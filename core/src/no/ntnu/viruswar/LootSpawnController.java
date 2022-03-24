@@ -18,7 +18,7 @@ public class LootSpawnController  {
         return random.nextInt((int) max); //evt floor
     }
 
-    private Vector3 generateSpawnPos() {
+    public Vector3 generateSpawnPos() {
         if (this.nextSpawn > 0){
             return null;
         }

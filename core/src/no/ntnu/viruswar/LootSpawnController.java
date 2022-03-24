@@ -1,7 +1,5 @@
 package no.ntnu.viruswar;
 
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 import java.util.Random;
@@ -10,11 +8,7 @@ public class LootSpawnController  {
 
     // deciding when and where to spawn loot
 
-    //private int waitFrames; //can be decremented each update
-    //private Vector3 position;
-
-    //public LootSpawnController(){
-    //}
+    private int nextSpawn;    //"timer": frames until next, assuming 60fps
 
     private int getRandom(float max){
         Random random = new Random();
@@ -24,18 +18,19 @@ public class LootSpawnController  {
         return random.nextInt((int) max); //evt floor
     }
 
-    private Vector3 generatePosTime() {
+    private Vector3 generateSpawnPos() {
+        if (this.nextSpawn > 0){
+            return null;
+        }
+        //only allowed if randomly generated time has passed
         int x = getRandom(Constants.GAME_WORLD_WIDTH);
         int y = getRandom(Constants.GAME_WORLD_HEIGHT);
-        int waitFrames = getRandom(0);
-        return new Vector3(x, y, waitFrames);
+        this.nextSpawn = getRandom(0);
+        return new Vector3(x, y, 0);
 
     }
-    /*
-     public int getTime(){
-        return waitFrames;
-     }
+     // call from render/update
      public void decrementWait(){
-
-     }*/
+        this.nextSpawn--;
+     }
 }

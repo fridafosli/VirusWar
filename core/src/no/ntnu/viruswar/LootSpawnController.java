@@ -20,7 +20,7 @@ public class LootSpawnController  {
 
     public Vector3 generateSpawnPos() {
         if (this.nextSpawn > 0){
-            return null;
+            return null; //denied
         }
         //only allowed if randomly generated time has passed
         int x = getRandom(Constants.GAME_WORLD_WIDTH);

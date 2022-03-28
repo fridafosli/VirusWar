@@ -1,3 +1,4 @@
+apply plugin: 'com.google.gms.google-services'
 android {
     buildToolsVersion "29.0.3"
     compileSdkVersion 30
@@ -87,6 +88,10 @@ task run(type: Exec) {
 
     def adb = path + "/platform-tools/adb"
     commandLine "$adb", 'shell', 'am', 'start', '-n', 'no.ntnu.viruswar/no.ntnu.viruswar.AndroidLauncher'
+}
+
+dependencies {
+    implementation 'com.google.firebase:firebase-database:20.0.4'
 }
 
 eclipse.project.name = appName + "-android"

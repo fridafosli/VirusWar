@@ -27,6 +27,8 @@ public class Settings extends State {
     public Settings(final GameStateManager gsm) {
         super(gsm);
           skin = new Skin(Gdx.files.internal("uiskin.json"));
+          skin.getFont("default-font").getData().setScale(scale);
+
           stage = new Stage(new ScreenViewport());
 //
 //        table = new Table();

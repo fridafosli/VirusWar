@@ -7,6 +7,9 @@ import no.ntnu.viruswar.States.GameStateManager;
 import no.ntnu.viruswar.States.MainMenu;
 
 public class VirusWar extends ApplicationAdapter {
+	public static final int WIDTH = 800;
+	public static final int HEIGHT = 400;
+
 	SpriteBatch batch;
 	private GameStateManager gsm;
 	
@@ -20,16 +23,10 @@ public class VirusWar extends ApplicationAdapter {
 	@Override
 	public void render () {
 		gsm.render(batch);
-//		ScreenUtils.clear(1, 0, 0, 1);
-//		batch.begin();
-//		batch.draw(img, 0, 0);
-//		batch.end();
-//		menu.render(batch);
 	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
-		//img.dispose();
 	}
 }

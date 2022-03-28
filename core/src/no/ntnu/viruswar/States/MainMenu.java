@@ -8,12 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import no.ntnu.viruswar.VirusWar;
+
 public class MainMenu extends StateMenu {
 
-//    protected Stage stage;
-//    protected Skin skin;
-//    protected Table table;
-//    protected Sprite background;
     private TextButton playBtn;
     private TextButton tutorialBtn;
     private TextButton settingsBtn;
@@ -21,19 +19,8 @@ public class MainMenu extends StateMenu {
 
     public MainMenu(final GameStateManager gsm) {
         super(gsm);
-//        skin = new Skin(Gdx.files.internal("uiskin.json"));
-//        stage = new Stage(new ScreenViewport());
-//        table = new Table();
-//        table.setWidth(stage.getWidth());
-//        table.align(Align.center | Align.top);
-//
-//        table.setPosition(0, Gdx.graphics.getHeight());
-
-
-        //InputMultiplexer im = new InputMultiplexer(stage,this);
-
-
         playBtn = new TextButton("Play", skin);
+        playBtn.setHeight(Gdx.graphics.getHeight());
         tutorialBtn = new TextButton("Tutorial", skin);
         settingsBtn = new TextButton("Settings", skin);
 
@@ -53,10 +40,10 @@ public class MainMenu extends StateMenu {
 
             }
         });
-        table.padTop(150);
-        table.add(playBtn).padBottom(30);
+        table.padTop(scale*100);
+        table.add(playBtn).padBottom(scale*50);
         table.row();
-        table.add(tutorialBtn).padBottom(30);
+        table.add(tutorialBtn).padBottom(scale*50);
         table.row();
         table.add(settingsBtn);
 
@@ -82,6 +69,7 @@ public class MainMenu extends StateMenu {
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+
 
 
     }

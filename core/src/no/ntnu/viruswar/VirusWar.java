@@ -1,9 +1,10 @@
 package no.ntnu.viruswar;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+
+import no.ntnu.viruswar.States.GameStateManager;
+import no.ntnu.viruswar.States.MainMenu;
 
 public class VirusWar extends ApplicationAdapter {
 	SpriteBatch batch;

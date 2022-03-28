@@ -1,9 +1,8 @@
-package no.ntnu.viruswar;
+package no.ntnu.viruswar.States;
 
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 
 public abstract class State{
     protected GameStateManager gsm;
@@ -12,6 +11,7 @@ public abstract class State{
         this.gsm = gsm;
     }
 
+    protected abstract InputProcessor getInputprosesspr();
     protected abstract void handleInput();
     public abstract void update(float dt);
     public abstract void render(SpriteBatch sb);

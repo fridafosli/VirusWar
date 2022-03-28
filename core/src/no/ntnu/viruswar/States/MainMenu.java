@@ -1,31 +1,19 @@
-package no.ntnu.viruswar;
+package no.ntnu.viruswar.States;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class MainMenu extends State {
+public class MainMenu extends StateMenu {
 
-    protected Stage stage;
-    protected Skin skin;
-    protected Table table;
-    protected Sprite background;
+//    protected Stage stage;
+//    protected Skin skin;
+//    protected Table table;
+//    protected Sprite background;
     private TextButton playBtn;
     private TextButton tutorialBtn;
     private TextButton settingsBtn;
@@ -33,14 +21,13 @@ public class MainMenu extends State {
 
     public MainMenu(final GameStateManager gsm) {
         super(gsm);
-        skin = new Skin(Gdx.files.internal("uiskin.json"));
-        stage = new Stage(new ScreenViewport());
+//        skin = new Skin(Gdx.files.internal("uiskin.json"));
+//        stage = new Stage(new ScreenViewport());
+//        table = new Table();
+//        table.setWidth(stage.getWidth());
+//        table.align(Align.center | Align.top);
 //
-        table = new Table();
-        table.setWidth(stage.getWidth());
-        table.align(Align.center | Align.top);
-
-        table.setPosition(0, Gdx.graphics.getHeight());
+//        table.setPosition(0, Gdx.graphics.getHeight());
 
 
         //InputMultiplexer im = new InputMultiplexer(stage,this);
@@ -55,9 +42,17 @@ public class MainMenu extends State {
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("Settings", "clicked");
                 gsm.push(new Settings(gsm));
+
             }
         });
-//
+        playBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("play", "clicked");
+                gsm.push(new PlayMenu(gsm));
+
+            }
+        });
         table.padTop(150);
         table.add(playBtn).padBottom(30);
         table.row();
@@ -65,11 +60,11 @@ public class MainMenu extends State {
         table.row();
         table.add(settingsBtn);
 
-        stage.addActor(table);
-        Gdx.input.setInputProcessor(stage);
-
-        background = new Sprite(new Texture(Gdx.files.internal("badlogic.jpg")));
-        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+//        stage.addActor(table);
+//        Gdx.input.setInputProcessor(stage);
+//
+//        background = new Sprite(new Texture(Gdx.files.internal("badlogic.jpg")));
+//        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override

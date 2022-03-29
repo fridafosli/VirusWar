@@ -37,29 +37,10 @@ public class PlayerMovementSystem extends IteratingSystem {
             RectangleComponent rtc = rectangleMapper.get(entity);
 
             if (vcc.velocity.len() > 0.1) {
-
                 rtc.rect.setX(rtc.rect.x + vcc.velocity.x * deltaTime);
                 rtc.rect.setY(rtc.rect.y + vcc.velocity.y * deltaTime);
             }
-
         }
-
-
-//
-//        for (Entity entity : renderQueue) {
-//            RectangleComponent rtc  = rectangleMapper.get(entity);
-//
-//            Vector3 touch = touchController.getTouchInWorld();
-//
-//            if (!rtc.rect.contains(touch.x, touch.y)) {
-//                continue;
-//            }
-//
-//            rtc.rect.setPosition(touch.x - rtc.rect.width / 2, touch.y - rtc.rect.height / 2);
-//
-//
-//
-//        }
     }
 
     @Override

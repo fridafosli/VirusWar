@@ -6,14 +6,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 
 import no.ntnu.viruswar.Camera;
+import no.ntnu.viruswar.LootSpawnController;
 import no.ntnu.viruswar.TouchController;
+import no.ntnu.viruswar.componenets.LootComponent;
 import no.ntnu.viruswar.componenets.PlayerComponent;
 import no.ntnu.viruswar.componenets.RectangleComponent;
 import no.ntnu.viruswar.componenets.TextureComponent;
 import no.ntnu.viruswar.componenets.TransformComponent;
 import no.ntnu.viruswar.componenets.VelocityComponent;
+import no.ntnu.viruswar.systems.LootSpawnSystem;
 import no.ntnu.viruswar.systems.PlayerControlSystem;
 import no.ntnu.viruswar.systems.PlayerMovementSystem;
 import no.ntnu.viruswar.systems.RenderingSystem;
@@ -40,8 +44,10 @@ public class GameScreen extends ScreenAdapter {
         engine.addSystem(new PlayerControlSystem(touchController));
         engine.addSystem(new PlayerMovementSystem());
         engine.addSystem(new RenderingSystem(batch, camera));
+        engine.addSystem(new LootSpawnSystem(20));
         engine.addEntity(createVirus());
     }
+
 
     private Entity createVirus() {
 

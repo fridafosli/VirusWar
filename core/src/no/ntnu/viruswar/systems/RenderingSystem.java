@@ -50,18 +50,9 @@ public class RenderingSystem extends IteratingSystem {
                 continue;
             }
 
-//            float width = texture.region.getWidth();
-//            float height = texture.region.getHeight();
-
-//            float centerX = width/2f;
-//            float centerY = height/2f;
             float cx = rtc.rect.x - rtc.rect.width;
             float cy = rtc.rect.y - rtc.rect.height;
-
-
             batch.draw(texture.region, cx, cy, rtc.rect.width, rtc.rect.height);
-
-
         }
 
         batch.end();

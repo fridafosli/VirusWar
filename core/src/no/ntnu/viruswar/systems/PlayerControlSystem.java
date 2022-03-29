@@ -48,30 +48,11 @@ public class PlayerControlSystem extends IteratingSystem {
 
                 Vector2 vel = new Vector2(touch.x - cx, touch.y - cy).scl(0.005f);
                 vel.clamp(0, 2);
-//                float length = vel.len();
-//                vel.nor();
                 vcc.velocity.set(vel);
 
 
             }
         }
-
-
-//
-//        for (Entity entity : renderQueue) {
-//            RectangleComponent rtc  = rectangleMapper.get(entity);
-//
-//            Vector3 touch = touchController.getTouchInWorld();
-//
-//            if (!rtc.rect.contains(touch.x, touch.y)) {
-//                continue;
-//            }
-//
-//            rtc.rect.setPosition(touch.x - rtc.rect.width / 2, touch.y - rtc.rect.height / 2);
-//
-//
-//
-//        }
     }
 
     @Override

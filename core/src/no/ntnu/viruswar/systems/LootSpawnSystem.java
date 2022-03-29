@@ -41,13 +41,14 @@ public class LootSpawnSystem extends IntervalSystem {
 
     public LootSpawnSystem(float interval) {
         super(interval);
-        lootTexture = new Texture("badlogic.jpg");    // change to loot texture
+        lootTexture = new Texture("virus.png");    // change to loot texture
     }
 
     @Override
     protected void updateInterval() {
         Random random = new Random();
         int x = random.nextInt((int) Constants.GAME_WORLD_WIDTH);
+        //consider making loot spawn within a given radius of the client that generates it.
         int y = random.nextInt((int)Constants.GAME_WORLD_WIDTH);
         getEngine().addEntity(createLoot(x, y)); //when consumed: remove entity
     }
@@ -56,7 +57,8 @@ public class LootSpawnSystem extends IntervalSystem {
         Entity entity = getEngine().createEntity();
         TransformComponent tfc = new TransformComponent();
         tfc.position.set(x, y, 0);
-        LootComponent lc = new LootComponent(); // set points or same point for all?
+        LootComponent lc = new LootComponent(5); //temp points for absorbing
+        // set points or same point for all?
         RectangleComponent rc = new RectangleComponent(x, y, 20, 20); //update to actual texture size
         TextureComponent txc = new TextureComponent();
         txc.region = lootTexture;

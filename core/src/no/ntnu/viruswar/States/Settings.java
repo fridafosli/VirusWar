@@ -27,7 +27,7 @@ public class Settings extends State {
         super(gsm);
 
         // Create the skin
-        //skin = new Skin(Gdx.files.internal("uiskin.json"));
+        skin = new Skin(Gdx.files.internal("uiskin.json"));
         //skin.getFont("default-font").getData().setScale(scale);
 
         stage = new Stage(new ScreenViewport());

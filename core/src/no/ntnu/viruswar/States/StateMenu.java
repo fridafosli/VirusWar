@@ -19,21 +19,22 @@ abstract class StateMenu extends State{
 
     protected StateMenu(GameStateManager gsm) {
         super(gsm);
+        // Create skin
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-        skin.getFont("default-font").getData().setScale(scale);
+        //skin.getFont("default-font").getData().setScale(scale);
 
+        // Create stage
         stage = new Stage(new ScreenViewport());
+
+        // Create table
         table = new Table();
         table.setWidth(stage.getWidth());
         table.align(Align.center | Align.top);
-
         table.setPosition(0, Gdx.graphics.getHeight());
-
         stage.addActor(table);
-        Gdx.input.setInputProcessor(stage);
 
-        background = new Sprite(new Texture(Gdx.files.internal("badlogic.jpg")));
-        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        // set the InputProcessor
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

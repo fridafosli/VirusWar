@@ -18,7 +18,6 @@ public class Settings extends State {
 
     protected Stage stage;
     protected Skin skin;
-    protected Table table;
     protected Sprite background;
 
     private TextButton backBtn;
@@ -26,20 +25,16 @@ public class Settings extends State {
 
     public Settings(final GameStateManager gsm) {
         super(gsm);
-          skin = new Skin(Gdx.files.internal("uiskin.json"));
-          skin.getFont("default-font").getData().setScale(scale);
 
-          stage = new Stage(new ScreenViewport());
-//
-//        table = new Table();
-//        table.setWidth(stage.getWidth());
-//        table.align(Align.center | Align.top);
-//
-//        table.setPosition(0, Gdx.graphics.getHeight());
+        // Create the skin
+        //skin = new Skin(Gdx.files.internal("uiskin.json"));
+        //skin.getFont("default-font").getData().setScale(scale);
 
+        stage = new Stage(new ScreenViewport());
+
+        // Setting up the back button
         backBtn = new TextButton("Back", skin);
-        backBtn.setPosition(0,Gdx.graphics.getHeight()-50);
-
+        backBtn.setPosition(0, Gdx.graphics.getHeight() - 50);
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -48,11 +43,13 @@ public class Settings extends State {
             }
         });
         stage.addActor(backBtn);
-//        stage.addActor(table);
-        Gdx.input.setInputProcessor(stage);
 
+        // Set the background
         background = new Sprite(new Texture(Gdx.files.internal("settings.png")));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        // Set the inputProcessor
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

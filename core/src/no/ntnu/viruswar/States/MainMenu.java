@@ -19,39 +19,44 @@ public class MainMenu extends StateMenu {
 
     public MainMenu(final GameStateManager gsm) {
         super(gsm);
+        // Create the play-button
         playBtn = new TextButton("Play", skin);
         playBtn.setHeight(Gdx.graphics.getHeight());
-        tutorialBtn = new TextButton("Tutorial", skin);
-        settingsBtn = new TextButton("Settings", skin);
-
-        settingsBtn.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("Settings", "clicked");
-                gsm.push(new Settings(gsm));
-
-            }
-        });
         playBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("play", "clicked");
                 gsm.push(new PlayMenu(gsm));
-
             }
         });
+
+        // Create the Tutorial-button
+        tutorialBtn = new TextButton("Tutorial", skin);
+        tutorialBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("tutorial", "clicked");
+                gsm.push(new Tutorial(gsm));
+            }
+        });
+
+        // Create the Settings-button
+        settingsBtn = new TextButton("Settings", skin);
+        settingsBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("Settings", "clicked");
+                gsm.push(new Settings(gsm));
+            }
+        });
+
+        // add buttons to table
         table.padTop(scale*100);
         table.add(playBtn).padBottom(scale*50);
         table.row();
         table.add(tutorialBtn).padBottom(scale*50);
         table.row();
         table.add(settingsBtn);
-
-//        stage.addActor(table);
-//        Gdx.input.setInputProcessor(stage);
-//
-//        background = new Sprite(new Texture(Gdx.files.internal("badlogic.jpg")));
-//        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
@@ -69,9 +74,6 @@ public class MainMenu extends StateMenu {
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-
-
-
     }
 
     @Override

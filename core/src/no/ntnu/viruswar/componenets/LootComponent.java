@@ -8,7 +8,7 @@ public class LootComponent implements Component {
     private int points; //public or getter?
 
 
-    public LootComponent(int points){
-        this.points = points;
-    }
+    //public LootComponent(int points){
+    //    this.points = points;
+    //}
 }

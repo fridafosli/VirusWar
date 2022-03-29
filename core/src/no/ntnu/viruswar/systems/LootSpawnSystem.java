@@ -42,6 +42,7 @@ public class LootSpawnSystem extends IntervalSystem {
     public LootSpawnSystem(float interval) {
         super(interval);
         lootTexture = new Texture("virus.png");    // change to loot texture
+        //this texture is supposed to be loot lol
     }
 
     @Override

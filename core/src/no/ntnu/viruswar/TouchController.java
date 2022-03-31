@@ -15,7 +15,6 @@ public class TouchController implements InputProcessor {
 
     public TouchController(Camera camera) {
         this.camera = camera;
-
         Gdx.input.setInputProcessor(this);
     }
 

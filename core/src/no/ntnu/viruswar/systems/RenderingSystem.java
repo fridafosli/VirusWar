@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
 import no.ntnu.viruswar.Camera;
+import no.ntnu.viruswar.componenets.HiddenComponent;
 import no.ntnu.viruswar.componenets.RectangleComponent;
 import no.ntnu.viruswar.componenets.TextureComponent;
 import no.ntnu.viruswar.componenets.TransformComponent;
@@ -16,19 +17,21 @@ import no.ntnu.viruswar.componenets.TransformComponent;
 public class RenderingSystem extends IteratingSystem {
 
     private final SpriteBatch batch;
-    private final Array<Entity> renderQueue;
+    private final Array<Entity> entityQueue;
     private final OrthographicCamera camera;
 
     private final ComponentMapper<TextureComponent> textureMapper;
     private final ComponentMapper<RectangleComponent> rectangleMapper;
+    private final ComponentMapper<TransformComponent> transformMapper;
 
     public RenderingSystem(SpriteBatch batch, Camera camera) {
-        super(Family.all(RectangleComponent.class, TextureComponent.class).get());
+        super(Family.all(RectangleComponent.class, TextureComponent.class, TransformComponent.class).exclude(HiddenComponent.class).get());
 
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         rectangleMapper = ComponentMapper.getFor(RectangleComponent.class);
+        transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
-        renderQueue = new Array<Entity>();
+        entityQueue = new Array<Entity>();
 
         this.camera = camera;
         this.batch = batch;
@@ -42,30 +45,26 @@ public class RenderingSystem extends IteratingSystem {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-        for (Entity entity : renderQueue) {
+        for (Entity entity : entityQueue) {
             TextureComponent texture = textureMapper.get(entity);
             RectangleComponent rtc = rectangleMapper.get(entity);
+            TransformComponent trc = transformMapper.get(entity);
 
             if (texture.region == null) {
                 continue;
             }
 
-            float cx = rtc.rect.x - rtc.rect.width;
-            float cy = rtc.rect.y - rtc.rect.height;
-            batch.draw(texture.region, cx, cy, rtc.rect.width, rtc.rect.height);
+            batch.draw(texture.region, trc.position.x - rtc.rect.width / 2, trc.position.y - rtc.rect.height / 2, rtc.rect.width, rtc.rect.height);
         }
 
         batch.end();
-        renderQueue.clear();
+        entityQueue.clear();
 
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        renderQueue.add(entity);
+        entityQueue.add(entity);
     }
 
-    public OrthographicCamera getCamera() {
-        return camera;
-    }
 }

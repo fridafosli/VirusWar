@@ -1,10 +1,10 @@
 package no.ntnu.viruswar.componenets;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 public class VelocityComponent implements Component {
 
-    public Vector2 velocity = new Vector2(0f, 0f);
+    public final Vector3 velocity = new Vector3(0f, 0f, 0f);
 
 }

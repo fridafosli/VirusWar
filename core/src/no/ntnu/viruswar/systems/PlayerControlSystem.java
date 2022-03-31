@@ -4,29 +4,27 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 import no.ntnu.viruswar.TouchController;
 import no.ntnu.viruswar.componenets.PlayerComponent;
-import no.ntnu.viruswar.componenets.RectangleComponent;
 import no.ntnu.viruswar.componenets.TransformComponent;
 import no.ntnu.viruswar.componenets.VelocityComponent;
 
 
 public class PlayerControlSystem extends IteratingSystem {
 
-    private final ComponentMapper<RectangleComponent> rectangleMapper;
+    private final ComponentMapper<TransformComponent> transformMapper;
     private final ComponentMapper<VelocityComponent> velocityMapper;
-    private final Array<Entity> renderQueue;
+    private final Array<Entity> entityQueue;
     private final TouchController touchController;
 
     public PlayerControlSystem(TouchController touchController) {
         super(Family.all(TransformComponent.class, PlayerComponent.class, VelocityComponent.class).get());
-        rectangleMapper = ComponentMapper.getFor(RectangleComponent.class);
         velocityMapper = ComponentMapper.getFor(VelocityComponent.class);
-        renderQueue = new Array<Entity>();
+        transformMapper = ComponentMapper.getFor(TransformComponent.class);
+        entityQueue = new Array<>();
         this.touchController = touchController;
     }
 
@@ -34,30 +32,24 @@ public class PlayerControlSystem extends IteratingSystem {
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        for (Entity entity : renderQueue) {
+        for (Entity entity : entityQueue) {
             VelocityComponent vcc = velocityMapper.get(entity);
-            RectangleComponent rtc = rectangleMapper.get(entity);
-
 
             if (!touchController.isTouching) {
-                vcc.velocity.set(0, 0);
-            } else {
-                Vector3 touch = touchController.getTouchInWorld();
-                float cx = rtc.rect.x - rtc.rect.width / 2;
-                float cy = rtc.rect.y - rtc.rect.height / 2;
-
-                Vector2 vel = new Vector2(touch.x - cx, touch.y - cy).scl(0.005f);
-                vel.clamp(0, 2);
-                vcc.velocity.set(vel);
-
-
+                vcc.velocity.set(0, 0, 0);
+                return;
             }
+            Vector3 touch = touchController.getTouchInWorld();
+            Vector3 position = transformMapper.get(entity).position;
+            vcc.velocity.set(touch.cpy().sub(position).nor().scl(touch.cpy().sub(position).len()));
         }
+
+        entityQueue.clear();
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        renderQueue.add(entity);
+        entityQueue.add(entity);
     }
 }
 

@@ -83,7 +83,7 @@ public class Tutorial extends State {
         stage.addActor(nextBtn);
 
         // Setting up the prev button
-        prevBtn = new TextButton("prev", skin);
+        prevBtn = new TextButton("previous", skin);
         prevBtn.setPosition(Gdx.graphics.getWidth()/2- prevBtn.getWidth() - 50, 20);
         prevBtn.addListener(new ClickListener() {
             @Override

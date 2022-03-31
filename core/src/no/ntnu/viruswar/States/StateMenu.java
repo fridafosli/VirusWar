@@ -21,7 +21,7 @@ abstract class StateMenu extends State{
         super(gsm);
         // Create skin
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-        //skin.getFont("default-font").getData().setScale(scale);
+        skin.getFont("default-font").getData().setScale(scale);
 
         // Create stage
         stage = new Stage(new ScreenViewport());

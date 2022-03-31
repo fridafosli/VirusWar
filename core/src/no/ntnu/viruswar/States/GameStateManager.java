@@ -1,5 +1,6 @@
-package no.ntnu.viruswar;
+package no.ntnu.viruswar.States;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Stack;
@@ -18,6 +19,7 @@ public class GameStateManager {
 
     public void pop() {
         states.pop();
+        Gdx.input.setInputProcessor(states.peek().getInputprosesspr());
     }
 
     public void set(State state) {

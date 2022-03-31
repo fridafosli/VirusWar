@@ -1,7 +1,7 @@
 package no.ntnu.viruswar;
 
 
-public class CoreInterfaceClass implements FireBaseInterface{
+public class CoreInterfaceClass implements FireBaseInterface {
 
     @Override
     public void SomeFunction() {
@@ -12,21 +12,14 @@ public class CoreInterfaceClass implements FireBaseInterface{
     public void FirstFireBaseTest() {
 
     }
-/*
-       @Override
-       public void SetOnValueChangedListener(DataHolderClass datader) {
 
-       }
+    @Override
+    public void SetOnValueChangedListener(DataHolderClass datader) {
 
-       /*
-       @Override
-       public void SetOnValueChangedListener() {
-
-       }
+    }
 
     @Override
     public void SetValueInDb(String target, String value) {
 
     }
-  */
 }

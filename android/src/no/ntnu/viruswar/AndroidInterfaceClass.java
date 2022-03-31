@@ -30,14 +30,12 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     @Override
     public void FirstFireBaseTest() {
         if(myRef != null){
-            myRef.setValue("Hello, World!");
+            myRef.setValue("Hello, World");
         }
         else{
             System.out.println("Databasereference was not set -> therefore could not write to DB");
         }
     }
-    /*
-
 
     @Override
     public void SetOnValueChangedListener(final DataHolderClass dataholder) {
@@ -68,7 +66,7 @@ public class AndroidInterfaceClass implements FireBaseInterface {
         myRef.setValue(value);
     }
 
- */
+
 
 
 

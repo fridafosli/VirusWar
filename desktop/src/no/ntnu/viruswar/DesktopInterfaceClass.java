@@ -14,8 +14,7 @@ public class DesktopInterfaceClass implements FireBaseInterface {
     public void FirstFireBaseTest() {
 
     }
-}
-/*
+
     @Override
     public void SetOnValueChangedListener(DataHolderClass dataholder) {
 
@@ -25,5 +24,5 @@ public class DesktopInterfaceClass implements FireBaseInterface {
     public void SetValueInDb(String target, String value) {
 
     }
- */
+}
 

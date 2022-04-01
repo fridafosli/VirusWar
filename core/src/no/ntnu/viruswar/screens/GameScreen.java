@@ -10,6 +10,8 @@ import no.ntnu.viruswar.TouchController;
 import no.ntnu.viruswar.factories.VirusFactory;
 import no.ntnu.viruswar.managers.AssetManager;
 import no.ntnu.viruswar.systems.ConsumingSystem;
+import no.ntnu.viruswar.systems.LootSpawnSystem;
+import no.ntnu.viruswar.systems.MapShrinkSystem;
 import no.ntnu.viruswar.systems.PlayerControlSystem;
 import no.ntnu.viruswar.systems.PlayerMovementSystem;
 import no.ntnu.viruswar.systems.RenderingSystem;
@@ -37,6 +39,8 @@ public class GameScreen extends ScreenAdapter {
         engine.addSystem(new PlayerMovementSystem());
         engine.addSystem(new RenderingSystem(batch, camera));
         engine.addSystem(new ConsumingSystem());
+        //engine.addSystem(new MapShrinkSystem(5));
+        engine.addSystem(new LootSpawnSystem(1));
 
         engine.addEntity(VirusFactory.createVirus(engine, 100, 100, false));
         engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));

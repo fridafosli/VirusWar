@@ -13,7 +13,8 @@ public class AssetManager {
 
     private AssetManager() {
         textureMap = new HashMap<>();
-        textureMap.put("virus", new Texture("badlogic.jpg"));
+        textureMap.put("virus", new Texture("virus.png"));
+        textureMap.put("loot", new Texture("person.png"));
     }
 
     public static AssetManager getInstance() {

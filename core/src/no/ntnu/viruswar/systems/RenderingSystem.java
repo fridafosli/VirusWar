@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Array;
 
 import no.ntnu.viruswar.Camera;
 import no.ntnu.viruswar.componenets.HiddenComponent;
-import no.ntnu.viruswar.componenets.RectangleComponent;
+import no.ntnu.viruswar.componenets.DimensionComponent;
 import no.ntnu.viruswar.componenets.TextureComponent;
 import no.ntnu.viruswar.componenets.TransformComponent;
 
@@ -21,14 +21,14 @@ public class RenderingSystem extends IteratingSystem {
     private final OrthographicCamera camera;
 
     private final ComponentMapper<TextureComponent> textureMapper;
-    private final ComponentMapper<RectangleComponent> rectangleMapper;
+    private final ComponentMapper<DimensionComponent> rectangleMapper;
     private final ComponentMapper<TransformComponent> transformMapper;
 
     public RenderingSystem(SpriteBatch batch, Camera camera) {
-        super(Family.all(RectangleComponent.class, TextureComponent.class, TransformComponent.class).exclude(HiddenComponent.class).get());
+        super(Family.all(DimensionComponent.class, TextureComponent.class, TransformComponent.class).exclude(HiddenComponent.class).get());
 
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
-        rectangleMapper = ComponentMapper.getFor(RectangleComponent.class);
+        rectangleMapper = ComponentMapper.getFor(DimensionComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
         entityQueue = new Array<Entity>();
@@ -47,14 +47,14 @@ public class RenderingSystem extends IteratingSystem {
 
         for (Entity entity : entityQueue) {
             TextureComponent texture = textureMapper.get(entity);
-            RectangleComponent rtc = rectangleMapper.get(entity);
+            DimensionComponent rtc = rectangleMapper.get(entity);
             TransformComponent trc = transformMapper.get(entity);
 
             if (texture.region == null) {
                 continue;
             }
 
-            batch.draw(texture.region, trc.position.x - rtc.rect.width / 2, trc.position.y - rtc.rect.height / 2, rtc.rect.width, rtc.rect.height);
+            batch.draw(texture.region, trc.position.x - rtc.width / 2, trc.position.y - rtc.height / 2, rtc.width, rtc.height);
         }
 
         batch.end();

@@ -42,6 +42,7 @@ public class MapShrinkSystem extends IntervalSystem {
         TextureComponent txc = new TextureComponent();
         CircleComponent cc = new CircleComponent(rc.rect.x, rc.rect.y, rc.rect.width);
         txc.region = worldTexture;
+        txc.zIndex = 0;
         entity.add(cc);
         entity.add(rc);
         entity.add(txc);

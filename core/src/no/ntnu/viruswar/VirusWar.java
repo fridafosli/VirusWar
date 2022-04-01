@@ -20,7 +20,7 @@ public class VirusWar extends Game {
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 1, 1, 1);
+		ScreenUtils.clear(0, 0, 0, 0);
 		super.render();
 	}
 

@@ -4,27 +4,30 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
 import no.ntnu.viruswar.Camera;
+import no.ntnu.viruswar.EntityComparator;
 import no.ntnu.viruswar.componenets.RectangleComponent;
 import no.ntnu.viruswar.componenets.TextureComponent;
 import no.ntnu.viruswar.componenets.TransformComponent;
 
-public class RenderingSystem extends IteratingSystem {
+public class RenderingSystem extends SortedIteratingSystem {
 
     private final SpriteBatch batch;
     private final Array<Entity> renderQueue;
     private final OrthographicCamera camera;
+    private final EntityComparator comparator;
 
     private final ComponentMapper<TextureComponent> textureMapper;
     private final ComponentMapper<RectangleComponent> rectangleMapper;
 
-    public RenderingSystem(SpriteBatch batch, Camera camera) {
-        super(Family.all(RectangleComponent.class, TextureComponent.class).get());
-
+    public RenderingSystem(SpriteBatch batch, Camera camera, EntityComparator comparator) {
+        super(Family.all(RectangleComponent.class, TextureComponent.class).get(), comparator);
+        this.comparator = comparator;
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         rectangleMapper = ComponentMapper.getFor(RectangleComponent.class);
 
@@ -63,6 +66,7 @@ public class RenderingSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         renderQueue.add(entity);
+        renderQueue.sort(comparator);
     }
 
     public OrthographicCamera getCamera() {

@@ -4,29 +4,34 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
 import no.ntnu.viruswar.Camera;
+import no.ntnu.viruswar.EntityComparator;
 import no.ntnu.viruswar.componenets.HiddenComponent;
 import no.ntnu.viruswar.componenets.DimensionComponent;
 import no.ntnu.viruswar.componenets.TextureComponent;
 import no.ntnu.viruswar.componenets.TransformComponent;
 
-public class RenderingSystem extends IteratingSystem {
+public class RenderingSystem extends SortedIteratingSystem {
 
     private final SpriteBatch batch;
     private final Array<Entity> entityQueue;
     private final OrthographicCamera camera;
+    private final EntityComparator comparator;
 
     private final ComponentMapper<TextureComponent> textureMapper;
     private final ComponentMapper<DimensionComponent> rectangleMapper;
     private final ComponentMapper<TransformComponent> transformMapper;
 
-    public RenderingSystem(SpriteBatch batch, Camera camera) {
-        super(Family.all(DimensionComponent.class, TextureComponent.class, TransformComponent.class).exclude(HiddenComponent.class).get());
+    public RenderingSystem(SpriteBatch batch, Camera camera, EntityComparator comparator) {
+        super(Family.all(DimensionComponent.class, TextureComponent.class, TransformComponent.class).exclude(HiddenComponent.class).get(), comparator);
 
+
+        this.comparator = comparator;
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         rectangleMapper = ComponentMapper.getFor(DimensionComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
@@ -65,6 +70,7 @@ public class RenderingSystem extends IteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         entityQueue.add(entity);
+        entityQueue.sort(comparator);
     }
 
 }

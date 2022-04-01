@@ -25,7 +25,6 @@ public class GameScreen extends ScreenAdapter {
     private PooledEngine engine;
     private final SpriteBatch batch;
     private final Texture texture;
-    private final Texture worldTexture;
     private final Camera camera;
     private final TouchController touchController;
 
@@ -33,7 +32,6 @@ public class GameScreen extends ScreenAdapter {
         super();
         this.batch = batch;
         texture = new Texture("badlogic.jpg");
-        worldTexture = new Texture("bg.jpeg");
         camera = new Camera();
         touchController = new TouchController(camera);
         Gdx.input.setInputProcessor(touchController);
@@ -49,7 +47,6 @@ public class GameScreen extends ScreenAdapter {
         engine.addEntity(createVirus());
     }
 
-
     private Entity createVirus() {
         Entity entity = engine.createEntity();
         TransformComponent tfc = new TransformComponent();
@@ -64,19 +61,6 @@ public class GameScreen extends ScreenAdapter {
         entity.add(new PlayerComponent());
         return entity;
     }
-    /*private Entity createWorld(){
-        Entity entity = engine.createEntity();
-        MapComponent mp = new MapComponent();
-        RectangleComponent rc = new RectangleComponent(100,100, Constants.GAME_WORLD_WIDTH , Constants.GAME_WORLD_HEIGHT);
-        TextureComponent txc = new TextureComponent();
-        txc.region = worldTexture;
-        txc.tr = new TextureRegion(txc.region);
-        entity.add(mp);
-        entity.add(rc);
-        entity.add(txc);
-
-        return entity;
-    }*/
 
     private void update(float dt) {
         engine.update(dt);

@@ -21,13 +21,6 @@ public class CircleComponent implements Component {
 
     public CircleComponent(float x, float y, float rad){
         this.circle = new Circle(x, y, rad);
-        /*circle = new Circle(100,100,20);
-        mapTexture = new Texture("hueCircle.png");
-        region = new TextureRegion(mapTexture);
-        region.setRegionHeight(10);
-        region.setRegionX(0);
-        region.setRegionY(0);*/
-
     }
 
 

@@ -6,7 +6,7 @@ import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
-
+//sortetd iterating system in renderingsystem
 
 import no.ntnu.viruswar.Constants;
 import no.ntnu.viruswar.componenets.CircleComponent;

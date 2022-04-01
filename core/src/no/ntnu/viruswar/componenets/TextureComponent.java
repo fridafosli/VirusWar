@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class TextureComponent implements Component {
 
     public Texture region = null;
-    public TextureRegion tr = null;
 
 }
 

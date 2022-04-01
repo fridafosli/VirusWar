@@ -6,15 +6,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector3;
 
 import no.ntnu.viruswar.Camera;
-import no.ntnu.viruswar.Constants;
-import no.ntnu.viruswar.LootSpawnController;
 import no.ntnu.viruswar.TouchController;
-import no.ntnu.viruswar.componenets.LootComponent;
-import no.ntnu.viruswar.componenets.MapComponent;
 import no.ntnu.viruswar.componenets.PlayerComponent;
 import no.ntnu.viruswar.componenets.RectangleComponent;
 import no.ntnu.viruswar.componenets.TextureComponent;

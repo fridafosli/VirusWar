@@ -2,32 +2,27 @@ package no.ntnu.viruswar.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IntervalIteratingSystem;
 import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
-import com.badlogic.gdx.utils.Array;
 
 
 import no.ntnu.viruswar.Constants;
-import no.ntnu.viruswar.componenets.LootComponent;
-import no.ntnu.viruswar.componenets.MapComponent;
+import no.ntnu.viruswar.componenets.CircleComponent;
 import no.ntnu.viruswar.componenets.RectangleComponent;
 import no.ntnu.viruswar.componenets.TextureComponent;
-import no.ntnu.viruswar.componenets.TransformComponent;
 
 public class MapShrinkSystem extends IntervalSystem {
 
-    private final ComponentMapper<MapComponent> mapMapper;
+    private final ComponentMapper<CircleComponent> mapMapper;
     private final ComponentMapper<TextureComponent> textureMapper;
     private final ComponentMapper<RectangleComponent> rectangleMapper;
+    private final ComponentMapper<CircleComponent> circleMapper;
 
     //private final SpriteBatch batch;
     //private final Array<Entity> renderQueue;
-
+    // sjekk ut image isten for texture
 
 
     //create and add in screenSystem?
@@ -43,10 +38,12 @@ public class MapShrinkSystem extends IntervalSystem {
     public MapShrinkSystem(float interval) {
         super(interval);
         //entity = new Entity();
-        mapMapper = ComponentMapper.getFor(MapComponent.class);
+        mapMapper = ComponentMapper.getFor(CircleComponent.class);
         textureMapper = ComponentMapper.getFor(TextureComponent.class);
         rectangleMapper = ComponentMapper.getFor(RectangleComponent.class);
-        worldTexture = new Texture("bg.jpeg");
+        circleMapper = ComponentMapper.getFor(CircleComponent.class);
+
+        worldTexture = new Texture("hueCircle.png");
 
         //this.batch = batch;
         //mapTexture = new Texture("hueCircle.png");
@@ -56,11 +53,11 @@ public class MapShrinkSystem extends IntervalSystem {
 
     private Entity createWorld(){
         entity = getEngine().createEntity();
-        MapComponent lc = new MapComponent();
         RectangleComponent rc = new RectangleComponent(200,200, Constants.GAME_WORLD_WIDTH, Constants.GAME_WORLD_HEIGHT); //update to actual size
         TextureComponent txc = new TextureComponent();
+        CircleComponent cc = new CircleComponent(rc.rect.x, rc.rect.y, rc.rect.width);
         txc.region = worldTexture;
-        entity.add(lc);
+        entity.add(cc);
         entity.add(rc);
         entity.add(txc);
         return entity;
@@ -68,7 +65,10 @@ public class MapShrinkSystem extends IntervalSystem {
 
     private void shrink(){
         RectangleComponent rc = rectangleMapper.get(entity);
-        rc.rect.set(rc.rect.x, rc.rect.y, rc.rect.width - 100, rc.rect.height - 100);
+        CircleComponent cc = circleMapper.get(entity);
+        rc.rect.set(rc.rect.x + 10, rc.rect.y +10, rc.rect.width - 10, rc.rect.height - 10);
+        cc.circle.set(rc.rect.x, rc.rect.y, rc.rect.width);
+
     }
 
     @Override
@@ -76,9 +76,12 @@ public class MapShrinkSystem extends IntervalSystem {
         // get the entity and edit its size components (circle)
         if (!created){
             getEngine().addEntity(createWorld());
+            created = true;
         }
-        System.out.println("i am here");
-        shrink();
+        else {
+            System.out.println("i am here");
+            shrink();
+        }
         /*System.out.println(Integer.toString(renderQueue.size));
         for (Entity entity: renderQueue){
             //MapComponent mp = mapMapper.get(entity);

@@ -41,12 +41,13 @@ public class LootSpawnSystem extends IntervalSystem {
 
     public LootSpawnSystem(float interval) {
         super(interval);
-        lootTexture = new Texture("virus.png");    // change to loot texture
+        lootTexture = new Texture("person.png");    // change to loot texture
         //this texture is supposed to be loot lol
     }
 
     @Override
     protected void updateInterval() {
+        System.out.println("spawning");
         Random random = new Random();
         int x = random.nextInt((int) Constants.GAME_WORLD_WIDTH);
         //consider making loot spawn within a given radius of the client that generates it.
@@ -60,7 +61,7 @@ public class LootSpawnSystem extends IntervalSystem {
         tfc.position.set(x, y, 0);
         LootComponent lc = new LootComponent(5); //temp points for absorbing
         // set points or same point for all?
-        RectangleComponent rc = new RectangleComponent(x, y, 20, 20); //update to actual texture size
+        RectangleComponent rc = new RectangleComponent(x, y, 20, 20); //update to actual size
         TextureComponent txc = new TextureComponent();
         txc.region = lootTexture;
         entity.add(tfc);

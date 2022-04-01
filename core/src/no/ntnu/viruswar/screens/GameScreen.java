@@ -6,18 +6,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 
 import no.ntnu.viruswar.Camera;
-import no.ntnu.viruswar.LootSpawnController;
 import no.ntnu.viruswar.TouchController;
-import no.ntnu.viruswar.componenets.LootComponent;
 import no.ntnu.viruswar.componenets.PlayerComponent;
 import no.ntnu.viruswar.componenets.RectangleComponent;
 import no.ntnu.viruswar.componenets.TextureComponent;
 import no.ntnu.viruswar.componenets.TransformComponent;
 import no.ntnu.viruswar.componenets.VelocityComponent;
 import no.ntnu.viruswar.systems.LootSpawnSystem;
+import no.ntnu.viruswar.systems.MapShrinkSystem;
 import no.ntnu.viruswar.systems.PlayerControlSystem;
 import no.ntnu.viruswar.systems.PlayerMovementSystem;
 import no.ntnu.viruswar.systems.RenderingSystem;
@@ -45,33 +43,23 @@ public class GameScreen extends ScreenAdapter {
         engine.addSystem(new PlayerMovementSystem());
         engine.addSystem(new RenderingSystem(batch, camera));
         engine.addSystem(new LootSpawnSystem(20));
+        engine.addSystem(new MapShrinkSystem(10));
         engine.addEntity(createVirus());
     }
 
-
     private Entity createVirus() {
-
         Entity entity = engine.createEntity();
-
         TransformComponent tfc = new TransformComponent();
         tfc.position.set(0f, 0f, 0f);
         entity.add(tfc);
-
         TextureComponent txc= new TextureComponent();
         txc.region = texture;
         entity.add(txc);
-
         RectangleComponent rtc = new RectangleComponent(50, 50, 40, 40);
-
         entity.add(rtc);
-
         entity.add(new VelocityComponent());
-
         entity.add(new PlayerComponent());
-
         return entity;
-
-
     }
 
     private void update(float dt) {

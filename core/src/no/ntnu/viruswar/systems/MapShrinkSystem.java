@@ -10,18 +10,12 @@ import no.ntnu.viruswar.Constants;
 import no.ntnu.viruswar.componenets.CircleComponent;
 import no.ntnu.viruswar.componenets.DimensionComponent;
 import no.ntnu.viruswar.componenets.TextureComponent;
+import no.ntnu.viruswar.componenets.TransformComponent;
 
 public class MapShrinkSystem extends IntervalSystem {
 
-    private final ComponentMapper<DimensionComponent> rectangleMapper;
+    private final ComponentMapper<DimensionComponent> dimensionMapper;
     private final ComponentMapper<CircleComponent> circleMapper;
-
-    //private final SpriteBatch batch;
-    //private final Array<Entity> renderQueue;
-    // sjekk ut image isten for texture
-
-
-    //create and add in screenSystem?
 
     private Entity entity;
     private Texture worldTexture;
@@ -29,7 +23,7 @@ public class MapShrinkSystem extends IntervalSystem {
 
     public MapShrinkSystem(float interval) {
         super(interval);
-        rectangleMapper = ComponentMapper.getFor(DimensionComponent.class);
+        dimensionMapper = ComponentMapper.getFor(DimensionComponent.class);
         circleMapper = ComponentMapper.getFor(CircleComponent.class);
         worldTexture = new Texture("hueCircle.png");
     }
@@ -39,23 +33,25 @@ public class MapShrinkSystem extends IntervalSystem {
         DimensionComponent rc = new DimensionComponent(Constants.GAME_WORLD_WIDTH, Constants.GAME_WORLD_HEIGHT); //update to actual size
         TextureComponent txc = new TextureComponent();
         CircleComponent cc = new CircleComponent(rc.width, rc.height, rc.width);
+        TransformComponent tc = new TransformComponent(0,0);
         txc.region = worldTexture;
+        txc.zIndex = 0;
         entity.add(cc);
         entity.add(rc);
         entity.add(txc);
+        entity.add(tc);
         return entity;
     }
 
     private void shrink(){
-        DimensionComponent rc = rectangleMapper.get(entity);
+        DimensionComponent dc = dimensionMapper.get(entity);
         CircleComponent cc = circleMapper.get(entity);
-        rc.add(-10);
-        cc.circle.set(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT / 2, rc.width);
+        dc.add(-10);
+        cc.circle.set(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT / 2, dc.width);
     }
 
     @Override
     protected void updateInterval() {
-        // get the entity and edit its size components (circle)
         if (!created){
             getEngine().addEntity(createWorld());
             created = true;

@@ -6,6 +6,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import no.ntnu.viruswar.Camera;
+import no.ntnu.viruswar.EntityComparator;
 import no.ntnu.viruswar.TouchController;
 import no.ntnu.viruswar.factories.VirusFactory;
 import no.ntnu.viruswar.managers.AssetManager;
@@ -37,9 +38,10 @@ public class GameScreen extends ScreenAdapter {
 
         engine.addSystem(new PlayerControlSystem(touchController));
         engine.addSystem(new PlayerMovementSystem());
-        engine.addSystem(new RenderingSystem(batch, camera));
         engine.addSystem(new ConsumingSystem());
-        //engine.addSystem(new MapShrinkSystem(5));
+        EntityComparator comparator = new EntityComparator();
+        engine.addSystem(new RenderingSystem(batch, camera, comparator));
+        engine.addSystem(new MapShrinkSystem(5));
         engine.addSystem(new LootSpawnSystem(1));
 
         engine.addEntity(VirusFactory.createVirus(engine, 100, 100, false));

@@ -46,27 +46,8 @@ public class ConsumingSystem extends IteratingSystem {
             if (distance < rectangleMapper.get(entity).getRadius() + rectangleMapper.get(clientPlayer).getRadius()) {
                 Entity smallest = (clientSize < consumableMapper.get(entity).size) ? clientPlayer : entity;
                 Entity largest = (smallest == entity) ? clientPlayer : entity;
-
-//                area = pi * r^2
-
-               // new_area = (sr + lr)^2 * pi
-//
-//               la + sa = na
-
-
-//               (pi * ra^2) + (pi * rl^2) = na
-
-//                pi(ra^2+rl^2) = na
-
-//                na = r^2 * pi
-
-
-
-//              TODO: calculate real size increase
                 consumableMapper.get(largest).size += consumableMapper.get(smallest).size;
                 rectangleMapper.get(largest).setSize((float) consumableMapper.get(largest).size);
-
-//                rectangleMapper.get(largest).add(rectangleMapper.get(smallest).getRadius());
                 smallest.remove(ConsumableComponent.class);
                 smallest.add(new HiddenComponent());
             }

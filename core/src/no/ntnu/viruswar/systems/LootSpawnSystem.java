@@ -36,19 +36,4 @@ public class LootSpawnSystem extends IntervalSystem {
         getEngine().addEntity(LootFactory.createEntity(getEngine(), x, y)); //when consumed: remove entity
     }
 
-//    private Entity createLoot(int x, int y){
-//        Entity entity = getEngine().createEntity();
-//        TransformComponent tfc = new TransformComponent(x, y);
-//        LootComponent lc = new LootComponent(5); //temp points for absorbing
-//        // set points or same point for all?
-//        RectangleComponent rc = new RectangleComponent(x, y, 20, 20); //update to actual size
-//        TextureComponent txc = new TextureComponent();
-//        entity.add(new ConsumableComponent(2));
-//        txc.region = lootTexture;
-//        entity.add(tfc);
-//        entity.add(lc);
-//        entity.add(rc);
-//        entity.add(txc);
-//        return entity;
-//    }
 }

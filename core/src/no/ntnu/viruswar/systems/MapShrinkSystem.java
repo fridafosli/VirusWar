@@ -21,17 +21,18 @@ public class MapShrinkSystem extends IntervalSystem {
     //EDIT SHRINK METHOD^^
 
     private Entity entity;
-    private Texture worldTexture;
-    private boolean created = false;
+    //private Texture worldTexture;
+    //private boolean created = false;
 
-    public MapShrinkSystem(float interval) {
+    public MapShrinkSystem(float interval, Entity entity) {
         super(interval);
         dimensionMapper = ComponentMapper.getFor(DimensionComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
-        worldTexture = new Texture("hueCircle.png");
+        this.entity = entity;
+        //worldTexture = new Texture("hueCircle.png");
     }
 
-    private Entity createWorld(){
+    /*private Entity createWorld(){
         entity = getEngine().createEntity();
         DimensionComponent rc = new DimensionComponent(Constants.GAME_WORLD_WIDTH, Constants.GAME_WORLD_HEIGHT); //update to actual size
         TextureComponent txc = new TextureComponent();
@@ -44,7 +45,7 @@ public class MapShrinkSystem extends IntervalSystem {
         entity.add(txc);
         entity.add(tc);
         return entity;
-    }
+    }*/
 
     private void shrink(){
 
@@ -60,14 +61,15 @@ public class MapShrinkSystem extends IntervalSystem {
 
     @Override
     protected void updateInterval() {
-        if (!created){
+        /*if (!created){
             getEngine().addEntity(createWorld());
             created = true;
         }
         else {
             System.out.println("i am here"); //for debug. remove
             shrink();
-        }
+        }*/
+        shrink();
     }
 
 }

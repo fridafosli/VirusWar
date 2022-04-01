@@ -4,18 +4,16 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.systems.IntervalSystem;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.maps.objects.TextureMapObject;
 //sortetd iterating system in renderingsystem
 
 import no.ntnu.viruswar.Constants;
 import no.ntnu.viruswar.componenets.CircleComponent;
-import no.ntnu.viruswar.componenets.RectangleComponent;
+import no.ntnu.viruswar.componenets.DimensionComponent;
 import no.ntnu.viruswar.componenets.TextureComponent;
 
 public class MapShrinkSystem extends IntervalSystem {
 
-    private final ComponentMapper<RectangleComponent> rectangleMapper;
+    private final ComponentMapper<DimensionComponent> rectangleMapper;
     private final ComponentMapper<CircleComponent> circleMapper;
 
     //private final SpriteBatch batch;
@@ -31,16 +29,16 @@ public class MapShrinkSystem extends IntervalSystem {
 
     public MapShrinkSystem(float interval) {
         super(interval);
-        rectangleMapper = ComponentMapper.getFor(RectangleComponent.class);
+        rectangleMapper = ComponentMapper.getFor(DimensionComponent.class);
         circleMapper = ComponentMapper.getFor(CircleComponent.class);
         worldTexture = new Texture("hueCircle.png");
     }
 
     private Entity createWorld(){
         entity = getEngine().createEntity();
-        RectangleComponent rc = new RectangleComponent(200,200, Constants.GAME_WORLD_WIDTH, Constants.GAME_WORLD_HEIGHT); //update to actual size
+        DimensionComponent rc = new DimensionComponent(Constants.GAME_WORLD_WIDTH, Constants.GAME_WORLD_HEIGHT); //update to actual size
         TextureComponent txc = new TextureComponent();
-        CircleComponent cc = new CircleComponent(rc.rect.x, rc.rect.y, rc.rect.width);
+        CircleComponent cc = new CircleComponent(rc.width, rc.height, rc.width);
         txc.region = worldTexture;
         entity.add(cc);
         entity.add(rc);
@@ -49,10 +47,10 @@ public class MapShrinkSystem extends IntervalSystem {
     }
 
     private void shrink(){
-        RectangleComponent rc = rectangleMapper.get(entity);
+        DimensionComponent rc = rectangleMapper.get(entity);
         CircleComponent cc = circleMapper.get(entity);
-        rc.rect.set(rc.rect.x + 10, rc.rect.y +10, rc.rect.width - 10, rc.rect.height - 10);
-        cc.circle.set(rc.rect.x, rc.rect.y, rc.rect.width);
+        rc.add(-10);
+        cc.circle.set(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT / 2, rc.width);
     }
 
     @Override

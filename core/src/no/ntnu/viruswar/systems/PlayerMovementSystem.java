@@ -44,8 +44,8 @@ public class PlayerMovementSystem extends IteratingSystem {
             VelocityComponent vcc = velocityMapper.get(entity);
             TransformComponent trc = transformMapper.get(entity);
             Vector3 centerToPlayer = new Vector3(trc.position.x - radius, trc.position.y -radius, 0);
-
-            if (vcc.velocity.len() > 0.1 && centerToPlayer.add(vcc.velocity).len() < radius) { // and dtw+vel.len < radius
+            //tror egt dette er ish riktig tanke men blir fucka pga banen og koordinatene
+            if (vcc.velocity.len() > 0.1 && centerToPlayer.add(vcc.velocity).len() < radius) {
                 trc.position.add(vcc.velocity.scl(deltaTime));
             }
         }

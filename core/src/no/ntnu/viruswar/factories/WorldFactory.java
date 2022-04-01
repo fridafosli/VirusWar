@@ -18,7 +18,7 @@ public class WorldFactory {
         DimensionComponent rc = new DimensionComponent(Constants.GAME_WORLD_WIDTH, Constants.GAME_WORLD_HEIGHT); //update to actual size
         TextureComponent txc = new TextureComponent();
         MapComponent mc = new MapComponent();
-        TransformComponent tc = new TransformComponent(0,0);
+        TransformComponent tc = new TransformComponent(50,50);
         txc.region = AssetManager.getInstance().getTexture("map");
         txc.zIndex = 0;
         entity.add(mc);

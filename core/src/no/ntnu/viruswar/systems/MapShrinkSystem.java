@@ -51,12 +51,11 @@ public class MapShrinkSystem extends IntervalSystem {
 
         DimensionComponent dc = dimensionMapper.get(entity);
         TransformComponent tc = transformMapper.get(entity);
-
-        //CircleComponent cc = circleMapper.get(entity);
+        //uncomment under here
+/*
         dc.add(-10);
-        tc.position.add(10);
+        tc.position.add(10);*/
 
-        //cc.circle.set(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT / 2, dc.width);
     }
 
     @Override

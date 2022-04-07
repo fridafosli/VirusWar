@@ -1,12 +1,11 @@
 package no.ntnu.viruswar;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
+import no.ntnu.viruswar.Data.Player;
 import no.ntnu.viruswar.States.GameStateManager;
 import no.ntnu.viruswar.States.MainMenu;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class VirusWar extends ApplicationAdapter {
 	public static final int WIDTH = 800;
@@ -40,6 +39,14 @@ public class VirusWar extends ApplicationAdapter {
 		_FBIC.SomeFunction();
 		_FBIC.FirstFireBaseTest();
 		_FBIC.SetOnValueChangedListener(dataHolder);
+		Player player = new Player(1,2,3,"skin", "Erlem");
+		Player player2 = new Player(1,2,3,"skin", "erlen");
+		_FBIC.AddPlayerToGame("abc123",player);
+		_FBIC.SetChildEventListener(dataHolder,"abc123");
+		_FBIC.AddPlayerToGame("abc123",player2);
+		_FBIC.RemovePlayerFromGame("abc123", player.getId());
+
+
 	}
 
 //		img = new Texture("badlogic.jpg");

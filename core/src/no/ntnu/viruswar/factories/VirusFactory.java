@@ -19,7 +19,7 @@ public class VirusFactory {
     static public Entity createVirus(PooledEngine engine, float x, float y, boolean online) {
         Entity entity = engine.createEntity();
 
-        TransformComponent tfc = new TransformComponent(x, y);
+        TransformComponent tfc = new TransformComponent(100, 100);
         entity.add(tfc);
 
         TextureComponent txc = new TextureComponent();

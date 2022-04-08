@@ -15,6 +15,7 @@ public class AssetManager {
         textureMap = new HashMap<>();
         textureMap.put("virus", new Texture("virus.png"));
         textureMap.put("loot", new Texture("person.png"));
+        textureMap.put("map", new Texture("hueCircle.png"));
     }
 
     public static AssetManager getInstance() {

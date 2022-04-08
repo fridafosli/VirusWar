@@ -1,5 +1,6 @@
 package no.ntnu.viruswar.screens;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
@@ -9,6 +10,7 @@ import no.ntnu.viruswar.Camera;
 import no.ntnu.viruswar.EntityComparator;
 import no.ntnu.viruswar.TouchController;
 import no.ntnu.viruswar.factories.VirusFactory;
+import no.ntnu.viruswar.factories.WorldFactory;
 import no.ntnu.viruswar.managers.AssetManager;
 import no.ntnu.viruswar.systems.ConsumingSystem;
 import no.ntnu.viruswar.systems.LootSpawnSystem;
@@ -35,15 +37,16 @@ public class GameScreen extends ScreenAdapter {
 
     private void init() {
         engine = new PooledEngine();
+        Entity mapEntity = WorldFactory.createWorld(engine);
+        engine.addSystem(new MapShrinkSystem(5, mapEntity));
+        engine.addEntity(mapEntity);
 
         engine.addSystem(new PlayerControlSystem(touchController));
-        engine.addSystem(new PlayerMovementSystem());
+        engine.addSystem(new PlayerMovementSystem(mapEntity));
         engine.addSystem(new ConsumingSystem());
         EntityComparator comparator = new EntityComparator();
         engine.addSystem(new RenderingSystem(batch, camera, comparator));
-        engine.addSystem(new MapShrinkSystem(5));
-        engine.addSystem(new LootSpawnSystem(1));
-
+        engine.addSystem(new LootSpawnSystem(1, mapEntity)); //change to bigger spawn interval
         engine.addEntity(VirusFactory.createVirus(engine, 100, 100, false));
         engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));
     }

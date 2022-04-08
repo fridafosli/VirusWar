@@ -52,9 +52,9 @@ public class MapShrinkSystem extends IntervalSystem {
         DimensionComponent dc = dimensionMapper.get(entity);
         TransformComponent tc = transformMapper.get(entity);
         //uncomment under here
-/*
+
         dc.add(-10);
-        tc.position.add(10);*/
+//        tc.position.add(10);
 
     }
 

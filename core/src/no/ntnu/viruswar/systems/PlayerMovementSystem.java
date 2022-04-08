@@ -36,7 +36,6 @@ public class PlayerMovementSystem extends IteratingSystem {
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-
         for (Entity entity : entityQueue) {
             DimensionComponent mapDimension = dimensionMapper.get(mapEntity);
             TransformComponent worldTc = transformMapper.get(mapEntity);
@@ -86,7 +85,7 @@ public class PlayerMovementSystem extends IteratingSystem {
                     trc.position.add(vcc.velocity.scl(deltaTime));
                 }
                 else {
-                    int newD = d = (int)Math.sqrt(((worldTc.position.x - trc.position.x)
+                    int newD = (int)Math.sqrt(((worldTc.position.x - trc.position.x)
                             * (worldTc.position.x - trc.position.x))
                             + ((worldTc.position.y - trc.position.y)
                             * (worldTc.position.y - trc.position.y)));

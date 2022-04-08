@@ -2,6 +2,8 @@ package no.ntnu.viruswar.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -12,6 +14,7 @@ public class GameLobby extends StateMenu {
 
     private boolean host;
     private String pin;
+    private Sprite background;
 
     protected GameLobby(final GameStateManager gsm, boolean host, String pin) {
         super(gsm);
@@ -40,9 +43,8 @@ public class GameLobby extends StateMenu {
         customizeBtn.setPosition((Gdx.graphics.getWidth()/2)-40, 10);
         stage.addActor(backBtn);
         stage.addActor(customizeBtn);
-
-
-
+        background = new Sprite(new Texture(Gdx.files.internal("basicBackground.png")));
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 
     @Override
@@ -58,7 +60,9 @@ public class GameLobby extends StateMenu {
     @Override
     public void render(SpriteBatch sb) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        sb.begin();
+        background.draw(sb);
+        sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

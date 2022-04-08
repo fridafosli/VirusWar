@@ -47,7 +47,7 @@ public class Custom extends State{
         stage.addActor(backBtn);
     setPlayerVirus();
         // Set the background
-        background = new Sprite(new Texture(Gdx.files.internal("settings.png")));
+        background = new Sprite(new Texture(Gdx.files.internal("basicBackground.png")));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Set the inputProcessor

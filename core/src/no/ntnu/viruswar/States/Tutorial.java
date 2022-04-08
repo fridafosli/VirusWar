@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -23,6 +24,7 @@ public class Tutorial extends State {
     private TextButton backBtn;
     private TextButton nextBtn;
     private TextButton prevBtn;
+    private Sprite background;
 
     private List<Image> pages = new ArrayList<Image>();
     private int page = 0;
@@ -45,7 +47,8 @@ public class Tutorial extends State {
             }
         });
         stage.addActor(backBtn);
-
+        background = new Sprite(new Texture(Gdx.files.internal("basicBackground.png")));
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         // creating the images in the tutorial
         Image img1 = new Image(new Texture(Gdx.files.internal("badlogic.jpg")));
         img1.setSize(Gdx.graphics.getWidth() * 2/3, Gdx.graphics.getHeight() * 2/3);
@@ -122,7 +125,9 @@ public class Tutorial extends State {
     @Override
     public void render(SpriteBatch sb) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        sb.begin();
+        background.draw(sb);
+        sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

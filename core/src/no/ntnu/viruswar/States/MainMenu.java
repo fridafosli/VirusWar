@@ -3,6 +3,8 @@ package no.ntnu.viruswar.States;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -49,7 +51,8 @@ public class MainMenu extends StateMenu {
                 gsm.push(new Settings(gsm));
             }
         });
-
+        background = new Sprite(new Texture(Gdx.files.internal("virusWar2.png")));
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         // add buttons to table
         table.padTop(scale*100);
         table.add(playBtn).padBottom(scale*50);
@@ -71,7 +74,9 @@ public class MainMenu extends StateMenu {
 
     public void render(SpriteBatch sb) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        sb.begin();
+        background.draw(sb);
+        sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

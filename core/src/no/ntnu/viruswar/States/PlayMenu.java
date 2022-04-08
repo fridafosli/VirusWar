@@ -2,6 +2,8 @@ package no.ntnu.viruswar.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -15,7 +17,7 @@ public class PlayMenu extends StateMenu {
     private TextButton backBtn;
     private TextButton createBtn;
     private TextButton joinBtn;
-
+    private Sprite background;
     private TextField input;
 
     protected PlayMenu(final GameStateManager gsm) {
@@ -45,6 +47,8 @@ public class PlayMenu extends StateMenu {
                 gsm.push(new GameLobby(gsm, true, gamePin));
             }
         });
+        background = new Sprite(new Texture(Gdx.files.internal("basicBackground.png")));
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Set up Join button
         joinBtn = new TextButton("Join", skin);
@@ -95,7 +99,9 @@ public class PlayMenu extends StateMenu {
     @Override
     public void render(SpriteBatch sb) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+    sb.begin();
+    background.draw(sb);
+    sb.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

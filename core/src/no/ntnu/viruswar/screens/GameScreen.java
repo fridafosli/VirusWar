@@ -46,7 +46,7 @@ public class GameScreen extends ScreenAdapter {
         engine.addSystem(new ConsumingSystem());
         EntityComparator comparator = new EntityComparator();
         engine.addSystem(new RenderingSystem(batch, camera, comparator));
-        engine.addSystem(new LootSpawnSystem(1)); //change to bigger spawn interval
+        engine.addSystem(new LootSpawnSystem(1, mapEntity)); //change to bigger spawn interval
         engine.addEntity(VirusFactory.createVirus(engine, 100, 100, false));
         engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));
     }

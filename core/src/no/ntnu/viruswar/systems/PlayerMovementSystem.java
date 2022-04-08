@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
+import no.ntnu.viruswar.Constants;
 import no.ntnu.viruswar.componenets.DimensionComponent;
 import no.ntnu.viruswar.componenets.PlayerComponent;
 import no.ntnu.viruswar.componenets.TransformComponent;
@@ -35,64 +36,26 @@ public class PlayerMovementSystem extends IteratingSystem {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
+        DimensionComponent mapDimension = dimensionMapper.get(mapEntity);
+
+        float radius = mapDimension.getRadius();
+
+        Vector3 center = new Vector3(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT /2, 0);
 
         for (Entity entity : entityQueue) {
-            DimensionComponent mapDimension = dimensionMapper.get(mapEntity);
-            TransformComponent worldTc = transformMapper.get(mapEntity);
-            float worldRadius = mapDimension.getRadius();
-
-            DimensionComponent playerDimension = dimensionMapper.get(entity);
             VelocityComponent vcc = velocityMapper.get(entity);
             TransformComponent trc = transformMapper.get(entity);
-            float playerRadius = playerDimension.getRadius();
-
-            //Vector3 playerCenterPoint = new Vector3(trc.position.x + playerRadius, trc.position.y+playerRadius,0);
-            //Vector3 worldCenterPoint = new Vector3(worldTc.position.x + worldRadius, worldTc.position.y + worldRadius,0);
-            // ALLE METODER GIR SAMME AVSTAND
-            //double d = Math.sqrt((playerCenterPoint.x-worldCenterPoint.x)*(playerCenterPoint.x-worldCenterPoint.x) + (playerCenterPoint.y-worldCenterPoint.y)*(playerCenterPoint.y-worldCenterPoint.y));
-            //Vector3 centerToCenter = new Vector3(playerCenterPoint.x - worldCenterPoint.x, playerCenterPoint.y-worldCenterPoint.y, 0);
-            //double dist = Math.hypot(Math.abs(playerCenterPoint.y-worldCenterPoint.y), Math.abs(playerCenterPoint.x-worldCenterPoint.x));
-            //float distance = playerCenterPoint.cpy().sub(worldCenterPoint).len();
-            //float distanceee = worldTc.position.cpy().sub(trc.position).len();
-            //double j =  Math.hypot(playerCenterPoint.x-worldCenterPoint.x, playerCenterPoint.y-worldCenterPoint.y);
-
-
-            /*
-            int distSq = (int)Math.sqrt(((worldTc.position.x - trc.position.x)
-                    * (worldTc.position.x - trc.position.x))
-                    + ((worldTc.position.y - trc.position.y)
-                    * (worldTc.position.y - trc.position.y)));
-
-            // Det under begrenser spilleren til banen men får ikke relatert det til velocity
-            if (distSq + playerRadius < worldRadius)
-            {
-                System.out.println("The smaller circle lies completely"
-                        + " inside the bigger circle without"
-                        + " touching each other "
-                        + "at a point of circumference.") ;
-            }*/
-
-
-
             if (vcc.velocity.len() > 0.1) {
-                Vector3 tmp = new Vector3(trc.position);
-                tmp.add(vcc.velocity);
-                int d = (int)Math.sqrt(((worldTc.position.x - tmp.x)
-                        * (worldTc.position.x - tmp.x))
-                        + ((worldTc.position.y - tmp.y)
-                        * (worldTc.position.y - tmp.y)));
-                if ((d + playerRadius < worldRadius)){
-                    trc.position.add(vcc.velocity.scl(deltaTime));
-                }
-                else {
-                    int newD = (int)Math.sqrt(((worldTc.position.x - trc.position.x)
-                            * (worldTc.position.x - trc.position.x))
-                            + ((worldTc.position.y - trc.position.y)
-                            * (worldTc.position.y - trc.position.y)));
-                    Vector3 newVel = new Vector3(vcc.velocity);
-                    newVel.setLength(worldRadius - newD - playerRadius);
-                    trc.position.add(newVel.scl(deltaTime));
-                }
+                trc.position.add(vcc.velocity.scl(deltaTime));
+            }
+
+            Vector3 centerToPlayer = trc.position.cpy().sub(center);
+            float length = centerToPlayer.len() + dimensionMapper.get(entity).getRadius();
+            if (length > radius) {
+                trc.position.sub(
+                        // The vector from the circle to the player in line with center of the map
+                       centerToPlayer.cpy().sub(centerToPlayer.cpy().scl(radius / length))
+                );
             }
         }
         entityQueue.clear();

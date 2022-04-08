@@ -85,6 +85,15 @@ public class PlayerMovementSystem extends IteratingSystem {
                 if ((d + playerRadius < worldRadius)){
                     trc.position.add(vcc.velocity.scl(deltaTime));
                 }
+                else {
+                    int newD = d = (int)Math.sqrt(((worldTc.position.x - trc.position.x)
+                            * (worldTc.position.x - trc.position.x))
+                            + ((worldTc.position.y - trc.position.y)
+                            * (worldTc.position.y - trc.position.y)));
+                    Vector3 newVel = new Vector3(vcc.velocity);
+                    newVel.setLength(worldRadius - newD - playerRadius);
+                    trc.position.add(newVel.scl(deltaTime));
+                }
             }
         }
         entityQueue.clear();

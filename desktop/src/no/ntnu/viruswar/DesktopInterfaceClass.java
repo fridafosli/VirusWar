@@ -1,44 +1,48 @@
 package no.ntnu.viruswar;
 
 
+import no.ntnu.viruswar.Data.Loot;
 import no.ntnu.viruswar.Data.Player;
 
 public class DesktopInterfaceClass implements FireBaseInterface {
 
-
     @Override
-    public void SomeFunction() {
-        System.out.println("kekorko");
-    }
-
-
-    @Override
-    public void FirstFireBaseTest() {
+    public void setGamePinEventListener(DataHolderClass dataHolder) {
 
     }
 
     @Override
-    public void SetOnValueChangedListener(DataHolderClass dataholder) {
+    public void addPlayerToGame(String gamePin, Player player) {
 
     }
 
     @Override
-    public void SetValueInDb(String target, String value) {
+    public void updatePLayerPosition(String gamePin, String playerId, float x, float y, float points) {
 
     }
 
     @Override
-    public void AddPlayerToGame(String gamePin, Player player) {
+    public void removePlayerFromGame(String gamePin, String playerId) {
 
     }
 
     @Override
-    public void RemovePlayerFromGame(String gamePin, String playerId) {
+    public void setPlayersEventListener(DataHolderClass dataHolder, String gamePin) {
 
     }
 
     @Override
-    public void SetChildEventListener(DataHolderClass dataholder, String gamePin) {
+    public void addLootToGame(String gamePin, Loot loot) {
+
+    }
+
+    @Override
+    public void removeLootFromGame(String gamePin, String lootId) {
+
+    }
+
+    @Override
+    public void setLootEventListener(DataHolderClass dataHolder, String gamePin) {
 
     }
 }

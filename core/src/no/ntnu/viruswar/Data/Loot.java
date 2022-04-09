@@ -1,12 +1,20 @@
 package no.ntnu.viruswar.Data;
 
+import java.util.UUID;
+
 public class Loot {
 
+    private String id;
     private float x;
     private float y;
     private float points = 0;
 
-    public Loot(int x, int y, int points) {
+    public Loot() {
+        // Default constructor required for calls to DataSnapshot.getValue(Loot.class)
+    }
+
+    public Loot(float x, float y, float points) {
+        id = UUID.randomUUID().toString();
         this.x = x;
         this.y = y;
         this.points = points;
@@ -20,7 +28,7 @@ public class Loot {
         return y;
     }
 
-    public void setPosition(int x, int y) {
+    public void setPosition(float x, float y) {
         this.x = x;
         this.y = y;
     }
@@ -31,5 +39,19 @@ public class Loot {
 
     public void setPoints(float points) {
         this.points = points;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Loot{" +
+                "id='" + id + '\'' +
+                ", x=" + x +
+                ", y=" + y +
+                ", points=" + points +
+                '}';
     }
 }

@@ -12,7 +12,7 @@ public class Player {
     private String id;
 
     public Player() {
-        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+        // Default constructor required for calls to DataSnapshot.getValue(Player.class)
     }
 
     public Player(float x, float y, float points, String skin, String name) {
@@ -44,10 +44,24 @@ public class Player {
     public void setPoints(float points) {
         this.points = points;
     }
+
     public String getName() {
         return name;
     }
-    public String getId(){
+
+    public String getId() {
         return id;
+    }
+
+    public String getSkin() {
+        return skin;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                '}';
     }
 }

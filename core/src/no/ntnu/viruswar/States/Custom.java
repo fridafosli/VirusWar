@@ -26,6 +26,7 @@ public class Custom extends State{
     protected Sprite playerVirus;
     private Color color;
     private TextButton backBtn;
+    private TextButton colorChange;
     public Custom(final GameStateManager gsm){
         super(gsm);
 
@@ -44,8 +45,19 @@ public class Custom extends State{
                 gsm.pop();
             }
         });
+        setPlayerVirus();
+        colorChange = new TextButton("Change Color", skin);
+        colorChange.setPosition(200, Gdx.graphics.getHeight() - 200);
+        colorChange.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("Settings", "clicked");
+               setPlayerVirus();
+            }
+        });
         stage.addActor(backBtn);
-    setPlayerVirus();
+        stage.addActor(colorChange);
+
         // Set the background
         background = new Sprite(new Texture(Gdx.files.internal("basicBackground.png")));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -69,7 +81,6 @@ public class Custom extends State{
 
     @Override
     protected void handleInput() {
-
     }
 
     @Override
@@ -83,7 +94,7 @@ public class Custom extends State{
 
         sb.begin();
         background.draw(sb);
-        sb.draw(playerVirus, Gdx.graphics.getWidth()/2-100, Gdx.graphics.getHeight()/2-100, 250,250);
+        sb.draw(playerVirus, Gdx.graphics.getWidth()/2-20, Gdx.graphics.getHeight()/2-120, 250,250);
         sb.setColor(color);
         sb.end();
 

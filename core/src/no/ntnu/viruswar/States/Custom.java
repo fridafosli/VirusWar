@@ -9,8 +9,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
@@ -26,52 +29,88 @@ public class Custom extends State{
     protected Sprite playerVirus;
     private Color color;
     private TextButton backBtn;
-    private TextButton colorChange;
+    private TextButton colorChangePlus;
+    private TextButton colorChangeMinus;
+    private TextButton submitBtn;
+    private int colorIndex;
+    private TextField usernameInput;
+    private String colorName;
+
     public Custom(final GameStateManager gsm){
         super(gsm);
-
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         //skin.getFont("default-font").getData().setScale(scale);
-
+        usernameInput = new TextField("username", skin);
+        usernameInput.setPosition(120,Gdx.graphics.getHeight() - 200);
         stage = new Stage(new ScreenViewport());
-
+        submitBtn= new TextButton("Submit", skin);
+        submitBtn.setPosition(150, 50);
         // Setting up the back button
         backBtn = new TextButton("Back", skin);
         backBtn.setPosition(0, Gdx.graphics.getHeight() - 70);
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("Settings", "clicked");
                 gsm.pop();
             }
         });
-        setPlayerVirus();
-        colorChange = new TextButton("Change Color", skin);
-        colorChange.setPosition(200, Gdx.graphics.getHeight() - 200);
-        colorChange.addListener(new ClickListener() {
+        backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("Settings", "clicked");
-               setPlayerVirus();
+                gsm.pop();
+            }
+        });
+
+        setPlayerVirus(true,false);
+
+        colorChangePlus = new TextButton(">", skin);
+        colorChangePlus.setPosition(Gdx.graphics.getWidth()-150, Gdx.graphics.getHeight() - 200);
+
+        colorChangePlus.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+               setPlayerVirus(false, true);
+
+            }
+        });
+        colorChangeMinus = new TextButton("<", skin);
+        colorChangeMinus.setPosition(280, Gdx.graphics.getHeight() - 200);
+        colorChangeMinus.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                setPlayerVirus(false,false);
             }
         });
         stage.addActor(backBtn);
-        stage.addActor(colorChange);
-
+        stage.addActor(colorChangePlus);
+        stage.addActor(colorChangeMinus);
+        stage.addActor(usernameInput);
+        stage.addActor(submitBtn);
         // Set the background
         background = new Sprite(new Texture(Gdx.files.internal("basicBackground.png")));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Set the inputProcessor
         Gdx.input.setInputProcessor(stage);
-    }
 
-    private void setPlayerVirus(){
+    }
+    private void setPlayerVirus(boolean initial, boolean add){
         playerVirus= new Sprite(new Texture("virus.png"));
         List<Color> colors= Arrays.asList(Color.BLUE,Color.PINK,Color.CYAN, Color.RED, Color.GREEN, Color.MAGENTA, Color.BROWN,
                 Color.FIREBRICK, Color.FOREST, Color.PURPLE, Color.CORAL, Color.LIME, Color.SKY,Color.ORANGE, Color.OLIVE,Color.YELLOW, Color.VIOLET, Color.WHITE,Color.GOLDENROD, Color.SALMON, Color.MAROON, Color.NAVY);
+        if(initial){
+            colorIndex= (int)(Math.random()*(colors.size()-1));
 
-        color= colors.get((int)(Math.random()*(colors.size()-1)));
+        }
+        else if(add){
+            colorIndex=(colorIndex==colors.size()-1)?0:colorIndex+1;
+        }
+        else{
+            colorIndex=(colorIndex==0)?colors.size()-1:colorIndex-1;
+
+        }
+        color= colors.get(colorIndex);
+
     }
 
     @Override
@@ -94,15 +133,12 @@ public class Custom extends State{
 
         sb.begin();
         background.draw(sb);
-        sb.draw(playerVirus, Gdx.graphics.getWidth()/2-20, Gdx.graphics.getHeight()/2-120, 250,250);
+        sb.draw(playerVirus, (int)(Gdx.graphics.getWidth()/2)-50,(int)(Gdx.graphics.getHeight()/2)-120, 250,250);
         sb.setColor(color);
         sb.end();
 
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-
-
-
     }
 
     @Override

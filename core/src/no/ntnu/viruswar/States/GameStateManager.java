@@ -5,17 +5,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Stack;
 
+import no.ntnu.viruswar.FireBaseInterface;
+
 public class GameStateManager {
 
     private Stack<State> states;
+    private FireBaseInterface _FBIC;
 
-    public GameStateManager() {
+    public GameStateManager(FireBaseInterface FBIC) {
         states = new Stack<State>();
+        this._FBIC = FBIC;
     }
 
     public void push(State state) {
         states.push(state);
     }
+
+    public FireBaseInterface get_FBIC() { return _FBIC; }
 
     public void pop() {
         states.pop();

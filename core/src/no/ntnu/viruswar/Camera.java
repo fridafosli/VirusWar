@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector3;
 
 public class Camera extends OrthographicCamera {
 
-    final static float aspectRatio = (float) Gdx.graphics.getHeight() /  (float) Gdx.graphics.getWidth();
+    final static float aspectRatio = (float) Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();;
 
     public Camera() {
         super(Constants.GAME_WORLD_WIDTH * aspectRatio, Constants.GAME_WORLD_HEIGHT);

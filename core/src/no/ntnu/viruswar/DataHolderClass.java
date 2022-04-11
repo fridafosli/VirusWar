@@ -8,7 +8,7 @@ import java.util.Map;
 import no.ntnu.viruswar.Data.Loot;
 import no.ntnu.viruswar.Data.Player;
 
-class DataHolderClass {
+public class DataHolderClass {
 
     private Collection<String> activeGamePins = new ArrayList<>();
     private Map<String, Player> players = new HashMap<>();

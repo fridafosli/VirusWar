@@ -29,7 +29,7 @@ public class VirusWar extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        gsm = new GameStateManager();
+        gsm = new GameStateManager(this._FBIC);
         gsm.push(new MainMenu(gsm));
         dataHolder = new DataHolderClass();
         //scale = Gdx.graphics.getHeight()/300;

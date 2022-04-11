@@ -8,6 +8,7 @@ import java.util.Map;
 import no.ntnu.viruswar.Data.Loot;
 import no.ntnu.viruswar.Data.Player;
 
+// Gjorde den public, si fra dersom det er et problem
 public class DataHolderClass {
 
     private Collection<String> activeGamePins = new ArrayList<>();

@@ -12,10 +12,6 @@ public class GameStateManager {
     private Stack<State> states;
     private FireBaseInterface _FBIC;
 
-    public FireBaseInterface get_FBIC() {
-        return _FBIC;
-    }
-
     public GameStateManager(FireBaseInterface FBIC) {
         states = new Stack<State>();
         this._FBIC = FBIC;
@@ -24,6 +20,8 @@ public class GameStateManager {
     public void push(State state) {
         states.push(state);
     }
+
+    public FireBaseInterface get_FBIC() { return _FBIC; }
 
     public void pop() {
         states.pop();

@@ -11,15 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class Custom extends State{
@@ -34,7 +31,6 @@ public class Custom extends State{
     private TextButton submitBtn;
     private int colorIndex;
     private TextField usernameInput;
-    private String colorName;
 
     public Custom(final GameStateManager gsm){
         super(gsm);
@@ -44,7 +40,7 @@ public class Custom extends State{
         usernameInput.setPosition(120,Gdx.graphics.getHeight() - 200);
         stage = new Stage(new ScreenViewport());
         submitBtn= new TextButton("Submit", skin);
-        submitBtn.setPosition(150, 50);
+        submitBtn.setPosition(160, 100);
         // Setting up the back button
         backBtn = new TextButton("Back", skin);
         backBtn.setPosition(0, Gdx.graphics.getHeight() - 70);
@@ -64,7 +60,7 @@ public class Custom extends State{
         setPlayerVirus(true,false);
 
         colorChangePlus = new TextButton(">", skin);
-        colorChangePlus.setPosition(Gdx.graphics.getWidth()-150, Gdx.graphics.getHeight() - 200);
+        colorChangePlus.setPosition(Gdx.graphics.getWidth()-185, Gdx.graphics.getHeight() - 200);
 
         colorChangePlus.addListener(new ClickListener() {
             @Override
@@ -74,13 +70,17 @@ public class Custom extends State{
             }
         });
         colorChangeMinus = new TextButton("<", skin);
-        colorChangeMinus.setPosition(280, Gdx.graphics.getHeight() - 200);
+        colorChangeMinus.setPosition(310, Gdx.graphics.getHeight() - 200);
         colorChangeMinus.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 setPlayerVirus(false,false);
             }
         });
+
+        Label label= new Label("Customize avatar",skin);
+        label.setPosition(120, Gdx.graphics.getHeight()-100);
+        stage.addActor(label);
         stage.addActor(backBtn);
         stage.addActor(colorChangePlus);
         stage.addActor(colorChangeMinus);

@@ -20,10 +20,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import no.ntnu.viruswar.Data.Player;
+
 public class Custom extends State{
     protected Stage stage;
     protected Skin skin;
-    protected Sprite background;
     protected Sprite playerVirus;
     private Color color;
     private TextButton backBtn;
@@ -33,7 +34,7 @@ public class Custom extends State{
     private int colorIndex;
     private TextField usernameInput;
 
-    public Custom(final GameStateManager gsm){
+    public Custom(final GameStateManager gsm, Player player){
         super(gsm);
 
         skin = new Skin(Gdx.files.internal("uiskin.json"));
@@ -46,12 +47,6 @@ public class Custom extends State{
         // Setting up the back button
         backBtn = new TextButton("Back", skin);
         backBtn.setPosition(0, Gdx.graphics.getHeight() - 70);
-        backBtn.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                gsm.pop();
-            }
-        });
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -89,8 +84,6 @@ public class Custom extends State{
         stage.addActor(usernameInput);
         stage.addActor(submitBtn);
         // Set the background
-        background = new Sprite(new Texture(Gdx.files.internal("basicBackground.png")));
-        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Set the inputProcessor
         Gdx.input.setInputProcessor(stage);
@@ -135,7 +128,6 @@ public class Custom extends State{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         sb.begin();
-        background.draw(sb);
         sb.draw(playerVirus, (int)(Gdx.graphics.getWidth()/2)-50,(int)(Gdx.graphics.getHeight()/2)-120, 250,250);
         sb.setColor(color);
         sb.end();

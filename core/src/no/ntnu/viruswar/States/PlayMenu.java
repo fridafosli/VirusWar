@@ -150,7 +150,7 @@ public class PlayMenu extends StateMenu {
         table.add(label4, nick_input, joinBtn).padBottom(40);
         table.row();
 
-        // error
+        // Error label must be added outside the table to not disturb the textfields.
         error.setPosition(500, 500);
         stage.addActor(error);
 

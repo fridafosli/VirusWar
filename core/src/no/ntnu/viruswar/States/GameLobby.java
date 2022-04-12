@@ -23,20 +23,21 @@ public class GameLobby extends StateMenu {
 
     private boolean host;
     private String pin;
+    private Player player;
     private TextButton backBtn;
     private TextButton playBtn;
     private DataHolderClass dataHolder = new DataHolderClass();
     private FireBaseInterface _FBIC;
-    private ArrayList<String> players = new ArrayList<String>();
     private String playertext = "";
     Label pls;
 
-    protected GameLobby(final GameStateManager gsm, boolean host, String pin) {
+    protected GameLobby(final GameStateManager gsm, final boolean host, final String pin, final Player player) {
         super(gsm);
         this.host = host;
         this.pin = pin;
+        this.player = player;
         _FBIC = gsm.get_FBIC();
-        _FBIC.setPlayersEventListener(this.dataHolder, "abc123");
+        _FBIC.setPlayersEventListener(this.dataHolder, this.pin);
 
 
         // Set up Back-button
@@ -46,24 +47,33 @@ public class GameLobby extends StateMenu {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("back", "clicked");
+                // removes player from game
+                _FBIC.removePlayerFromGame(pin, player.getId());
+                if (host) {
+                    // set hostPresent false in db
+                }
                 gsm.pop();
             }
         });
         stage.addActor(backBtn);
 
-        // Set up button that displays no player message
+        // Set up button that displays no player message or message to wait for creator to start game
         final Label no_pls = new Label("", skin);
-        table.add(no_pls);
+        table.padTop(30);
+        table.add(no_pls).padBottom(30);
         table.row();
+        if (!host) {
+            no_pls.setText("Wait for game creator to start the game.");
+        }
 
         Label l = new Label("Game Pin: " + this.pin, skin);
         l.setPosition(100, 20);
-        table.add(l);
+        table.add(l).padBottom(30);
         table.row();
 
         Label p = new Label("Players: ", skin);
         p.setPosition(100, 50);
-        table.add(p);
+        table.add(p).padBottom(30);
         table.row();
 
         // Set up label that displays connected players
@@ -79,8 +89,8 @@ public class GameLobby extends StateMenu {
         playBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (dataHolder.getPlayers().values().isEmpty()) {
-                    no_pls.setText("Cannot start game without players");
+                if (dataHolder.getPlayers().values().size() < 2) {
+                    no_pls.setText("Cannot start game without opponents");
                     // Set timer and make the text disappear after 5 seconds
                     Thread timer = new Thread(){
                         public void run(){
@@ -100,13 +110,14 @@ public class GameLobby extends StateMenu {
                 gsm.pop();
             }
         });
-        stage.addActor(playBtn);
+        if (host) {
+            stage.addActor(playBtn);
+        }
 
 
         // Add all players connected to game to the screen
         for (Player pl : dataHolder.getPlayers().values()) {
             playertext += pl.getName() + " \n ";
-//            players.add(pl.getName());
         }
         pls.setText(playertext);
 
@@ -124,21 +135,12 @@ public class GameLobby extends StateMenu {
 
     @Override
     public void render(SpriteBatch sb) {
-//        players.clear();
-//        for (Player pl : dataHolder.getPlayers().values()) {
-//            if (players.contains(pl.getName())) {
-//                continue;
-//            }
-//            players.add(pl.getName());
-//            playertext += pl.getName() + " \n ";
-//        }
-//        String[] displayed = playertext.split("\n");
-//        for (String str : displayed) {
-//            if (!players.contains(str)) {
-//                playertext.replace(str + " \n", "");
-//            }
-//        }
-
+        if (!true) { // if hostPresent
+            Gdx.app.log("game", "game deleted");
+            // When all players are removed the game will be deleted??
+            _FBIC.removePlayerFromGame(this.pin, this.player.getId());
+            gsm.pop();
+        }
         // Add all players connected to game to the screen
         playertext = "";
         System.out.println(dataHolder.getPlayers().values());

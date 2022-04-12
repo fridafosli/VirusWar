@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import no.ntnu.viruswar.Data.Player;
 import no.ntnu.viruswar.DataHolderClass;
 import no.ntnu.viruswar.FireBaseInterface;
 
@@ -20,6 +21,7 @@ public class PlayMenu extends StateMenu {
     private TextButton joinBtn;
     private TextField pin_input;
     private TextField nick_input;
+    private TextField host_nick_input;
 
 
     private DataHolderClass dataHolder = new DataHolderClass();
@@ -29,16 +31,19 @@ public class PlayMenu extends StateMenu {
         super(gsm);
         this._FBIC = gsm.get_FBIC();
         _FBIC.setGamePinEventListener(dataHolder);
+        // Hvordan lagre host??
 
         // Create input-fields
         pin_input = new TextField("", skin);
         nick_input = new TextField("", skin);
+        host_nick_input = new TextField("", skin);
 
         // Create labels
         Label label1 = new Label("Create Game:", skin);
         Label label2 = new Label("Join Game By PIN:", skin);
         Label label3 = new Label("Gamepin: ", skin);
         Label label4 = new Label("Nickname: ", skin);
+        Label label5 = new Label("Nickname: ", skin);
         final Label error = new Label("", skin);
 
 
@@ -47,6 +52,22 @@ public class PlayMenu extends StateMenu {
         createBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (host_nick_input.getText().length() < 1) {
+                    error.setText("Please fill nickname to create game.");
+                    Thread timer = new Thread(){
+                        public void run(){
+                            try{
+                                sleep(5000);
+                            } catch (InterruptedException e){
+                                e.printStackTrace();
+                            } finally {
+                                error.setText("");
+                            }
+                        }
+                    };
+                    timer.start();
+                    return;
+                }
                 Gdx.app.log("create", "clicked");
 
                 // Generate a random 6 character game-pin
@@ -66,7 +87,9 @@ public class PlayMenu extends StateMenu {
                     }
                 }
                 System.out.println(gamePin);
-                gsm.push(new GameLobby(gsm, true, gamePin));
+                Player host = new Player(0,0,0,"default", host_nick_input.getText());
+                _FBIC.addPlayerToGame(gamePin, host);
+                gsm.push(new GameLobby(gsm, true, gamePin, host));
             }
         });
 
@@ -75,7 +98,6 @@ public class PlayMenu extends StateMenu {
         joinBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("join", "clicked");
                 if (pin_input.getText().length() < 1 && nick_input.getText().length() < 1) {
                     error.setText("Please fill gamepin and nickname to join.");
                     Thread timer = new Thread(){
@@ -108,7 +130,10 @@ public class PlayMenu extends StateMenu {
                     timer.start();
                     return;
                 }
-                gsm.push(new GameLobby(gsm, true, pin_input.getText()));
+                Gdx.app.log("join", "clicked");
+                Player player = new Player(0,0,0,"blue", nick_input.getText());
+                _FBIC.addPlayerToGame(pin_input.getText(), player);
+                gsm.push(new GameLobby(gsm, false, pin_input.getText(), player));
             }
         });
 
@@ -116,7 +141,7 @@ public class PlayMenu extends StateMenu {
         table.padTop(30);
         table.add(label1).padBottom(30);
         table.row();
-        table.add(createBtn).padBottom(30);
+        table.add(label5, host_nick_input, createBtn).padBottom(30);
         table.row();
         table.add(label2).padBottom(30);
         table.row();

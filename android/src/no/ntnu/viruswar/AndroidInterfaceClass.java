@@ -62,6 +62,8 @@ public class AndroidInterfaceClass implements FireBaseInterface {
     @Override
     public void addPlayerToGame(String gamePin, Player player) {
         myRef.child(gamePin + "/players/" + player.getId()).setValue(player);
+        // next line may not be supposed to have??
+        myRef.child(gamePin + "/hostPresent/").setValue(true);
     }
 
     @Override

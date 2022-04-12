@@ -23,13 +23,13 @@ public class GameLobby extends StateMenu {
 
     private boolean host;
     private String pin;
-    private Player player;
+    private final Player player;
     private TextButton backBtn;
     private TextButton playBtn;
     private DataHolderClass dataHolder = new DataHolderClass();
     private FireBaseInterface _FBIC;
     private String playertext = "";
-    Label pls;
+    private Label playerDisplay;
 
     protected GameLobby(final GameStateManager gsm, final boolean host, final String pin, final Player player) {
         super(gsm);
@@ -38,6 +38,25 @@ public class GameLobby extends StateMenu {
         this.player = player;
         _FBIC = gsm.get_FBIC();
         _FBIC.setPlayersEventListener(this.dataHolder, this.pin);
+
+        // Initialize labels
+        final Label no_pls = new Label("", skin); // Label that displays no opponents message when playbutton is pressed
+        Label pinLabel = new Label("Game Pin: " + this.pin, skin);
+        Label playerLabel = new Label("Players: ", skin);
+        this.playerDisplay = new Label(playertext + "", skin);
+
+        // Add the labels to the table
+        table.padTop(30);
+        table.add(no_pls).padBottom(30);
+        table.row();
+        pinLabel.setPosition(100, 20);
+        table.add(pinLabel).padBottom(30);
+        table.row();
+        playerLabel.setPosition(100, 50);
+        table.add(playerLabel).padBottom(30);
+        table.row();
+        table.add(playerDisplay);
+        table.row();
 
 
         // Set up Back-button
@@ -49,38 +68,10 @@ public class GameLobby extends StateMenu {
                 Gdx.app.log("back", "clicked");
                 // removes player from game
                 _FBIC.removePlayerFromGame(pin, player.getId());
-                if (host) {
-                    // set hostPresent false in db
-                }
                 gsm.pop();
             }
         });
         stage.addActor(backBtn);
-
-        // Set up button that displays no player message or message to wait for creator to start game
-        final Label no_pls = new Label("", skin);
-        table.padTop(30);
-        table.add(no_pls).padBottom(30);
-        table.row();
-        if (!host) {
-            no_pls.setText("Wait for game creator to start the game.");
-        }
-
-        Label l = new Label("Game Pin: " + this.pin, skin);
-        l.setPosition(100, 20);
-        table.add(l).padBottom(30);
-        table.row();
-
-        Label p = new Label("Players: ", skin);
-        p.setPosition(100, 50);
-        table.add(p).padBottom(30);
-        table.row();
-
-        // Set up label that displays connected players
-        this.pls = new Label(playertext + "", skin);
-        table.add(pls);
-        table.row();
-
 
 
         // Set up Play-button
@@ -110,16 +101,15 @@ public class GameLobby extends StateMenu {
                 gsm.pop();
             }
         });
-        if (host) {
-            stage.addActor(playBtn);
-        }
+        stage.addActor(playBtn);
 
 
+        // Legge inn en scrollpane?? (Container<Slider>)
         // Add all players connected to game to the screen
         for (Player pl : dataHolder.getPlayers().values()) {
             playertext += pl.getName() + " \n ";
         }
-        pls.setText(playertext);
+        playerDisplay.setText(playertext);
 
     }
 
@@ -135,21 +125,16 @@ public class GameLobby extends StateMenu {
 
     @Override
     public void render(SpriteBatch sb) {
-        if (!true) { // if hostPresent
-            Gdx.app.log("game", "game deleted");
-            // When all players are removed the game will be deleted??
-            _FBIC.removePlayerFromGame(this.pin, this.player.getId());
-            gsm.pop();
-        }
         // Add all players connected to game to the screen
         playertext = "";
         System.out.println(dataHolder.getPlayers().values());
         for (Player pl : dataHolder.getPlayers().values()) {
             playertext += pl.getName() + " \n ";
         }
-        pls.setText(playertext);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        playerDisplay.setText(playertext);
 
+
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }

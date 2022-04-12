@@ -99,7 +99,7 @@ public class PlayMenu extends StateMenu {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (pin_input.getText().length() < 1 && nick_input.getText().length() < 1) {
-                    error.setText("Please fill gamepin and nickname to join.");
+                    error.setText("\n Please fill gamepin and nickname to join.");
                     Thread timer = new Thread(){
                         public void run(){
                             try{
@@ -115,7 +115,7 @@ public class PlayMenu extends StateMenu {
                     return;
                 }
                 if (!dataHolder.activeGamePinsContainsPin(pin_input.getText())) {
-                    error.setText("Gamepin not valid.");
+                    error.setText("\n Gamepin not valid.");
                     Thread timer = new Thread(){
                         public void run(){
                             try{
@@ -138,18 +138,21 @@ public class PlayMenu extends StateMenu {
         });
 
         // Add actors to Table
-        table.padTop(30);
-        table.add(label1).padBottom(30);
+        table.padTop(40);
+        table.add(label1).padBottom(40);
         table.row();
-        table.add(label5, host_nick_input, createBtn).padBottom(30);
+        table.add(label5, host_nick_input, createBtn).padBottom(40);
         table.row();
-        table.add(label2).padBottom(30);
+        table.add(label2).padBottom(40);
         table.row();
         table.add(label3, pin_input);
         table.row();
-        table.add(label4, nick_input, joinBtn);
+        table.add(label4, nick_input, joinBtn).padBottom(40);
         table.row();
-        table.add(error).padBottom(30);
+
+        // error
+        error.setPosition(500, 500);
+        stage.addActor(error);
 
         // Set up Back-button
         backBtn = new TextButton("Back", skin);

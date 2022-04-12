@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import no.ntnu.viruswar.Data.Loot;
 import no.ntnu.viruswar.Data.Player;
+import no.ntnu.viruswar.States.DeadScreen;
 import no.ntnu.viruswar.States.GameStateManager;
 import no.ntnu.viruswar.States.MainMenu;
 
@@ -30,7 +31,10 @@ public class VirusWar extends ApplicationAdapter {
     public void create() {
         batch = new SpriteBatch();
         gsm = new GameStateManager(_FBIC);
-        gsm.push(new MainMenu(gsm));
+//        gsm.push(new MainMenu(gsm));
+        Player player = new Player(1,2,3,"skin", "testplayer");
+        _FBIC.addPlayerToGame("abc123", player);
+        gsm.push(new DeadScreen(gsm, "abc123", player));
         dataHolder = new DataHolderClass();
         //scale = Gdx.graphics.getHeight()/300;
         // skin = new Skin(Gdx.files.internal("uiskin.json"));

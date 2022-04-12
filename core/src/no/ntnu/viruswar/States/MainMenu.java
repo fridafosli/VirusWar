@@ -51,7 +51,7 @@ public class MainMenu extends StateMenu {
                 gsm.push(new Settings(gsm));
             }
         });
-        background = new Sprite(new Texture(Gdx.files.internal("virusWar2.png")));
+        background = new Sprite(new Texture(Gdx.files.internal("virusWar.png")));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         // add buttons to table
         table.padTop(scale*100);

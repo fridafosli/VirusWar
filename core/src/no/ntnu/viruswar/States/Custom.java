@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Custom extends State{
     protected Stage stage;
@@ -34,6 +35,7 @@ public class Custom extends State{
 
     public Custom(final GameStateManager gsm){
         super(gsm);
+
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         //skin.getFont("default-font").getData().setScale(scale);
         usernameInput = new TextField("username", skin);
@@ -98,6 +100,7 @@ public class Custom extends State{
         playerVirus= new Sprite(new Texture("virus.png"));
         List<Color> colors= Arrays.asList(Color.BLUE,Color.PINK,Color.CYAN, Color.RED, Color.GREEN, Color.MAGENTA, Color.BROWN,
                 Color.FIREBRICK, Color.FOREST, Color.PURPLE, Color.CORAL, Color.LIME, Color.SKY,Color.ORANGE, Color.OLIVE,Color.YELLOW, Color.VIOLET, Color.WHITE,Color.GOLDENROD, Color.SALMON, Color.MAROON, Color.NAVY);
+
         if(initial){
             colorIndex= (int)(Math.random()*(colors.size()-1));
 

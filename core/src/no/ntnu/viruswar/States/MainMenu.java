@@ -2,6 +2,7 @@ package no.ntnu.viruswar.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -31,6 +32,8 @@ public class MainMenu extends StateMenu {
                 gsm.push(new PlayMenu(gsm));
             }
         });
+        playBtn.setColor(Color.RED);
+
 
         // Create the Tutorial-button
         tutorialBtn = new TextButton("Tutorial", skin);
@@ -41,7 +44,7 @@ public class MainMenu extends StateMenu {
                 gsm.push(new Tutorial(gsm));
             }
         });
-
+        tutorialBtn.setColor(Color.RED);
         // Create the Settings-button
         settingsBtn = new TextButton("Settings", skin);
         settingsBtn.addListener(new ClickListener() {
@@ -51,6 +54,7 @@ public class MainMenu extends StateMenu {
                 gsm.push(new Settings(gsm));
             }
         });
+        settingsBtn.setColor(Color.RED);
         background = new Sprite(new Texture(Gdx.files.internal("virusWar.png")));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         // add buttons to table

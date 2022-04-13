@@ -8,10 +8,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import no.ntnu.viruswar.Camera;
 import no.ntnu.viruswar.EntityComparator;
+import no.ntnu.viruswar.Screen;
 import no.ntnu.viruswar.TouchController;
 import no.ntnu.viruswar.factories.VirusFactory;
 import no.ntnu.viruswar.factories.WorldFactory;
 import no.ntnu.viruswar.managers.AssetManager;
+import no.ntnu.viruswar.managers.ScreenManager;
 import no.ntnu.viruswar.systems.ConsumingSystem;
 import no.ntnu.viruswar.systems.LootSpawnSystem;
 import no.ntnu.viruswar.systems.MapShrinkSystem;
@@ -19,20 +21,18 @@ import no.ntnu.viruswar.systems.PlayerControlSystem;
 import no.ntnu.viruswar.systems.PlayerMovementSystem;
 import no.ntnu.viruswar.systems.RenderingSystem;
 
-public class GameScreen extends ScreenAdapter {
+public class GameScreen extends Screen {
 
     private PooledEngine engine;
-    private final SpriteBatch batch;
 
     private final Camera camera;
     private final TouchController touchController;
 
-    public GameScreen(SpriteBatch batch) {
-        super();
-        this.batch = batch;
+    public GameScreen(ScreenManager screenManager) {
+        super(screenManager);
         camera = new Camera();
         touchController = new TouchController(camera);
-        Gdx.input.setInputProcessor(touchController);
+
     }
 
     private void init() {
@@ -45,7 +45,7 @@ public class GameScreen extends ScreenAdapter {
         engine.addSystem(new PlayerMovementSystem(mapEntity));
         engine.addSystem(new ConsumingSystem());
         EntityComparator comparator = new EntityComparator();
-        engine.addSystem(new RenderingSystem(batch, camera, comparator));
+        engine.addSystem(new RenderingSystem(gsm.getBatch(), camera, comparator));
         engine.addSystem(new LootSpawnSystem(1, mapEntity)); //change to bigger spawn interval
         engine.addEntity(VirusFactory.createVirus(engine, 100, 100, false));
         engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));
@@ -64,9 +64,8 @@ public class GameScreen extends ScreenAdapter {
     }
 
     @Override
-    public void dispose() {
-        super.dispose();
-        AssetManager.getInstance().dispose();
+    public void show() {
+        Gdx.input.setInputProcessor(touchController);
     }
 }
 

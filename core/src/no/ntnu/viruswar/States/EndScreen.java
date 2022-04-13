@@ -9,28 +9,25 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.Data.Player;
-import no.ntnu.viruswar.DataHolderClass;
-import no.ntnu.viruswar.FireBaseInterface;
 
-public class DeadScreen extends StateMenu {
+public class EndScreen extends StateMenu {
 
-    private final Player player;
-    private String gamePin;
-    private TextButton backBtn;
-    private DataHolderClass dataHolder = new DataHolderClass();
-    private FireBaseInterface _FBIC;
 
-    public DeadScreen(final GameStateManager gsm, String gamePin, final Player player) {
+    public EndScreen(final GameStateManager gsm, final Player player, boolean winner) {
         super(gsm);
-        this.player = player;
-        this.gamePin = gamePin;
-        _FBIC = gsm.get_FBIC();
-        _FBIC.setPlayersEventListener(dataHolder, gamePin);
+
+        String text;
+        if (winner) {
+            text = "WINNER";
+        }
+        else {
+            text = "You died loser ";
+        }
 
         // Initialize labels
-        Label dieLabel = new Label("You died loser ", skin);
-        Label scoreLabel = new Label("Score: " + dataHolder.getPlayers().get(player.getId()).getPoints(), skin);
-//        Label scoreLabel = new Label("Score: ", skin);
+        Label dieLabel = new Label(text, skin);
+        Label scoreLabel = new Label("Score: " + player.getPoints(), skin);
+
 
         // Add the labels to the stage
         dieLabel.setPosition(780, 700);
@@ -38,18 +35,9 @@ public class DeadScreen extends StateMenu {
         stage.addActor(dieLabel);
         stage.addActor(scoreLabel);
 
-//        table.padTop(30);
-//        table.row();
-//        pinLabel.setPosition(100, 20);
-//        table.add(pinLabel).padBottom(30);
-//        table.row();
-//        playerLabel.setPosition(100, 50);
-//        table.add(playerLabel).padBottom(30);
-//        table.row();
-
 
         // Set up Back-button, pops the user back to main menu
-        backBtn = new TextButton("Main Menu", skin);
+        TextButton backBtn = new TextButton("Main Menu", skin);
         backBtn.setPosition(780, 400);
         backBtn.addListener(new ClickListener() {
             @Override

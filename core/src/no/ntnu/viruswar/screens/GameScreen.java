@@ -3,17 +3,14 @@ package no.ntnu.viruswar.screens;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import no.ntnu.viruswar.Camera;
 import no.ntnu.viruswar.EntityComparator;
 import no.ntnu.viruswar.Screen;
 import no.ntnu.viruswar.TouchController;
 import no.ntnu.viruswar.factories.VirusFactory;
 import no.ntnu.viruswar.factories.WorldFactory;
-import no.ntnu.viruswar.managers.AssetManager;
 import no.ntnu.viruswar.managers.ScreenManager;
+import no.ntnu.viruswar.systems.CameraSystem;
 import no.ntnu.viruswar.systems.ConsumingSystem;
 import no.ntnu.viruswar.systems.LootSpawnSystem;
 import no.ntnu.viruswar.systems.MapShrinkSystem;
@@ -40,6 +37,7 @@ public class GameScreen extends Screen {
         Entity mapEntity = WorldFactory.createWorld(engine);
         engine.addSystem(new MapShrinkSystem(5, mapEntity));
         engine.addEntity(mapEntity);
+        engine.addSystem(new CameraSystem(camera));
 
         engine.addSystem(new PlayerControlSystem(touchController));
         engine.addSystem(new PlayerMovementSystem(mapEntity));

@@ -1,8 +1,10 @@
-package no.ntnu.viruswar;
+package no.ntnu.viruswar.ecs.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
+
+import no.ntnu.viruswar.utils.Constants;
 
 public class Camera extends OrthographicCamera {
 

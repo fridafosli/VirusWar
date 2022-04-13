@@ -1,20 +1,19 @@
-package no.ntnu.viruswar.systems;
+package no.ntnu.viruswar.ecs.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
-import no.ntnu.viruswar.Camera;
-import no.ntnu.viruswar.EntityComparator;
-import no.ntnu.viruswar.componenets.HiddenComponent;
-import no.ntnu.viruswar.componenets.DimensionComponent;
-import no.ntnu.viruswar.componenets.TextureComponent;
-import no.ntnu.viruswar.componenets.TransformComponent;
+import no.ntnu.viruswar.ecs.utils.Camera;
+import no.ntnu.viruswar.ecs.utils.EntityComparator;
+import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
+import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
+import no.ntnu.viruswar.ecs.componenets.TextureComponent;
+import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 
 public class RenderingSystem extends SortedIteratingSystem {
 

@@ -1,4 +1,4 @@
-package no.ntnu.viruswar.componenets;
+package no.ntnu.viruswar.ecs.componenets;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector3;

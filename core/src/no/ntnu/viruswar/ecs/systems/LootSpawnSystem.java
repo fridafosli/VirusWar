@@ -1,4 +1,4 @@
-package no.ntnu.viruswar.systems;
+package no.ntnu.viruswar.ecs.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
@@ -7,9 +7,9 @@ import com.badlogic.gdx.math.Vector3;
 
 import java.util.Random;
 
-import no.ntnu.viruswar.Constants;
-import no.ntnu.viruswar.componenets.DimensionComponent;
-import no.ntnu.viruswar.factories.LootFactory;
+import no.ntnu.viruswar.utils.Constants;
+import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
+import no.ntnu.viruswar.ecs.factories.LootFactory;
 
 public class LootSpawnSystem extends IntervalSystem {
 

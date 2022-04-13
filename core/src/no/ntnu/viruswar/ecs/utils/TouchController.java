@@ -1,4 +1,4 @@
-package no.ntnu.viruswar;
+package no.ntnu.viruswar.ecs.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;

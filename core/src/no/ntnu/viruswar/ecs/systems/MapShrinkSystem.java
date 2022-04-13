@@ -1,22 +1,18 @@
-package no.ntnu.viruswar.systems;
+package no.ntnu.viruswar.ecs.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalIteratingSystem;
-import com.badlogic.ashley.systems.IntervalSystem;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 //sortetd iterating system in renderingsystem
 
-import no.ntnu.viruswar.Constants;
-import no.ntnu.viruswar.componenets.DimensionComponent;
-import no.ntnu.viruswar.componenets.HiddenComponent;
-import no.ntnu.viruswar.componenets.LootComponent;
-import no.ntnu.viruswar.componenets.MapComponent;
-import no.ntnu.viruswar.componenets.TextureComponent;
-import no.ntnu.viruswar.componenets.TransformComponent;
+import no.ntnu.viruswar.utils.Constants;
+import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
+import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
+import no.ntnu.viruswar.ecs.componenets.LootComponent;
+import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 
 public class MapShrinkSystem extends IntervalIteratingSystem {
 

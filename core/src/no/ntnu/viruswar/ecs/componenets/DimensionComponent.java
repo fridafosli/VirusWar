@@ -1,8 +1,7 @@
-package no.ntnu.viruswar.componenets;
+package no.ntnu.viruswar.ecs.componenets;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 
 public class DimensionComponent implements Component {
 

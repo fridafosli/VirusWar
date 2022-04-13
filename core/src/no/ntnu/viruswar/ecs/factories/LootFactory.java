@@ -1,13 +1,13 @@
-package no.ntnu.viruswar.factories;
+package no.ntnu.viruswar.ecs.factories;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 
-import no.ntnu.viruswar.componenets.ConsumableComponent;
-import no.ntnu.viruswar.componenets.LootComponent;
-import no.ntnu.viruswar.componenets.DimensionComponent;
-import no.ntnu.viruswar.componenets.TextureComponent;
-import no.ntnu.viruswar.componenets.TransformComponent;
+import no.ntnu.viruswar.ecs.componenets.ConsumableComponent;
+import no.ntnu.viruswar.ecs.componenets.LootComponent;
+import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
+import no.ntnu.viruswar.ecs.componenets.TextureComponent;
+import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.managers.AssetManager;
 
 public class LootFactory {

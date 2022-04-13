@@ -1,18 +1,17 @@
-package no.ntnu.viruswar.systems;
+package no.ntnu.viruswar.ecs.systems;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
-import no.ntnu.viruswar.componenets.HiddenComponent;
-import no.ntnu.viruswar.componenets.ConsumableComponent;
-import no.ntnu.viruswar.componenets.PlayerComponent;
-import no.ntnu.viruswar.componenets.DimensionComponent;
-import no.ntnu.viruswar.componenets.TransformComponent;
+import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
+import no.ntnu.viruswar.ecs.componenets.ConsumableComponent;
+import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
+import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
+import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 
 public class ConsumingSystem extends IteratingSystem {
 

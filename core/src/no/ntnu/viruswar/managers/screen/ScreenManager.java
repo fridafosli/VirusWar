@@ -1,4 +1,4 @@
-package no.ntnu.viruswar.managers;
+package no.ntnu.viruswar.managers.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -6,8 +6,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
-
-import no.ntnu.viruswar.Screen;
 
 public class ScreenManager {
 

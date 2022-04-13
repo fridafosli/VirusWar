@@ -1,10 +1,10 @@
-package no.ntnu.viruswar;
+package no.ntnu.viruswar.ecs.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import java.util.Comparator;
 
-import no.ntnu.viruswar.componenets.TextureComponent;
+import no.ntnu.viruswar.ecs.componenets.TextureComponent;
 
 public class EntityComparator implements Comparator<Entity> {
 

@@ -79,12 +79,12 @@ public class GameLobby extends StateMenu {
                 gsm.push(new Custom(gsm, player, pin));
             }
         });
-        customizeBtn.setPosition(200,300);
+        customizeBtn.setPosition((Gdx.graphics.getWidth()-customizeBtn.getWidth())/2,30);
         stage.addActor(customizeBtn);
 
         // Set up Play-button
         playBtn = new TextButton("Play", skin);
-        playBtn.setPosition(Gdx.graphics.getWidth() - 200, 50);
+        playBtn.setPosition(Gdx.graphics.getWidth() - 200, 30);
         playBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

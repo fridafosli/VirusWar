@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -24,9 +23,8 @@ import no.ntnu.viruswar.Data.Player;
 import no.ntnu.viruswar.DataHolderClass;
 import no.ntnu.viruswar.FireBaseInterface;
 
-public class Custom extends State{
+public class Custom extends StateMenu{
     protected Stage stage;
-    protected Skin skin;
     protected Sprite playerVirus;
     private Color color;
     private TextButton backBtn;
@@ -37,9 +35,8 @@ public class Custom extends State{
     private TextField usernameInput;
     private Player player;
     private FireBaseInterface _FBIC;
-    private DataHolderClass dataHolder;
 
-    public Custom(final GameStateManager gsm, final Player player, String gamePin){
+    public Custom(final GameStateManager gsm, final Player player, final String gamePin){
         super(gsm);
         this.player= player;
         _FBIC = gsm.get_FBIC();
@@ -48,12 +45,12 @@ public class Custom extends State{
         stage = new Stage(new ScreenViewport());
         //Initializes the player color
         setPlayerVirus(true,false);
-        skin = new Skin(Gdx.files.internal("uiskin.json"));
-        //skin.getFont("default-font").getData().setScale(scale);
+
 
         //Sets username text field
         usernameInput = new TextField("username", skin);
-        usernameInput.setPosition(120,Gdx.graphics.getHeight() - 200);
+        usernameInput.setText(player.getName());
+        usernameInput.setPosition(400,Gdx.graphics.getHeight() - 600);
         stage.addActor(usernameInput);
 
 
@@ -70,7 +67,7 @@ public class Custom extends State{
 
         //Sets up color change button (right)
         colorChangePlus = new TextButton(">", skin);
-        colorChangePlus.setPosition(Gdx.graphics.getWidth()-185, Gdx.graphics.getHeight() - 200);
+        colorChangePlus.setPosition(Gdx.graphics.getWidth()-300, Gdx.graphics.getHeight() - 600);
 
         colorChangePlus.addListener(new ClickListener() {
             @Override
@@ -83,7 +80,7 @@ public class Custom extends State{
 
         //Sets up color change button (left)
         colorChangeMinus = new TextButton("<", skin);
-        colorChangeMinus.setPosition(310, Gdx.graphics.getHeight() - 200);
+        colorChangeMinus.setPosition(Gdx.graphics.getWidth()-1350, Gdx.graphics.getHeight() - 600);
         colorChangeMinus.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -94,22 +91,27 @@ public class Custom extends State{
 
 
 
-        Label label= new Label("Customize avatar",skin);
-        label.setPosition(120, Gdx.graphics.getHeight()-100);
+        Label label= new Label("Customize Avatar",skin);
+        label.setPosition(400,Gdx.graphics.getHeight() - 200);
         stage.addActor(label);
+        Label usernameLabel= new Label("Edit username",skin);
+        usernameLabel.setPosition(400,Gdx.graphics.getHeight() - 500);
+        stage.addActor(usernameLabel);
         //Sets up submit button
         submitBtn= new TextButton("Submit", skin);
-        submitBtn.setPosition(160, 100);
+        submitBtn.setPosition(400,Gdx.graphics.getHeight() - 750);
         submitBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 player.setColor(color.toString());
+                player.setName(usernameInput.getText());
+                _FBIC.addPlayerToGame(gamePin, player);
             }
         });
         stage.addActor(submitBtn);
         Gdx.input.setInputProcessor(stage);
 
-        _FBIC.addPlayerToGame(gamePin, this.player);
+
     }
     private void setPlayerVirus(boolean initial, boolean add){
 
@@ -153,7 +155,7 @@ public class Custom extends State{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         sb.begin();
-        sb.draw(playerVirus, (int)(Gdx.graphics.getWidth()/2)-50,(int)(Gdx.graphics.getHeight()/2)-120, 250,250);
+        sb.draw(playerVirus, (int)(Gdx.graphics.getWidth()/2)-50,(int)(Gdx.graphics.getHeight()/2)-400, 800,800);
         sb.setColor(color);
         sb.end();
 

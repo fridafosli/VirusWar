@@ -127,10 +127,18 @@ public class GameLobby extends StateMenu {
     public void render(SpriteBatch sb) {
         // Add all players connected to game to the screen
         playertext = "";
-        System.out.println(dataHolder.getPlayers().values());
+        int count = 0;
         for (Player pl : dataHolder.getPlayers().values()) {
-            playertext += pl.getName() + " \n ";
+            if (count < 1) {
+                playertext += pl.getName() + " \t & \t ";
+                count++;
+            }
+            else {
+                playertext += pl.getName() + " \n & \t ";
+                count = 0;
+            }
         }
+//        playertext.substring(0, playertext.length()-2);
         playerDisplay.setText(playertext);
 
 

@@ -1,39 +1,33 @@
 package no.ntnu.viruswar;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import no.ntnu.viruswar.managers.AssetManager;
-import no.ntnu.viruswar.managers.screen.ScreenManager;
-import no.ntnu.viruswar.screens.GameLobby;
-import no.ntnu.viruswar.screens.GameScreen;
+
+import no.ntnu.viruswar.context.BuildContext;
+import no.ntnu.viruswar.context.Context;
+import no.ntnu.viruswar.screens.MainMenu;
+import no.ntnu.viruswar.services.backend.BackendService;
 
 
 public class VirusWar extends ApplicationAdapter {
-	FireBaseInterface _FBIC;
-	SpriteBatch batch;
-	ScreenManager screenManager;
+	Context context;
+	BackendService backendService;
 
-	public VirusWar(FireBaseInterface FBIC){
-		_FBIC=FBIC;
-	}
-
+	public VirusWar(BackendService backendService) {this.backendService = backendService;}
 
 	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		screenManager = new ScreenManager();
-		screenManager.push(new GameLobby(screenManager));
+	public void create() {
+		context = new BuildContext(backendService);
+		context.getScreens().push(
+				new MainMenu(context));
 	}
 
 	@Override
-	public void render () {
-		screenManager.nextFrame();
-
+	public void render() {
+		context.getScreens().nextFrame();
 	}
 
 	@Override
-	public void dispose () {
-		batch.dispose();
-		AssetManager.getInstance().dispose();
+	public void dispose() {
+		context.getAssets().dispose();
 	}
 }

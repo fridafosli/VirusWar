@@ -1,4 +1,4 @@
-package no.ntnu.viruswar.managers;
+package no.ntnu.viruswar.services.assets;
 
 import com.badlogic.gdx.graphics.Texture;
 

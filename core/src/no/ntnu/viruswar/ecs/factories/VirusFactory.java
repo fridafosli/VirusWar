@@ -10,7 +10,7 @@ import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 import no.ntnu.viruswar.ecs.componenets.TextureComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.ecs.componenets.VelocityComponent;
-import no.ntnu.viruswar.managers.AssetManager;
+import no.ntnu.viruswar.services.assets.AssetManager;
 
 public class VirusFactory {
 

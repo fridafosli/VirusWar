@@ -1,8 +1,6 @@
-package no.ntnu.viruswar.managers.screen;
+package no.ntnu.viruswar.services.screen;
 
 import com.badlogic.gdx.ScreenAdapter;
-
-import no.ntnu.viruswar.managers.screen.ScreenManager;
 
 public abstract class Screen extends ScreenAdapter {
     protected ScreenManager gsm;

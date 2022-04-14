@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setWindowedMode(Constants.WIDTH, Constants.HEIGHT);
-		new Lwjgl3Application(new VirusWar(new DesktopInterfaceClass()), config);
+		new Lwjgl3Application(new VirusWar(new DesktopBackendService()), config);
 
 	}
 }

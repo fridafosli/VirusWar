@@ -2,6 +2,8 @@ package no.ntnu.viruswar.Data;
 
 import com.badlogic.gdx.graphics.Color;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -30,10 +32,10 @@ public class Player {
     }
 
     public String generateColor(){
-        Random rand = new Random();
-        int myRandomNumber = rand.nextInt(0x10) + 0x10;
-        System.out.printf("%x\n",myRandomNumber);
-        return Integer.toHexString(myRandomNumber);
+        List<Color> colors= Arrays.asList(Color.BLUE,Color.PINK,Color.CYAN, Color.RED, Color.GREEN, Color.MAGENTA, Color.BROWN,
+                Color.FIREBRICK, Color.FOREST, Color.PURPLE, Color.CORAL, Color.LIME, Color.SKY,Color.ORANGE, Color.OLIVE,Color.YELLOW, Color.VIOLET, Color.WHITE,Color.GOLDENROD, Color.SALMON, Color.MAROON, Color.NAVY);
+        int colorIndex= (int)(Math.random()*(colors.size()-1));
+        return (colors.get(colorIndex)).toString();
     }
 
     public void setColor(String color){

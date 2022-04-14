@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Random;
 
 import no.ntnu.viruswar.Data.Player;
+import no.ntnu.viruswar.DataHolderClass;
+import no.ntnu.viruswar.FireBaseInterface;
 
 public class Custom extends State{
     protected Stage stage;
@@ -33,17 +35,28 @@ public class Custom extends State{
     private TextButton submitBtn;
     private int colorIndex;
     private TextField usernameInput;
+    private Player player;
+    private FireBaseInterface _FBIC;
+    private DataHolderClass dataHolder;
 
-    public Custom(final GameStateManager gsm, Player player){
+    public Custom(final GameStateManager gsm, final Player player, String gamePin){
         super(gsm);
+        this.player= player;
+        _FBIC = gsm.get_FBIC();
 
+        //Sets the stage
+        stage = new Stage(new ScreenViewport());
+        //Initializes the player color
+        setPlayerVirus(true,false);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         //skin.getFont("default-font").getData().setScale(scale);
+
+        //Sets username text field
         usernameInput = new TextField("username", skin);
         usernameInput.setPosition(120,Gdx.graphics.getHeight() - 200);
-        stage = new Stage(new ScreenViewport());
-        submitBtn= new TextButton("Submit", skin);
-        submitBtn.setPosition(160, 100);
+        stage.addActor(usernameInput);
+
+
         // Setting up the back button
         backBtn = new TextButton("Back", skin);
         backBtn.setPosition(0, Gdx.graphics.getHeight() - 70);
@@ -53,9 +66,9 @@ public class Custom extends State{
                 gsm.pop();
             }
         });
+        stage.addActor(backBtn);
 
-        setPlayerVirus(true,false);
-
+        //Sets up color change button (right)
         colorChangePlus = new TextButton(">", skin);
         colorChangePlus.setPosition(Gdx.graphics.getWidth()-185, Gdx.graphics.getHeight() - 200);
 
@@ -66,6 +79,9 @@ public class Custom extends State{
 
             }
         });
+        stage.addActor(colorChangePlus);
+
+        //Sets up color change button (left)
         colorChangeMinus = new TextButton("<", skin);
         colorChangeMinus.setPosition(310, Gdx.graphics.getHeight() - 200);
         colorChangeMinus.addListener(new ClickListener() {
@@ -74,28 +90,35 @@ public class Custom extends State{
                 setPlayerVirus(false,false);
             }
         });
+        stage.addActor(colorChangeMinus);
+
+
 
         Label label= new Label("Customize avatar",skin);
         label.setPosition(120, Gdx.graphics.getHeight()-100);
         stage.addActor(label);
-        stage.addActor(backBtn);
-        stage.addActor(colorChangePlus);
-        stage.addActor(colorChangeMinus);
-        stage.addActor(usernameInput);
+        //Sets up submit button
+        submitBtn= new TextButton("Submit", skin);
+        submitBtn.setPosition(160, 100);
+        submitBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                player.setColor(color.toString());
+            }
+        });
         stage.addActor(submitBtn);
-        // Set the background
-
-        // Set the inputProcessor
         Gdx.input.setInputProcessor(stage);
 
+        _FBIC.addPlayerToGame(gamePin, this.player);
     }
     private void setPlayerVirus(boolean initial, boolean add){
+
         playerVirus= new Sprite(new Texture("virus.png"));
         List<Color> colors= Arrays.asList(Color.BLUE,Color.PINK,Color.CYAN, Color.RED, Color.GREEN, Color.MAGENTA, Color.BROWN,
                 Color.FIREBRICK, Color.FOREST, Color.PURPLE, Color.CORAL, Color.LIME, Color.SKY,Color.ORANGE, Color.OLIVE,Color.YELLOW, Color.VIOLET, Color.WHITE,Color.GOLDENROD, Color.SALMON, Color.MAROON, Color.NAVY);
 
         if(initial){
-            colorIndex= (int)(Math.random()*(colors.size()-1));
+            colorIndex=colors.indexOf(Color.valueOf(player.getColor()));
 
         }
         else if(add){
@@ -105,7 +128,9 @@ public class Custom extends State{
             colorIndex=(colorIndex==0)?colors.size()-1:colorIndex-1;
 
         }
+
         color= colors.get(colorIndex);
+
 
     }
 

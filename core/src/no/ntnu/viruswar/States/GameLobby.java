@@ -86,7 +86,7 @@ public class GameLobby extends StateMenu {
         customizeBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gsm.push(new Custom(gsm, player));
+                gsm.push(new Custom(gsm, player, pin));
             }
         });
         customizeBtn.setPosition(200,300);

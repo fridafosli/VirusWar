@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "951229407631",
+    "firebase_url": "https://tdt4240-56d06-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "tdt4240-56d06",
+    "storage_bucket": "tdt4240-56d06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951229407631:android:05f16ae8490b7eac536bfa",
+        "android_client_info": {
+          "package_name": "no.ntnu.tdt4240"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951229407631-lq6efun5dtbb0brp70qqa6ncrlc16u1d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrjrYh6fW-MKaiZFD9fGRUfRoJ3URcLIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951229407631-lq6efun5dtbb0brp70qqa6ncrlc16u1d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951229407631:android:b484a86bb3fc9744536bfa",
+        "android_client_info": {
+          "package_name": "no.ntnu.viruswar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951229407631-lq6efun5dtbb0brp70qqa6ncrlc16u1d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrjrYh6fW-MKaiZFD9fGRUfRoJ3URcLIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951229407631-lq6efun5dtbb0brp70qqa6ncrlc16u1d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

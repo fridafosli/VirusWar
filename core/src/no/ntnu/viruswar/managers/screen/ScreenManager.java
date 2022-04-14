@@ -48,6 +48,19 @@ public class ScreenManager {
             getScreen().show();
         }
     }
+
+    public void pop() {
+        if (topIsNotNull()) {
+            Screen old = screens.pop();
+            if (topIsNotNull()) {
+                getScreen().show();
+                old.hide();
+            } else {
+                screens.push(old);
+            }
+        }
+
+    }
 }
 
 

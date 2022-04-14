@@ -19,6 +19,7 @@ import no.ntnu.viruswar.systems.MapShrinkSystem;
 import no.ntnu.viruswar.systems.PlayerControlSystem;
 import no.ntnu.viruswar.systems.PlayerMovementSystem;
 import no.ntnu.viruswar.systems.RenderingSystem;
+import no.ntnu.viruswar.systems.ZoomSystem;
 
 public class GameScreen extends ScreenAdapter {
 
@@ -46,6 +47,8 @@ public class GameScreen extends ScreenAdapter {
         engine.addSystem(new PlayerControlSystem(touchController));
         engine.addSystem(new PlayerMovementSystem(mapEntity));
         engine.addSystem(new ConsumingSystem());
+        engine.addSystem(new ZoomSystem((camera)));
+
         EntityComparator comparator = new EntityComparator();
         engine.addSystem(new RenderingSystem(batch, camera, comparator));
         engine.addSystem(new LootSpawnSystem(1, mapEntity)); //change to bigger spawn interval

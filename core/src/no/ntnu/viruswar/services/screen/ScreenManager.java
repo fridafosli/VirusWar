@@ -21,13 +21,8 @@ public class ScreenManager {
         return batch;
     }
 
-    private boolean topIsNotNull() {
-        try {
-            this.screens.peek();
-            return true;
-        } catch (EmptyStackException e) {
-            return false;
-        }
+    private boolean isNotEmpty() {
+       return !(screens.isEmpty());
     }
 
     private Screen getScreen() {
@@ -35,24 +30,24 @@ public class ScreenManager {
     }
 
     public void nextFrame() {
-        if (topIsNotNull()) {
+        if (isNotEmpty()) {
             ScreenUtils.clear(0, 0, 0, 1);
             getScreen().render(Gdx.graphics.getDeltaTime());
         }
     }
 
     public void push(Screen screen) {
-        if (topIsNotNull()) getScreen().hide();
+        if (isNotEmpty()) getScreen().hide();
         this.screens.push(screen);
-        if (topIsNotNull()) {
+        if (isNotEmpty()) {
             getScreen().show();
         }
     }
 
     public void pop() {
-        if (topIsNotNull()) {
+        if (isNotEmpty()) {
             Screen old = screens.pop();
-            if (topIsNotNull()) {
+            if (isNotEmpty()) {
                 getScreen().show();
                 old.hide();
             } else {

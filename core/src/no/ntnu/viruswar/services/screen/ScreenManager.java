@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class ScreenManager {
@@ -22,7 +21,7 @@ public class ScreenManager {
     }
 
     private boolean isNotEmpty() {
-       return !(screens.isEmpty());
+        return !(screens.isEmpty());
     }
 
     private Screen getScreen() {
@@ -54,7 +53,6 @@ public class ScreenManager {
                 screens.push(old);
             }
         }
-
     }
 }
 

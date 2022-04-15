@@ -125,7 +125,7 @@ public class GameLobby extends MenuBaseScreen {
         playBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (dataHolder.getPlayers().values().size() < 2) {
+                if (dataHolder.getPlayers().values().size() < 1) { // < 1 for testing
                     no_pls.setText("Cannot start game without opponents");
                     // Set timer and make the text disappear after 5 seconds
                     Thread timer = new Thread(){
@@ -143,7 +143,7 @@ public class GameLobby extends MenuBaseScreen {
                     return;
                 }
                 Gdx.app.log("play", "clicked");
-                gsm.pop();
+                context.getScreens().push(new GameScreen(context));
             }
         });
         stage.addActor(playBtn);
@@ -184,4 +184,3 @@ public class GameLobby extends MenuBaseScreen {
 
     }
 }
-//>>>>>>> remotes/origin/11-joining-rooms

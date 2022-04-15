@@ -7,17 +7,17 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
-import no.ntnu.viruswar.ecs.utils.Camera;
 import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
+import no.ntnu.viruswar.ecs.utils.Camera;
 
 public class CameraSystem extends IteratingSystem {
     private final ComponentMapper<TransformComponent> transformMapper;
 
 
     private final Array<Entity> entityQueue;
-    private Camera camera;
+    private final Camera camera;
 
     public CameraSystem(Camera camera) {
         super(Family.all(TransformComponent.class).exclude(HiddenComponent.class).get());

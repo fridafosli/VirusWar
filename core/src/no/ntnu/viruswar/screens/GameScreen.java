@@ -5,10 +5,6 @@ import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.ecs.utils.Camera;
-import no.ntnu.viruswar.ecs.utils.EntityComparator;
-import no.ntnu.viruswar.services.screen.Screen;
-import no.ntnu.viruswar.ecs.utils.TouchController;
 import no.ntnu.viruswar.ecs.factories.VirusFactory;
 import no.ntnu.viruswar.ecs.factories.WorldFactory;
 import no.ntnu.viruswar.ecs.systems.CameraSystem;
@@ -18,13 +14,17 @@ import no.ntnu.viruswar.ecs.systems.MapShrinkSystem;
 import no.ntnu.viruswar.ecs.systems.PlayerControlSystem;
 import no.ntnu.viruswar.ecs.systems.PlayerMovementSystem;
 import no.ntnu.viruswar.ecs.systems.RenderingSystem;
+import no.ntnu.viruswar.ecs.utils.Camera;
+import no.ntnu.viruswar.ecs.utils.EntityComparator;
+import no.ntnu.viruswar.ecs.utils.TouchController;
+import no.ntnu.viruswar.services.screen.Screen;
 
 public class GameScreen extends Screen {
 
-    private PooledEngine engine;
     private final Camera camera;
     private final TouchController touchController;
     private final Context context;
+    private PooledEngine engine;
 
     public GameScreen(Context context) {
         super(context.getScreens());

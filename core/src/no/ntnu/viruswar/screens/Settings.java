@@ -1,15 +1,11 @@
 package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -19,11 +15,11 @@ import no.ntnu.viruswar.services.screen.Screen;
 
 public class Settings extends Screen {
 
+    private final Context context;
     protected Stage stage;
     protected Skin skin;
     protected Sprite background;
-    private final Context context;
-    private TextButton backBtn;
+    private final TextButton backBtn;
 
 
     public Settings(final Context context) {
@@ -61,7 +57,6 @@ public class Settings extends Screen {
 
     @Override
     public void render(float dt) {
-
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         context.getScreens().getBatch().begin();
         background.draw(context.getScreens().getBatch());
@@ -69,8 +64,6 @@ public class Settings extends Screen {
 
         stage.act(dt);
         stage.draw();
-
-
     }
 
     @Override

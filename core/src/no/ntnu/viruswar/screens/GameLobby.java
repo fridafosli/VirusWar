@@ -1,54 +1,3 @@
-//<<<<<<< HEAD
-////package no.ntnu.viruswar.States;
-////
-////import com.badlogic.gdx.Gdx;
-////import com.badlogic.gdx.graphics.GL20;
-////import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-////import com.badlogic.gdx.scenes.scene2d.ui.Label;
-////
-////import no.ntnu.viruswar.screens.StateMenu;
-////
-////public class GameLobby extends StateMenu {
-////
-////    private boolean host;
-////    private String pin;
-////
-////    protected GameLobby(final GameStateManager gsm, boolean host, String pin) {
-////        super(gsm);
-////        this.host = host;
-////        this.pin = pin;
-////
-////        Label l = new Label("Game Pin: " + this.pin, skin);
-////        table.add(l);
-////
-////
-////
-////    }
-////
-////    @Override
-////    protected void handleInput() {
-////
-////    }
-////
-////    @Override
-////    public void update(float dt) {
-////
-////    }
-////
-////    @Override
-////    public void render(SpriteBatch sb) {
-////        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-////
-////        stage.act(Gdx.graphics.getDeltaTime());
-////        stage.draw();
-////    }
-////
-////    @Override
-////    public void dispose() {
-////
-////    }
-////}
-//=======
 package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
@@ -59,20 +8,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.data.Player;
 import no.ntnu.viruswar.services.data.NetworkDataController;
+import no.ntnu.viruswar.services.data.Player;
 
 public class GameLobby extends MenuBaseScreen {
 
-    private boolean host;
-    private String pin;
     private final Player player;
-    private TextButton backBtn;
-    private TextButton playBtn;
-    private NetworkDataController dataHolder = new NetworkDataController();
-    private String playertext = "";
-    private Label playerDisplay;
     private final Context context;
+    private final boolean host;
+    private final String pin;
+    private final TextButton backBtn;
+    private final TextButton playBtn;
+    private final NetworkDataController dataHolder = new NetworkDataController();
+    private String playertext = "";
+    private final Label playerDisplay;
 
     protected GameLobby(final Context context, final boolean host, final String pin, final Player player) {
         super(context.getScreens());
@@ -128,11 +77,11 @@ public class GameLobby extends MenuBaseScreen {
                 if (dataHolder.getPlayers().values().size() < 1) { // < 1 for testing
                     no_pls.setText("Cannot start game without opponents");
                     // Set timer and make the text disappear after 5 seconds
-                    Thread timer = new Thread(){
-                        public void run(){
-                            try{
+                    Thread timer = new Thread() {
+                        public void run() {
+                            try {
                                 sleep(5000);
-                            } catch (InterruptedException e){
+                            } catch (InterruptedException e) {
                                 e.printStackTrace();
                             } finally {
                                 no_pls.setText("");
@@ -167,8 +116,7 @@ public class GameLobby extends MenuBaseScreen {
             if (count < 1) {
                 playertext += pl.getName() + " \t & \t ";
                 count++;
-            }
-            else {
+            } else {
                 playertext += pl.getName() + " \n & \t ";
                 count = 0;
             }

@@ -7,10 +7,10 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
-import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
 import no.ntnu.viruswar.ecs.componenets.ConsumableComponent;
-import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
+import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
+import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 
 public class ConsumingSystem extends IteratingSystem {
@@ -46,7 +46,7 @@ public class ConsumingSystem extends IteratingSystem {
                 Entity smallest = (clientSize < consumableMapper.get(entity).size) ? clientPlayer : entity;
                 Entity largest = (smallest == entity) ? clientPlayer : entity;
                 consumableMapper.get(largest).size += consumableMapper.get(smallest).size;
-                rectangleMapper.get(largest).setSize((float) consumableMapper.get(largest).size);
+                rectangleMapper.get(largest).setSize(consumableMapper.get(largest).size);
                 smallest.remove(ConsumableComponent.class);
                 smallest.add(new HiddenComponent());
             }

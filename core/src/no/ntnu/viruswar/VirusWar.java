@@ -9,25 +9,27 @@ import no.ntnu.viruswar.services.backend.BackendService;
 
 
 public class VirusWar extends ApplicationAdapter {
-	Context context;
-	BackendService backendService;
+    Context context;
+    BackendService backendService;
 
-	public VirusWar(BackendService backendService) {this.backendService = backendService;}
+    public VirusWar(BackendService backendService) {
+        this.backendService = backendService;
+    }
 
-	@Override
-	public void create() {
-		context = new BuildContext(backendService);
-		context.getScreens().push(
-				new MainMenu(context));
-	}
+    @Override
+    public void create() {
+        context = new BuildContext(backendService);
+        context.getScreens().push(
+                new MainMenu(context));
+    }
 
-	@Override
-	public void render() {
-		context.getScreens().nextFrame();
-	}
+    @Override
+    public void render() {
+        context.getScreens().nextFrame();
+    }
 
-	@Override
-	public void dispose() {
-		context.getAssets().dispose();
-	}
+    @Override
+    public void dispose() {
+        context.getAssets().dispose();
+    }
 }

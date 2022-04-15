@@ -10,8 +10,13 @@ public abstract class Screen extends ScreenAdapter {
     }
 
     public abstract void show();
+
     public abstract void render(float dt);
-    public void hide() {};
-    public void dispose() {};
+
+    public void hide() {
+    }
+
+    public void dispose() {
+    }
 
 }

@@ -6,7 +6,9 @@ import no.ntnu.viruswar.services.screen.ScreenManager;
 
 public interface Context {
     ScreenManager getScreens();
+
     AssetManager getAssets();
+
     BackendService getBackend();
 
     //TODO: dispose

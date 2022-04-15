@@ -5,15 +5,12 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import no.ntnu.viruswar.services.data.Loot;
-import no.ntnu.viruswar.services.data.Player;
-
 // Gjorde den public, si fra dersom det er et problem
 public class NetworkDataController {
 
-    private Collection<String> activeGamePins = new ArrayList<>();
-    private Map<String, Player> players = new HashMap<>();
-    private Map<String, Loot> lootList = new HashMap<>();
+    private final Collection<String> activeGamePins = new ArrayList<>();
+    private final Map<String, Player> players = new HashMap<>();
+    private final Map<String, Loot> lootList = new HashMap<>();
 
     public NetworkDataController() {
 
@@ -25,8 +22,7 @@ public class NetworkDataController {
     }
 
     public void removeActiveGamePin(String pin) {
-        if (activeGamePins.contains(pin))
-            activeGamePins.remove(pin);
+        activeGamePins.remove(pin);
     }
 
     public boolean activeGamePinsContainsPin(String pin) {

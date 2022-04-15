@@ -9,24 +9,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.screen.Screen;
 
 public class Tutorial extends Screen {
 
+    private final Context context;
     protected Stage stage;
     protected Skin skin;
-
-    private TextButton backBtn;
-    private TextButton nextBtn;
-    private TextButton prevBtn;
-
-    private List<Image> pages = new ArrayList<Image>();
+    private final TextButton backBtn;
+    private final TextButton nextBtn;
+    private final TextButton prevBtn;
+    private final List<Image> pages = new ArrayList<Image>();
     private int page = 0;
-
-    private final Context context;
 
 
     protected Tutorial(final Context context) {
@@ -51,17 +50,17 @@ public class Tutorial extends Screen {
 
         // creating the images in the tutorial
         Image img1 = new Image(new Texture(Gdx.files.internal("badlogic.jpg")));
-        img1.setSize(Gdx.graphics.getWidth() * 2/3f, Gdx.graphics.getHeight() * 2/3f);
+        img1.setSize(Gdx.graphics.getWidth() * 2 / 3f, Gdx.graphics.getHeight() * 2 / 3f);
         img1.setPosition(Gdx.graphics.getWidth() / 2f - img1.getWidth() / 2, Gdx.graphics.getHeight() / 2f - img1.getHeight() / 2);
         pages.add(img1);
 
         Image img2 = new Image(new Texture(Gdx.files.internal("settings.png")));
-        img2.setSize(Gdx.graphics.getWidth() * 2/3f, Gdx.graphics.getHeight() * 2/3f);
+        img2.setSize(Gdx.graphics.getWidth() * 2 / 3f, Gdx.graphics.getHeight() * 2 / 3f);
         img2.setPosition(Gdx.graphics.getWidth() / 2f - img2.getWidth() / 2, Gdx.graphics.getHeight() / 2f - img2.getHeight() / 2);
         pages.add(img2);
 
         // Setting pages to not visible
-        for (Image page : pages ) {
+        for (Image page : pages) {
             stage.addActor(page);
             page.setVisible(false);
         }
@@ -70,12 +69,12 @@ public class Tutorial extends Screen {
 
         // Setting up the next button
         nextBtn = new TextButton("Next", skin);
-        nextBtn.setPosition(Gdx.graphics.getWidth()/2f, 20);
+        nextBtn.setPosition(Gdx.graphics.getWidth() / 2f, 20);
         nextBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("next", "clicked");
-                if (page < pages.size() - 1 )  {
+                if (page < pages.size() - 1) {
                     pages.get(page).setVisible(false);
                     page++;
                     pages.get(page).setVisible(true);
@@ -87,12 +86,12 @@ public class Tutorial extends Screen {
 
         // Setting up the prev button
         prevBtn = new TextButton("previous", skin);
-        prevBtn.setPosition(Gdx.graphics.getWidth()/2- prevBtn.getWidth() - 50, 20);
+        prevBtn.setPosition(Gdx.graphics.getWidth() / 2 - prevBtn.getWidth() - 50, 20);
         prevBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("prev", "clicked");
-                if (page > 0 )  {
+                if (page > 0) {
                     pages.get(page).setVisible(false);
                     page--;
                     pages.get(page).setVisible(true);
@@ -124,13 +123,7 @@ public class Tutorial extends Screen {
     }
 
     private void updateButtonsDisabled() {
-        if ( page == 0 )
-            prevBtn.setDisabled(true);
-        else
-            prevBtn.setDisabled(false);
-        if (page == pages.size()-1)
-            nextBtn.setDisabled(true);
-        else
-            nextBtn.setDisabled(false);
+        prevBtn.setDisabled(page == 0);
+        nextBtn.setDisabled(page == pages.size() - 1);
     }
 }

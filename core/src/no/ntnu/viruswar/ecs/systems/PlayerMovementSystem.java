@@ -7,11 +7,11 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
-import no.ntnu.viruswar.utils.Constants;
 import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.ecs.componenets.VelocityComponent;
+import no.ntnu.viruswar.utils.Constants;
 
 
 public class PlayerMovementSystem extends IteratingSystem {
@@ -21,7 +21,7 @@ public class PlayerMovementSystem extends IteratingSystem {
     private final ComponentMapper<TransformComponent> transformMapper;
     private final ComponentMapper<DimensionComponent> dimensionMapper;
 
-    private Entity mapEntity;
+    private final Entity mapEntity;
 
     public PlayerMovementSystem(Entity mapEntity) {//Entity worldMap
         super(Family.all(TransformComponent.class, PlayerComponent.class, VelocityComponent.class).get());
@@ -40,7 +40,7 @@ public class PlayerMovementSystem extends IteratingSystem {
 
         float radius = mapDimension.getRadius();
 
-        Vector3 center = new Vector3(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT /2, 0);
+        Vector3 center = new Vector3(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT / 2, 0);
 
         for (Entity entity : entityQueue) {
             VelocityComponent vcc = velocityMapper.get(entity);
@@ -54,7 +54,7 @@ public class PlayerMovementSystem extends IteratingSystem {
             if (length > radius) {
                 trc.position.sub(
                         // The vector from the circle to the player in line with center of the map
-                       centerToPlayer.cpy().sub(centerToPlayer.cpy().scl(radius / length))
+                        centerToPlayer.cpy().sub(centerToPlayer.cpy().scl(radius / length))
                 );
             }
         }

@@ -9,7 +9,7 @@ public class AssetManager {
 
     static private AssetManager instance;
 
-    private final HashMap<String,Texture> textureMap;
+    private final HashMap<String, Texture> textureMap;
 
     private AssetManager() {
         textureMap = new HashMap<>();

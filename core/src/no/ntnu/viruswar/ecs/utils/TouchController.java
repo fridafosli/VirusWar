@@ -8,10 +8,10 @@ import com.badlogic.gdx.math.Vector3;
 
 public class TouchController implements InputProcessor {
 
+    private final Camera camera;
     public boolean isTouching;
     public Vector2 touchScreenLocation = new Vector2();
     private Vector3 calcVec3 = new Vector3();
-    private final Camera camera;
 
     public TouchController(Camera camera) {
         this.camera = camera;

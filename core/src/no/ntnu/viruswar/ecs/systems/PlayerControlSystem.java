@@ -7,10 +7,10 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
-import no.ntnu.viruswar.ecs.utils.TouchController;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.ecs.componenets.VelocityComponent;
+import no.ntnu.viruswar.ecs.utils.TouchController;
 
 
 public class PlayerControlSystem extends IteratingSystem {

@@ -4,9 +4,9 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 
 import no.ntnu.viruswar.ecs.componenets.ConsumableComponent;
+import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 import no.ntnu.viruswar.ecs.componenets.OnlinePlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
-import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 import no.ntnu.viruswar.ecs.componenets.TextureComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.ecs.componenets.VelocityComponent;

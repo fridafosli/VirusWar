@@ -7,9 +7,9 @@ import com.badlogic.gdx.math.Vector3;
 
 import java.util.Random;
 
-import no.ntnu.viruswar.utils.Constants;
 import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 import no.ntnu.viruswar.ecs.factories.LootFactory;
+import no.ntnu.viruswar.utils.Constants;
 
 public class LootSpawnSystem extends IntervalSystem {
 
@@ -24,8 +24,8 @@ public class LootSpawnSystem extends IntervalSystem {
     //private final LootSpawnController lootSpawnController;
     // Has no velocity, static with respect to background
 
-    private Entity worldMap;
     private final ComponentMapper<DimensionComponent> dimensionMapper;
+    private final Entity worldMap;
 
 
     public LootSpawnSystem(float interval, Entity worldMap) {
@@ -40,17 +40,17 @@ public class LootSpawnSystem extends IntervalSystem {
     protected void updateInterval() {
         DimensionComponent mapDimension = dimensionMapper.get(worldMap);
         Random random = new Random();
-        Vector3 center = new Vector3(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT /2, 0);
+        Vector3 center = new Vector3(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT / 2, 0);
         float length = 1000;
-        Vector3 lootPoint = new Vector3(0,0,0);
+        Vector3 lootPoint = new Vector3(0, 0, 0);
 
         // make sure loot only spawns withing current world map size
-        while (length > mapDimension.getRadius()){
-            lootPoint.set(random.nextInt((int) mapDimension.width*2), random.nextInt((int) mapDimension.height*2), 0);
+        while (length > mapDimension.getRadius()) {
+            lootPoint.set(random.nextInt((int) mapDimension.width * 2), random.nextInt((int) mapDimension.height * 2), 0);
             Vector3 centerToLoot = lootPoint.cpy().sub(center);
-            length = centerToLoot.len() ;
+            length = centerToLoot.len();
         }
-        getEngine().addEntity(LootFactory.createEntity(getEngine(), lootPoint.x , lootPoint.y));
+        getEngine().addEntity(LootFactory.createEntity(getEngine(), lootPoint.x, lootPoint.y));
     }
 
 }

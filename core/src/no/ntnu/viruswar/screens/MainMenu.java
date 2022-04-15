@@ -4,16 +4,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.screen.Screen;
 
 
 public class MainMenu extends MenuBaseScreen {
 
-    private TextButton playBtn;
-    private TextButton tutorialBtn;
-    private TextButton settingsBtn;
     private final Context context;
+    private final TextButton playBtn;
+    private final TextButton tutorialBtn;
+    private final TextButton settingsBtn;
 
 
     public MainMenu(final Context context) {
@@ -51,10 +51,10 @@ public class MainMenu extends MenuBaseScreen {
         });
 
         // add buttons to table
-        table.padTop(scale*100);
-        table.add(playBtn).padBottom(scale*50);
+        table.padTop(scale * 100);
+        table.add(playBtn).padBottom(scale * 50);
         table.row();
-        table.add(tutorialBtn).padBottom(scale*50);
+        table.add(tutorialBtn).padBottom(scale * 50);
         table.row();
         table.add(settingsBtn);
     }

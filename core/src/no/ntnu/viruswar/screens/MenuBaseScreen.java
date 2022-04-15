@@ -12,10 +12,10 @@ import no.ntnu.viruswar.services.screen.ScreenManager;
 
 abstract class MenuBaseScreen extends Screen {
 
+    final protected float scale = Gdx.graphics.getHeight() / 300;
     protected Stage stage;
     protected Skin skin;
     protected Table table;
-    final protected float scale = Gdx.graphics.getHeight()/300;
 
     protected MenuBaseScreen(ScreenManager screenManager) {
         super(screenManager);

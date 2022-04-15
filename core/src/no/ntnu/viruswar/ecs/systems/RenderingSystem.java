@@ -8,12 +8,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
-import no.ntnu.viruswar.ecs.utils.Camera;
-import no.ntnu.viruswar.ecs.utils.EntityComparator;
-import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
 import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
+import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
 import no.ntnu.viruswar.ecs.componenets.TextureComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
+import no.ntnu.viruswar.ecs.utils.Camera;
+import no.ntnu.viruswar.ecs.utils.EntityComparator;
 
 public class RenderingSystem extends SortedIteratingSystem {
 

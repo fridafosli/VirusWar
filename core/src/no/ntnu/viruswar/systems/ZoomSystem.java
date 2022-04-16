@@ -16,8 +16,6 @@ import no.ntnu.viruswar.componenets.TransformComponent;
 
 public class ZoomSystem extends IteratingSystem {
     private final ComponentMapper<ConsumableComponent> consumableMapper;
-    private final ComponentMapper<TransformComponent> transformMapper;
-    private final ComponentMapper<DimensionComponent> rectangleMapper;
 
 
     private final Array<Entity> entityQueue;
@@ -28,8 +26,6 @@ public class ZoomSystem extends IteratingSystem {
     public ZoomSystem(Camera camera) {
         super(Family.all(ConsumableComponent.class, TransformComponent.class, DimensionComponent.class).exclude(HiddenComponent.class).get());
         this.consumableMapper = ComponentMapper.getFor(ConsumableComponent.class);
-        this.transformMapper = ComponentMapper.getFor(TransformComponent.class);
-        this.rectangleMapper = ComponentMapper.getFor(DimensionComponent.class);
         this.entityQueue = new Array<>();
         this.camera = camera;
 
@@ -39,7 +35,6 @@ public class ZoomSystem extends IteratingSystem {
     public void update(float deltaTime) {
         super.update(deltaTime);
         Entity clientPlayer = getEngine().getEntitiesFor(Family.all(PlayerComponent.class).get()).get(0);
-        Vector3 clientPos = transformMapper.get(clientPlayer).position;
         if (prevSize == 0) {
             prevSize =  consumableMapper.get(clientPlayer).size;
         }

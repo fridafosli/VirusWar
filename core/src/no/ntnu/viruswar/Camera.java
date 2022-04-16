@@ -9,7 +9,7 @@ public class Camera extends OrthographicCamera {
     final static float aspectRatio = (float) Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
 
     public Camera() {
-        super(Constants.GAME_WORLD_WIDTH * aspectRatio, Constants.GAME_WORLD_HEIGHT);
+        super(Constants.GAME_WORLD_WIDTH * aspectRatio/2, Constants.GAME_WORLD_HEIGHT/2);
         this.position.set(Constants.GAME_WORLD_WIDTH /2, Constants.GAME_WORLD_HEIGHT /2, 0);
     }
 

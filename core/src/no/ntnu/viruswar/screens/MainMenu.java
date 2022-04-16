@@ -10,15 +10,14 @@ import no.ntnu.viruswar.context.Context;
 
 public class MainMenu extends MenuBaseScreen {
 
-    private final Context context;
     private final TextButton playBtn;
     private final TextButton tutorialBtn;
     private final TextButton settingsBtn;
 
 
     public MainMenu(final Context context) {
-        super(context.getScreens());
-        this.context = context;
+        super(context);
+
         // Create the play-button
         playBtn = new TextButton("Play", skin);
         playBtn.setHeight(Gdx.graphics.getHeight());

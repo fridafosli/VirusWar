@@ -11,21 +11,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.screen.Screen;
 
-public class Settings extends Screen {
+public class Settings extends ContextScreen {
 
-    private final Context context;
     protected Stage stage;
     protected Skin skin;
     protected Sprite background;
     private final TextButton backBtn;
 
-
     public Settings(final Context context) {
-        super(context.getScreens());
-        this.context = context;
-
+        super(context);
         // Create the skin
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         //skin.getFont("default-font").getData().setScale(scale);
@@ -36,6 +31,7 @@ public class Settings extends Screen {
         backBtn = new TextButton("Back", skin);
         backBtn.setPosition(0, Gdx.graphics.getHeight() - 50);
         backBtn.addListener(new ClickListener() {
+
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("Settings", "clicked");

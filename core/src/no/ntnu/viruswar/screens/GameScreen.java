@@ -19,16 +19,14 @@ import no.ntnu.viruswar.ecs.utils.EntityComparator;
 import no.ntnu.viruswar.ecs.utils.TouchController;
 import no.ntnu.viruswar.services.screen.Screen;
 
-public class GameScreen extends Screen {
+public class GameScreen extends ContextScreen {
 
     private final Camera camera;
     private final TouchController touchController;
-    private final Context context;
     private PooledEngine engine;
 
     public GameScreen(Context context) {
-        super(context.getScreens());
-        this.context = context;
+        super(context);
         camera = new Camera();
         touchController = new TouchController(camera);
     }

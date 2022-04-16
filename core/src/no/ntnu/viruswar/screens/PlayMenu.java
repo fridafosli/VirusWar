@@ -26,7 +26,7 @@ public class PlayMenu extends MenuBaseScreen {
     private final NetworkDataController dataHolder = new NetworkDataController();
 
     protected PlayMenu(final Context context) {
-        super(context.getScreens());
+        super(context);
         context.getBackend().setGamePinEventListener(dataHolder);
         pin_input = new TextField("", skin);
         nick_input = new TextField("", skin);

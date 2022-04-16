@@ -24,7 +24,7 @@ public class GameLobby extends MenuBaseScreen {
     private final Label playerDisplay;
 
     protected GameLobby(final Context context, final boolean host, final String pin, final Player player) {
-        super(context.getScreens());
+        super(context);
         this.context = context;
 
         this.host = host;

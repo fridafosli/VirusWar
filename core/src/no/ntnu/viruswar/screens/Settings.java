@@ -58,9 +58,9 @@ public class Settings extends Screen {
     @Override
     public void render(float dt) {
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        context.getScreens().getBatch().begin();
-        background.draw(context.getScreens().getBatch());
-        context.getScreens().getBatch().end();
+        context.getBatch().begin();
+        background.draw(context.getBatch());
+        context.getBatch().end();
 
         stage.act(dt);
         stage.draw();

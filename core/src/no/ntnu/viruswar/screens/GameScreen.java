@@ -42,7 +42,7 @@ public class GameScreen extends Screen {
         engine.addSystem(new PlayerControlSystem(touchController));
         engine.addSystem(new PlayerMovementSystem(mapEntity));
         engine.addSystem(new ConsumingSystem());
-        engine.addSystem(new RenderingSystem(context.getScreens().getBatch(), camera, new EntityComparator()));
+        engine.addSystem(new RenderingSystem(context.getBatch(), camera, new EntityComparator()));
         engine.addSystem(new LootSpawnSystem(1, mapEntity)); //change to bigger spawn interval
         engine.addEntity(VirusFactory.createVirus(engine, 100, 100, false));
         engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));

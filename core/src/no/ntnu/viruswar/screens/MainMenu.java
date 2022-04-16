@@ -36,7 +36,7 @@ public class MainMenu extends MenuBaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("tutorial", "clicked");
-                gsm.push(new Tutorial(context));
+                sm.push(new Tutorial(context));
             }
         });
 

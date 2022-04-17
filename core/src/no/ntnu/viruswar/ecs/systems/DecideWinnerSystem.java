@@ -23,11 +23,11 @@ public class DecideWinnerSystem extends IteratingSystem {
     public void update(float deltaTime) {
         super.update(deltaTime);
         if (entityQueue.size == 1) {
-            //the player is the winner
+            // TODO
+            // push end screen to this players screen
+            // set as winner in db?
+            // remove player from game in db?
             //context.getScreens().push(SETT INN END SCREEN);
-            //set winner in db?
-            //remove player from game in db?
-            
 
 
         }

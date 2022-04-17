@@ -40,7 +40,7 @@ public class GameScreen extends ContextScreen {
         engine.addSystem(new CameraSystem(camera));
         engine.addSystem(new PlayerControlSystem(touchController));
         engine.addSystem(new PlayerMovementSystem(mapEntity));
-        engine.addSystem(new ConsumingSystem());
+        engine.addSystem(new ConsumingSystem(context));
         engine.addSystem(new RenderingSystem(context.getBatch(), camera, new EntityComparator()));
         engine.addSystem(new LootSpawnSystem(1, mapEntity)); //change to bigger spawn interval
         engine.addSystem(new DecideWinnerSystem(context));

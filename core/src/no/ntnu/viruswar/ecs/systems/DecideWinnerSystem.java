@@ -6,6 +6,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.utils.Array;
 
 import no.ntnu.viruswar.context.Context;
+import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 
 public class DecideWinnerSystem extends IteratingSystem {
@@ -14,7 +15,7 @@ public class DecideWinnerSystem extends IteratingSystem {
     private final Context context;
 
     public DecideWinnerSystem(Context context) {
-        super(Family.all(PlayerComponent.class).get());
+        super(Family.all(PlayerComponent.class).exclude(HiddenComponent.class).get());
         entityQueue = new Array<>();
         this.context = context;
     }
@@ -23,7 +24,7 @@ public class DecideWinnerSystem extends IteratingSystem {
     public void update(float deltaTime) {
         super.update(deltaTime);
         if (entityQueue.size == 1) {
-            // TODO
+            // TODO:
             // push end screen to this players screen
             // set as winner in db?
             // remove player from game in db?

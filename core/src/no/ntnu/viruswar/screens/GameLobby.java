@@ -2,46 +2,40 @@ package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.data.NetworkDataController;
-import no.ntnu.viruswar.services.data.Player;
+import no.ntnu.viruswar.services.backend.BackendModel;
+import no.ntnu.viruswar.services.backend.model.Player;
+import no.ntnu.viruswar.services.lobby.LobbyController;
 
 public class GameLobby extends MenuBaseScreen {
 
-    private final Player player;
-    private final Context context;
-    private final boolean host;
-    private final String pin;
     private final TextButton backBtn;
     private final TextButton playBtn;
-    private final NetworkDataController dataHolder = new NetworkDataController();
+    private final Label errorLabel;
+    private final BackendModel dataHolder = new BackendModel();
     private String playertext = "";
     private final Label playerDisplay;
+    private LobbyController controller;
 
-    protected GameLobby(final Context context, final boolean host, final String pin, final Player player) {
+    public GameLobby(final Context context, final LobbyController controller) {
         super(context);
-        this.context = context;
-
-        this.host = host;
-        this.pin = pin;
-        this.player = player;
-
-        context.getBackend().setPlayersEventListener(this.dataHolder, this.pin);
+        this.controller = controller;
 
         // Initialize labels
-        final Label no_pls = new Label("", skin); // Label that displays no opponents message when playbutton is pressed
-        Label pinLabel = new Label("Game Pin: " + this.pin, skin);
+        errorLabel = new Label("", skin); // Label that displays no opponents message when playbutton is pressed
+        Label pinLabel = new Label("Game Pin: " + controller.getPin(), skin);
         Label playerLabel = new Label("Players: ", skin);
         this.playerDisplay = new Label(playertext + "", skin);
 
         // Add the labels to the table
         table.padTop(30);
-        table.add(no_pls).padBottom(30);
+        table.add(errorLabel).padBottom(30);
         table.row();
         pinLabel.setPosition(100, 20);
         table.add(pinLabel).padBottom(30);
@@ -60,8 +54,7 @@ public class GameLobby extends MenuBaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("back", "clicked");
-                // removes player from game
-                context.getBackend().removePlayerFromGame(pin, player.getId());
+                controller.removePlayer();
                 context.getScreens().pop();
             }
         });
@@ -74,25 +67,7 @@ public class GameLobby extends MenuBaseScreen {
         playBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (dataHolder.getPlayers().values().size() < 1) { // < 1 for testing
-                    no_pls.setText("Cannot start game without opponents");
-                    // Set timer and make the text disappear after 5 seconds
-                    Thread timer = new Thread() {
-                        public void run() {
-                            try {
-                                sleep(5000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } finally {
-                                no_pls.setText("");
-                            }
-                        }
-                    };
-                    timer.start();
-                    return;
-                }
-                Gdx.app.log("play", "clicked");
-                context.getScreens().push(new GameScreen(context));
+                controller.toGame(errorLabel);
             }
         });
         stage.addActor(playBtn);
@@ -109,10 +84,15 @@ public class GameLobby extends MenuBaseScreen {
 
     @Override
     public void render(float dt) {
+
+        if (controller.isStarted()) {
+            controller.toGame(errorLabel);
+        }
+
         // Add all players connected to game to the screen
         playertext = "";
         int count = 0;
-        for (Player pl : dataHolder.getPlayers().values()) {
+        for (Player pl : controller.getPlayers().values()) {
             if (count < 1) {
                 playertext += pl.getName() + " \t & \t ";
                 count++;

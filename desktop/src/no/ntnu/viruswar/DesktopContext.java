@@ -1,19 +1,16 @@
 package no.ntnu.viruswar;
 
 
-import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.assets.AssetManager;
 import no.ntnu.viruswar.services.backend.BackendService;
-import no.ntnu.viruswar.services.data.Loot;
-import no.ntnu.viruswar.services.data.NetworkDataController;
-import no.ntnu.viruswar.services.data.Player;
-import no.ntnu.viruswar.services.screen.ScreenManager;
+import no.ntnu.viruswar.services.backend.model.Loot;
+import no.ntnu.viruswar.services.backend.BackendModel;
+import no.ntnu.viruswar.services.backend.model.Player;
 
 class DesktopBackendService implements BackendService {
 
 
     @Override
-    public void setGamePinEventListener(NetworkDataController dataHolder) {
+    public void setGamePinEventListener(BackendModel dataHolder) {
 
     }
 
@@ -23,7 +20,7 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
-    public void updatePLayerPosition(String gamePin, String playerId, float x, float y, float points) {
+    public void updatePlayerPosition(String gamePin, String playerId, float x, float y, float points) {
 
     }
 
@@ -33,7 +30,7 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
-    public void setPlayersEventListener(NetworkDataController dataHolder, String gamePin) {
+    public void setPlayersEventListener(BackendModel dataHolder, String gamePin) {
 
     }
 
@@ -48,7 +45,7 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
-    public void setLootEventListener(NetworkDataController dataHolder, String gamePin) {
+    public void setLootEventListener(BackendModel dataHolder, String gamePin) {
 
     }
 }

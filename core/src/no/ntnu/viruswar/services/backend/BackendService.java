@@ -1,8 +1,7 @@
 package no.ntnu.viruswar.services.backend;
 
-import no.ntnu.viruswar.services.data.Loot;
-import no.ntnu.viruswar.services.data.NetworkDataController;
-import no.ntnu.viruswar.services.data.Player;
+import no.ntnu.viruswar.services.backend.model.Loot;
+import no.ntnu.viruswar.services.backend.model.Player;
 
 /**
  * Interface for communicating whit the database. Implementation in
@@ -15,7 +14,7 @@ public interface BackendService {
      *
      * @param dataHolder where the data is stored
      */
-    void setGamePinEventListener(NetworkDataController dataHolder);
+    void setGamePinEventListener(BackendModel dataHolder);
 
     /**
      * Adds player to game with the given game-pin. If game pin is not used, a new game is created.
@@ -23,6 +22,9 @@ public interface BackendService {
      * @param gamePin The game pin to add the player to
      * @param player  The player to be added to the game
      */
+
+    void startGame(String gamePin);
+
     void addPlayerToGame(String gamePin, Player player);
 
     /**
@@ -34,7 +36,9 @@ public interface BackendService {
      * @param y        new y-position
      * @param points   new points
      */
-    void updatePLayerPosition(String gamePin, String playerId, float x, float y, float points);
+    void updatePlayerPosition(String gamePin, String playerId, float x, float y, float points);
+
+    void setLobbyStateListener(final BackendModel dataHolder, String gamePin);
 
     /**
      * Removes a player from a game.
@@ -51,7 +55,7 @@ public interface BackendService {
      * @param dataHolder where the data is stored
      * @param gamePin    game-pin of the game to be listened to
      */
-    void setPlayersEventListener(NetworkDataController dataHolder, String gamePin);
+    void setPlayersEventListener(BackendModel dataHolder, String gamePin);
 
     /**
      * Adds loot to game with the given game-pin. If game pin is not used, a new game is created.
@@ -75,6 +79,6 @@ public interface BackendService {
      * @param dataHolder where the data is stored
      * @param gamePin    game-pin of the game to be listened to
      */
-    void setLootEventListener(NetworkDataController dataHolder, String gamePin);
+    void setLootEventListener(BackendModel dataHolder, String gamePin);
 
 }

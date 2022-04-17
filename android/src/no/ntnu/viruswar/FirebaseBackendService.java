@@ -1,23 +1,23 @@
 package no.ntnu.viruswar;
 
+import static android.content.ContentValues.TAG;
+
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-
-import static android.content.ContentValues.TAG;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import no.ntnu.viruswar.services.data.Loot;
-import no.ntnu.viruswar.services.data.NetworkDataController;
-import no.ntnu.viruswar.services.data.Player;
+import no.ntnu.viruswar.services.backend.BackendModel;
 import no.ntnu.viruswar.services.backend.BackendService;
+import no.ntnu.viruswar.services.backend.model.Loot;
+import no.ntnu.viruswar.services.backend.model.Player;
 
 public class FirebaseBackendService implements BackendService {
     FirebaseDatabase database;
@@ -29,7 +29,7 @@ public class FirebaseBackendService implements BackendService {
     }
 
     @Override
-    public void setGamePinEventListener(final NetworkDataController dataHolder) {
+    public void setGamePinEventListener(final BackendModel dataHolder) {
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -60,13 +60,14 @@ public class FirebaseBackendService implements BackendService {
         });
     }
 
+
     @Override
     public void addPlayerToGame(String gamePin, Player player) {
         myRef.child(gamePin + "/players/" + player.getId()).setValue(player);
     }
 
     @Override
-    public void updatePLayerPosition(String gamePin, String playerId, float x, float y, float points) {
+    public void updatePlayerPosition(String gamePin, String playerId, float x, float y, float points) {
         DatabaseReference ref = database.getReference(gamePin + "/players/" + playerId);
         ref.child("/x").setValue(x);
         ref.child("/y").setValue(y);
@@ -74,12 +75,39 @@ public class FirebaseBackendService implements BackendService {
     }
 
     @Override
+    public void startGame(String gamePin) {
+        DatabaseReference ref = database.getReference(gamePin);
+        ref.child("/started").setValue(true);
+    }
+
+
+    @Override
     public void removePlayerFromGame(String gamePin, String playerId) {
         myRef.child(gamePin + "/players/" + playerId).removeValue();
     }
 
     @Override
-    public void setPlayersEventListener(final NetworkDataController dataHolder, String gamePin) {
+    public void setLobbyStateListener(final BackendModel dataHolder, String gamePin) {
+        DatabaseReference ref = database.getReference(gamePin);
+        ref.child("/started").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    dataHolder.isGameStarted = (boolean) snapshot.getValue();
+                } catch (Exception e) {
+                    dataHolder.isGameStarted = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    @Override
+    public void setPlayersEventListener(final BackendModel dataHolder, String gamePin) {
         myRef.child(gamePin + "/players").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -109,6 +137,8 @@ public class FirebaseBackendService implements BackendService {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
+
+
         });
     }
 
@@ -120,11 +150,11 @@ public class FirebaseBackendService implements BackendService {
 
     @Override
     public void removeLootFromGame(String gamePin, String lootId) {
-        myRef.child(gamePin+ "/loot/" + lootId).removeValue() ;
+        myRef.child(gamePin + "/loot/" + lootId).removeValue();
     }
 
     @Override
-    public void setLootEventListener(final NetworkDataController dataholder, String gamePin) {
+    public void setLootEventListener(final BackendModel dataholder, String gamePin) {
         myRef.child(gamePin + "/loot").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

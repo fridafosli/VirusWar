@@ -7,16 +7,20 @@ import com.badlogic.gdx.Gdx;
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.factories.VirusFactory;
 import no.ntnu.viruswar.ecs.factories.WorldFactory;
+import no.ntnu.viruswar.ecs.systems.BackendSystem;
 import no.ntnu.viruswar.ecs.systems.CameraSystem;
 import no.ntnu.viruswar.ecs.systems.ConsumingSystem;
 import no.ntnu.viruswar.ecs.systems.LootSpawnSystem;
 import no.ntnu.viruswar.ecs.systems.MapShrinkSystem;
+import no.ntnu.viruswar.ecs.systems.OnlineControlSystem;
+import no.ntnu.viruswar.ecs.systems.OnlineSpawnSystem;
 import no.ntnu.viruswar.ecs.systems.PlayerControlSystem;
 import no.ntnu.viruswar.ecs.systems.PlayerMovementSystem;
 import no.ntnu.viruswar.ecs.systems.RenderingSystem;
 import no.ntnu.viruswar.ecs.utils.Camera;
 import no.ntnu.viruswar.ecs.utils.EntityComparator;
 import no.ntnu.viruswar.ecs.utils.TouchController;
+import no.ntnu.viruswar.services.lobby.LobbyController;
 import no.ntnu.viruswar.services.screen.Screen;
 
 public class GameScreen extends ContextScreen {
@@ -24,9 +28,11 @@ public class GameScreen extends ContextScreen {
     private final Camera camera;
     private final TouchController touchController;
     private PooledEngine engine;
+    private final LobbyController controller;
 
-    public GameScreen(Context context) {
+    public GameScreen(Context context, LobbyController controller) {
         super(context);
+        this.controller = controller;
         camera = new Camera();
         touchController = new TouchController(camera);
     }
@@ -42,8 +48,12 @@ public class GameScreen extends ContextScreen {
         engine.addSystem(new ConsumingSystem());
         engine.addSystem(new RenderingSystem(context.getBatch(), camera, new EntityComparator()));
         engine.addSystem(new LootSpawnSystem(1, mapEntity)); //change to bigger spawn interval
-        engine.addEntity(VirusFactory.createVirus(engine, 100, 100, false));
-        engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));
+        engine.addSystem(new BackendSystem(context, controller));
+        engine.addSystem(new OnlineSpawnSystem(controller));
+        engine.addSystem(new OnlineControlSystem(controller));
+        engine.addEntity(VirusFactory.createPlayerVirus(engine, 100, 100, controller.getState().getPlayerId()));
+        //engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));
+
     }
 
     private void update(float dt) {

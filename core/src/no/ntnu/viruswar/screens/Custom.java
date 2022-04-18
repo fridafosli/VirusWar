@@ -67,7 +67,7 @@ public class Custom extends MenuBaseScreen{
 
         //Sets up color change button (right)
         colorChangePlus = new TextButton(">", skin);
-        colorChangePlus.setPosition(Gdx.graphics.getWidth()-300, Gdx.graphics.getHeight() - 600);
+        colorChangePlus.setPosition(Gdx.graphics.getWidth()-200, Gdx.graphics.getHeight() - 600);
 
         colorChangePlus.addListener(new ClickListener() {
             @Override
@@ -80,7 +80,7 @@ public class Custom extends MenuBaseScreen{
 
         //Sets up color change button (left)
         colorChangeMinus = new TextButton("<", skin);
-        colorChangeMinus.setPosition(Gdx.graphics.getWidth()-1350, Gdx.graphics.getHeight() - 600);
+        colorChangeMinus.setPosition(Gdx.graphics.getWidth()-1150, Gdx.graphics.getHeight() - 600);
         colorChangeMinus.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -135,15 +135,14 @@ public class Custom extends MenuBaseScreen{
 
     @Override
     public void render(float dt) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(dt);
 
         SpriteBatch sb= context.getBatch();
+        sb.setColor(color);
         sb.begin();
         sb.draw(playerVirus, (int)(Gdx.graphics.getWidth()/2)-50,(int)(Gdx.graphics.getHeight()/2)-400, 800,800);
-        sb.setColor(color);
         sb.end();
-
         stage.draw();
 
 

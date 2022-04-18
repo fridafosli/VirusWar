@@ -7,18 +7,17 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import no.ntnu.viruswar.services.screen.Screen;
-import no.ntnu.viruswar.services.screen.ScreenManager;
+import no.ntnu.viruswar.context.Context;
 
-public abstract class MenuBaseScreen extends Screen {
+abstract class MenuBaseScreen extends ContextScreen {
 
     final protected float scale = Gdx.graphics.getHeight() / 300;
     protected Stage stage;
     protected Skin skin;
     protected Table table;
 
-    protected MenuBaseScreen(ScreenManager screenManager) {
-        super(screenManager);
+    protected MenuBaseScreen(Context context) {
+        super(context);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         skin.getFont("default-font").getData().setScale(scale);
         stage = new Stage(new ScreenViewport());

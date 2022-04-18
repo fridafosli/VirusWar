@@ -9,15 +9,9 @@ import java.util.Stack;
 public class ScreenManager {
 
     private final Stack<Screen> screens;
-    private final SpriteBatch batch;
 
     public ScreenManager() {
         this.screens = new Stack<>();
-        this.batch = new SpriteBatch();
-    }
-
-    public SpriteBatch getBatch() {
-        return batch;
     }
 
     private boolean isNotEmpty() {

@@ -14,7 +14,6 @@ import no.ntnu.viruswar.context.Context;
 
 public class MainMenu extends MenuBaseScreen {
 
-    private final Context context;
     private final TextButton playBtn;
     private final TextButton tutorialBtn;
     private final TextButton settingsBtn;
@@ -22,8 +21,8 @@ public class MainMenu extends MenuBaseScreen {
 
 
     public MainMenu(final Context context) {
-        super(context.getScreens());
-        this.context = context;
+        super(context);
+
         // Create the play-button
         playBtn = new TextButton("Play", skin);
         playBtn.setHeight(Gdx.graphics.getHeight());
@@ -41,7 +40,7 @@ public class MainMenu extends MenuBaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("tutorial", "clicked");
-                gsm.push(new Tutorial(context));
+                sm.push(new Tutorial(context));
             }
         });
 
@@ -76,7 +75,7 @@ public class MainMenu extends MenuBaseScreen {
 
     @Override
     public void render(float dt) {
-        SpriteBatch sb= context.getScreens().getBatch();
+        SpriteBatch sb= context.getBatch();
         stage.act(dt);
         sb.begin();
         background.draw(sb);

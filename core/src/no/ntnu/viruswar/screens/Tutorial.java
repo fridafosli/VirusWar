@@ -16,9 +16,8 @@ import java.util.List;
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.screen.Screen;
 
-public class Tutorial extends Screen {
+public class Tutorial extends ContextScreen {
 
-    private final Context context;
     protected Stage stage;
     protected Skin skin;
     private final TextButton backBtn;
@@ -29,8 +28,7 @@ public class Tutorial extends Screen {
 
 
     protected Tutorial(final Context context) {
-        super(context.getScreens());
-        this.context = context;
+        super(context);
 
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         //skin.getFont("default-font").getData().setScale(scale);

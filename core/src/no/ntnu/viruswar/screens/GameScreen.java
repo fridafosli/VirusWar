@@ -19,16 +19,14 @@ import no.ntnu.viruswar.ecs.utils.EntityComparator;
 import no.ntnu.viruswar.ecs.utils.TouchController;
 import no.ntnu.viruswar.services.screen.Screen;
 
-public class GameScreen extends Screen {
+public class GameScreen extends ContextScreen {
 
     private final Camera camera;
     private final TouchController touchController;
-    private final Context context;
     private PooledEngine engine;
 
     public GameScreen(Context context) {
-        super(context.getScreens());
-        this.context = context;
+        super(context);
         camera = new Camera();
         touchController = new TouchController(camera);
     }
@@ -42,7 +40,7 @@ public class GameScreen extends Screen {
         engine.addSystem(new PlayerControlSystem(touchController));
         engine.addSystem(new PlayerMovementSystem(mapEntity));
         engine.addSystem(new ConsumingSystem());
-        engine.addSystem(new RenderingSystem(context.getScreens().getBatch(), camera, new EntityComparator()));
+        engine.addSystem(new RenderingSystem(context.getBatch(), camera, new EntityComparator()));
         engine.addSystem(new LootSpawnSystem(1, mapEntity)); //change to bigger spawn interval
         engine.addEntity(VirusFactory.createVirus(engine, 100, 100, false));
         engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));

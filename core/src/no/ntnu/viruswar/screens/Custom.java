@@ -34,7 +34,7 @@ public class Custom extends MenuBaseScreen{
 
 
     public Custom(final Context context, final Player player){
-        super(context.getScreens());
+        super(context);
         this.context=context;
         this.player= player;
 
@@ -138,12 +138,11 @@ public class Custom extends MenuBaseScreen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(dt);
 
-/*
-        SpriteBatch sb= context.getScreens().getBatch();
+        SpriteBatch sb= context.getBatch();
         sb.begin();
         sb.draw(playerVirus, (int)(Gdx.graphics.getWidth()/2)-50,(int)(Gdx.graphics.getHeight()/2)-400, 800,800);
         sb.setColor(color);
-        sb.end();*/
+        sb.end();
 
         stage.draw();
 
@@ -153,5 +152,9 @@ public class Custom extends MenuBaseScreen{
     @Override
     public void dispose() {
 
+    }
+    @Override
+    public void show() {
+        Gdx.input.setInputProcessor(stage);
     }
 }

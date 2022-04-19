@@ -9,13 +9,13 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 
-public class DecideWinnerSystem extends IteratingSystem {
+public class DecideLooserSystem extends IteratingSystem {
 
     private final Array<Entity> entityQueue;
     private final Context context;
 
-    public DecideWinnerSystem(Context context) {
-        super(Family.all(PlayerComponent.class).exclude(HiddenComponent.class).get());
+    public DecideLooserSystem(Context context) {
+        super(Family.all(PlayerComponent.class, HiddenComponent.class).get());
         entityQueue = new Array<>();
         this.context = context;
     }
@@ -23,13 +23,9 @@ public class DecideWinnerSystem extends IteratingSystem {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        if (entityQueue.size == 1) {
-            // TODO: implement changing screens
-            // push end screen to this players screen
-            // set as winner in db?
-            // remove player from game in db?
-            //context.getScreens().push(SETT INN END SCREEN);
-        }
+        // TODO: implement changing screens
+        // every player in this queue is now one that has been consumed
+        // push the endscreen to each of them
         entityQueue.clear();
     }
 

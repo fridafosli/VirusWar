@@ -1,20 +1,20 @@
-package no.ntnu.viruswar.States;
+package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-import no.ntnu.viruswar.Data.Player;
+import no.ntnu.viruswar.context.Context;
+import no.ntnu.viruswar.services.data.Player;
 
-public class EndScreen extends StateMenu {
+public class EndScreen extends MenuBaseScreen {
 
 
-    public EndScreen(final GameStateManager gsm, final Player player, boolean winner) {
-        super(gsm);
+    public EndScreen(final Context context, final Player player, boolean winner) {
+        super(context);
 
         String text;
         if (winner) {
@@ -43,19 +43,16 @@ public class EndScreen extends StateMenu {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("back to main menu", "clicked");
-                gsm.pop();
-                gsm.pop();
-                gsm.pop();
-                gsm.pop();
+                context.getScreens().pop();
+                context.getScreens().pop();
+                context.getScreens().pop();
+                context.getScreens().pop();
             }
         });
         stage.addActor(backBtn);
 
-
-
-
     }
-
+/*
     @Override
     protected void handleInput() {
 
@@ -65,13 +62,17 @@ public class EndScreen extends StateMenu {
     public void update(float dt) {
 
     }
+*/
+
 
     @Override
-    public void render(SpriteBatch sb) {
-
+    public void render(float dt) {
+        //context.getBatch().begin();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+
+
     }
 
     @Override

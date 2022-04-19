@@ -26,6 +26,8 @@ public class DecideLooserSystem extends IteratingSystem {
         // TODO: implement changing screens
         // every player in this queue is now one that has been consumed
         // push the endscreen to each of them
+
+        // set Firebase variable consumed. when set, new screen push new endScreen (looser)
         entityQueue.clear();
     }
 

@@ -25,10 +25,8 @@ public class DecideWinnerSystem extends IteratingSystem {
         super.update(deltaTime);
         if (entityQueue.size == 1) {
             // TODO: implement changing screens
-            // push end screen to this players screen
-            // set as winner in db?
-            // remove player from game in db?
-            //context.getScreens().push(SETT INN END SCREEN);
+            // set variable gameFinished in Firebase lobby
+            // when set, push a new endScreen (winner) to this player
         }
         entityQueue.clear();
     }

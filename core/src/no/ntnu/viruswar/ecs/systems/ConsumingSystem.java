@@ -52,10 +52,6 @@ public class ConsumingSystem extends IteratingSystem {
                 rectangleMapper.get(largest).setSize(consumableMapper.get(largest).size);
                 smallest.remove(ConsumableComponent.class);
                 smallest.add(new HiddenComponent());
-                // TODO:
-                // remove smallest from game
-                // push end screen to smallest GameScreen stack
-
             }
         }
         entityQueue.clear();

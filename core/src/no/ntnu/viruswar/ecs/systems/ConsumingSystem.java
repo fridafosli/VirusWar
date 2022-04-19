@@ -7,6 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
+import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.componenets.ConsumableComponent;
 import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
@@ -18,16 +19,18 @@ public class ConsumingSystem extends IteratingSystem {
     private final ComponentMapper<ConsumableComponent> consumableMapper;
     private final ComponentMapper<TransformComponent> transformMapper;
     private final ComponentMapper<DimensionComponent> rectangleMapper;
+    private final Context context;
 
 
     private final Array<Entity> entityQueue;
 
-    public ConsumingSystem() {
+    public ConsumingSystem(Context context) {
         super(Family.all(ConsumableComponent.class, TransformComponent.class, DimensionComponent.class).exclude(HiddenComponent.class).get());
         this.consumableMapper = ComponentMapper.getFor(ConsumableComponent.class);
         this.transformMapper = ComponentMapper.getFor(TransformComponent.class);
         this.rectangleMapper = ComponentMapper.getFor(DimensionComponent.class);
         this.entityQueue = new Array<>();
+        this.context = context;
     }
 
     @Override

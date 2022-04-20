@@ -19,18 +19,16 @@ public class ConsumingSystem extends IteratingSystem {
     private final ComponentMapper<ConsumableComponent> consumableMapper;
     private final ComponentMapper<TransformComponent> transformMapper;
     private final ComponentMapper<DimensionComponent> rectangleMapper;
-    private final Context context;
 
 
     private final Array<Entity> entityQueue;
 
-    public ConsumingSystem(Context context) {
+    public ConsumingSystem() {
         super(Family.all(ConsumableComponent.class, TransformComponent.class, DimensionComponent.class).exclude(HiddenComponent.class).get());
         this.consumableMapper = ComponentMapper.getFor(ConsumableComponent.class);
         this.transformMapper = ComponentMapper.getFor(TransformComponent.class);
         this.rectangleMapper = ComponentMapper.getFor(DimensionComponent.class);
         this.entityQueue = new Array<>();
-        this.context = context;
     }
 
     @Override

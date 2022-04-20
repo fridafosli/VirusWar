@@ -1,18 +1,21 @@
-package no.ntnu.viruswar.services.data;
+package no.ntnu.viruswar.services.backend;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-// Gjorde den public, si fra dersom det er et problem
-public class NetworkDataController {
+import no.ntnu.viruswar.services.backend.model.Loot;
+import no.ntnu.viruswar.services.backend.model.Player;
+
+public class BackendModel {
 
     private final Collection<String> activeGamePins = new ArrayList<>();
     private final Map<String, Player> players = new HashMap<>();
-    private final Map<String, Loot> lootList = new HashMap<>();
+    private final Map<String, Loot> loots = new HashMap<>();
+    public boolean isGameStarted = false;
 
-    public NetworkDataController() {
+    public BackendModel() {
 
     }
 
@@ -57,11 +60,11 @@ public class NetworkDataController {
     }
 
     public void addLoot(Loot loot) {
-        this.lootList.put(loot.getId(), loot);
+        this.loots.put(loot.getId(), loot);
     }
 
     public Loot getLootById(String id) {
-        return lootList.get(id);
+        return loots.get(id);
     }
 
     /*
@@ -80,8 +83,8 @@ public class NetworkDataController {
         public void removePlayer(String id) {
             players.remove(id);
         }*/
-    public Map<String, Loot> getLootList() {
-        return lootList;
+    public Map<String, Loot> getLoots() {
+        return loots;
     }
 
 }

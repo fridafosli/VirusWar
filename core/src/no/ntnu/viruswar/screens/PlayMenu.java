@@ -9,25 +9,25 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.data.NetworkDataController;
-import no.ntnu.viruswar.services.data.Player;
+import no.ntnu.viruswar.services.backend.BackendModel;
+import no.ntnu.viruswar.services.backend.model.Player;
+import no.ntnu.viruswar.services.lobby.LobbyController;
 
 public class PlayMenu extends MenuBaseScreen {
 
-    public String VALID_CHARS = "abcdefghijklmnopqrstuvw0123456789";
     private final TextButton backBtn;
     private final TextButton createBtn;
     private final TextButton joinBtn;
     private final TextField pin_input;
     private final TextField nick_input;
     private final TextField host_nick_input;
+    private final LobbyController controller;
 
 
-    private final NetworkDataController dataHolder = new NetworkDataController();
-
-    protected PlayMenu(final Context context) {
+    public PlayMenu(final Context context) {
         super(context);
-        context.getBackend().setGamePinEventListener(dataHolder);
+        this.controller = new LobbyController(context);
+
         pin_input = new TextField("", skin);
         nick_input = new TextField("", skin);
         host_nick_input = new TextField("", skin);
@@ -40,50 +40,13 @@ public class PlayMenu extends MenuBaseScreen {
         Label label5 = new Label("Nickname: ", skin);
         final Label error = new Label("", skin);
 
-
         // Set up Create button
         createBtn = new TextButton("Create", skin);
         createBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (host_nick_input.getText().length() < 1) {
-                    error.setText("Please fill nickname to create game.");
-                    Thread timer = new Thread() {
-                        public void run() {
-                            try {
-                                sleep(5000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } finally {
-                                error.setText("");
-                            }
-                        }
-                    };
-                    timer.start();
-                    return;
-                }
                 Gdx.app.log("create", "clicked");
-
-                // Generate a random 6 character game-pin
-                String gamePin = "";
-                for (int i = 0; i < 6; i++) {
-                    int ch = (int) Math.floor(Math.random() * VALID_CHARS.length());
-                    gamePin += VALID_CHARS.charAt(ch);
-                }
-
-                // If gamepin already exists, a new one is created
-                while (dataHolder.activeGamePinsContainsPin(gamePin)) {
-                    // Generate a random 6 character game-pin
-                    gamePin = "";
-                    for (int i = 0; i < 6; i++) {
-                        int ch = (int) Math.floor(Math.random() * VALID_CHARS.length());
-                        gamePin += VALID_CHARS.charAt(ch);
-                    }
-                }
-                System.out.println(gamePin);
-                Player host = new Player(0, 0, 0, "default", host_nick_input.getText());
-                context.getBackend().addPlayerToGame(gamePin, host);
-                context.getScreens().push(new GameLobby(context, true, gamePin, host));
+                controller.createLobby(host_nick_input.getText(), error);
             }
         });
 
@@ -92,42 +55,8 @@ public class PlayMenu extends MenuBaseScreen {
         joinBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (pin_input.getText().length() < 1 && nick_input.getText().length() < 1) {
-                    error.setText("\n Please fill gamepin and nickname to join.");
-                    Thread timer = new Thread() {
-                        public void run() {
-                            try {
-                                sleep(5000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } finally {
-                                error.setText("");
-                            }
-                        }
-                    };
-                    timer.start();
-                    return;
-                }
-                if (!dataHolder.activeGamePinsContainsPin(pin_input.getText())) {
-                    error.setText("\n Gamepin not valid.");
-                    Thread timer = new Thread() {
-                        public void run() {
-                            try {
-                                sleep(5000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            } finally {
-                                error.setText("");
-                            }
-                        }
-                    };
-                    timer.start();
-                    return;
-                }
                 Gdx.app.log("join", "clicked");
-                Player player = new Player(0, 0, 0, "blue", nick_input.getText());
-                context.getBackend().addPlayerToGame(pin_input.getText(), player);
-                context.getScreens().push(new GameLobby(context, false, pin_input.getText(), player));
+                controller.joinLobby(pin_input.getText(), nick_input.getText(), error);
             }
         });
 

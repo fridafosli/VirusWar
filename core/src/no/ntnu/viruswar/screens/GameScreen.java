@@ -10,6 +10,8 @@ import no.ntnu.viruswar.ecs.factories.WorldFactory;
 import no.ntnu.viruswar.ecs.systems.BackendSystem;
 import no.ntnu.viruswar.ecs.systems.CameraSystem;
 import no.ntnu.viruswar.ecs.systems.ConsumingSystem;
+import no.ntnu.viruswar.ecs.systems.DecideLooserSystem;
+import no.ntnu.viruswar.ecs.systems.DecideWinnerSystem;
 import no.ntnu.viruswar.ecs.systems.LootSpawnSystem;
 import no.ntnu.viruswar.ecs.systems.MapShrinkSystem;
 import no.ntnu.viruswar.ecs.systems.OnlineControlSystem;
@@ -51,6 +53,8 @@ public class GameScreen extends ContextScreen {
         engine.addSystem(new BackendSystem(context, controller));
         engine.addSystem(new OnlineSpawnSystem(controller));
         engine.addSystem(new OnlineControlSystem(controller));
+        engine.addSystem(new DecideLooserSystem(context, controller));
+        engine.addSystem(new DecideWinnerSystem(context, controller));
         engine.addEntity(VirusFactory.createPlayerVirus(engine, 100, 100, controller.getState().getPlayerId()));
         //engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));
 

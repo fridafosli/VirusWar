@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.data.Player;
+import no.ntnu.viruswar.services.backend.model.Player;
 
 public class EndScreen extends MenuBaseScreen {
 

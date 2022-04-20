@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.data.NetworkDataController;
@@ -22,6 +24,8 @@ public class GameLobby extends MenuBaseScreen {
     private final NetworkDataController dataHolder = new NetworkDataController();
     private String playertext = "";
     private final Label playerDisplay;
+    private final ScrollPane scrollpane;
+    private final List<String> playerlist;
 
     protected GameLobby(final Context context, final boolean host, final String pin, final Player player) {
         super(context);
@@ -30,6 +34,8 @@ public class GameLobby extends MenuBaseScreen {
         this.host = host;
         this.pin = pin;
         this.player = player;
+        this.playerlist = new List(skin);
+        this.scrollpane = new ScrollPane(playerlist, skin);
 
         context.getBackend().setPlayersEventListener(this.dataHolder, this.pin);
 
@@ -49,7 +55,7 @@ public class GameLobby extends MenuBaseScreen {
         playerLabel.setPosition(100, 50);
         table.add(playerLabel).padBottom(30);
         table.row();
-        table.add(playerDisplay);
+        table.add(scrollpane).width(600).height(700);
         table.row();
 
 
@@ -100,36 +106,17 @@ public class GameLobby extends MenuBaseScreen {
 
         // Legge inn en scrollpane?? (Container<Slider>)
         // Add all players connected to game to the screen
-        for (Player pl : dataHolder.getPlayers().values()) {
-            playertext += pl.getName() + " \n ";
-        }
-        playerDisplay.setText(playertext);
+        playerlist.setItems(dataHolder.getPlayerNames());
+        scrollpane.setActor(playerlist);
+        scrollpane.setScrollingDisabled(true, false);
 
     }
 
     @Override
     public void render(float dt) {
         // Add all players connected to game to the screen
-        playertext = "";
-        int count = 0;
-        int numberOfPs = 0;
-        for (Player pl : dataHolder.getPlayers().values()) {
-            playertext += pl.getName();
-            numberOfPs++;
-            if (numberOfPs == dataHolder.getPlayers().size()) {
-                playertext += pl.getName() + " ";
-            }
-            else {
-                if (count < 1) {
-                    playertext += " \t & \t ";
-                    count++;
-                } else {
-                    playertext += " \n & \t ";
-                    count = 0;
-                }
-            }
-        }
-        playerDisplay.setText(playertext);
+        playerlist.clear();
+        playerlist.setItems(dataHolder.getPlayerNames());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(dt);
         stage.draw();

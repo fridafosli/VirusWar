@@ -10,6 +10,7 @@ abstract public class ContextScreen extends Screen {
 
     protected ContextScreen(Context context) {
         super(context.getScreens());
+
         this.context = context;
     }
 }

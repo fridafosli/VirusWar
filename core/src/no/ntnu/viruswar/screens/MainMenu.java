@@ -1,11 +1,13 @@
 package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
+import no.ntnu.viruswar.services.assets.AssetManager;
 
 
 public class MainMenu extends MenuBaseScreen {
@@ -17,7 +19,7 @@ public class MainMenu extends MenuBaseScreen {
 
     public MainMenu(final Context context) {
         super(context);
-
+        context.getAssets().setMusic(true,1f);
         // Create the play-button
         playBtn = new TextButton("Play", skin);
         playBtn.setHeight(Gdx.graphics.getHeight());

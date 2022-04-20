@@ -112,13 +112,21 @@ public class GameLobby extends MenuBaseScreen {
         // Add all players connected to game to the screen
         playertext = "";
         int count = 0;
+        int numberOfPs = 0;
         for (Player pl : dataHolder.getPlayers().values()) {
-            if (count < 1) {
-                playertext += pl.getName() + " \t & \t ";
-                count++;
-            } else {
-                playertext += pl.getName() + " \n & \t ";
-                count = 0;
+            playertext += pl.getName();
+            numberOfPs++;
+            if (numberOfPs == dataHolder.getPlayers().size()) {
+                playertext += pl.getName() + " ";
+            }
+            else {
+                if (count < 1) {
+                    playertext += " \t & \t ";
+                    count++;
+                } else {
+                    playertext += " \n & \t ";
+                    count = 0;
+                }
             }
         }
         playerDisplay.setText(playertext);

@@ -37,7 +37,7 @@ public class TextRenderSystem extends IteratingSystem {
         Entity entity = entityQueue.first();
         TransformComponent trc = transformMapper.get(entity);
         LeadTextComponent ltc = leadMapper.get(entity);
-        this.font.draw(batch, ltc.leadPlayer, trc.position.x, trc.position.y);
+        this.font.draw(batch, ltc.leadPlayer, ltc.position.x, ltc.position.y);
         batch.end();
     }
 

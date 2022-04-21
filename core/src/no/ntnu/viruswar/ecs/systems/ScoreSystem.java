@@ -55,8 +55,8 @@ public class ScoreSystem extends IteratingSystem {
             TransformComponent tc = transMapper.get(entity);
             PlayerComponent pc = playerMapper.get(entity);
             Player p = lobbyController.getPlayers().get(idc.id);
-            tc.position.x = 10;
-            tc.position.y = Constants.GAME_WORLD_HEIGHT;
+            textComp.position.x = 10;
+            textComp.position.y = Constants.GAME_WORLD_HEIGHT;
             if (p.getPoints() > leadpoints) {
                 leadpoints = p.getPoints();
                 lead = p.getName();

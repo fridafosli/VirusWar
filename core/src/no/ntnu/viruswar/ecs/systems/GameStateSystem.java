@@ -5,10 +5,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.componenets.IdentifierComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;

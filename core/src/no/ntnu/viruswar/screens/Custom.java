@@ -105,6 +105,7 @@ public class Custom extends MenuBaseScreen{
             public void clicked(InputEvent event, float x, float y) {
                 player.setColor(color.toString());
                 player.setName(usernameInput.getText());
+                context.getScreens().pop();
             }
         });
         stage.addActor(submitBtn);

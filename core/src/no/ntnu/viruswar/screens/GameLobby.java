@@ -22,8 +22,6 @@ public class GameLobby extends MenuBaseScreen {
     private final TextButton backBtn;
     private final TextButton playBtn;
     private final NetworkDataController dataHolder = new NetworkDataController();
-    private String playertext = "";
-    private final Label playerDisplay;
     private final ScrollPane scrollpane;
     private final List<String> playerlist;
 
@@ -37,13 +35,13 @@ public class GameLobby extends MenuBaseScreen {
         this.playerlist = new List(skin);
         this.scrollpane = new ScrollPane(playerlist, skin);
 
+
         context.getBackend().setPlayersEventListener(this.dataHolder, this.pin);
 
         // Initialize labels
         final Label no_pls = new Label("", skin); // Label that displays no opponents message when playbutton is pressed
         Label pinLabel = new Label("Game Pin: " + this.pin, skin);
         Label playerLabel = new Label("Players: ", skin);
-        this.playerDisplay = new Label(playertext + "", skin);
 
         // Add the labels to the table
         table.padTop(30);
@@ -55,7 +53,7 @@ public class GameLobby extends MenuBaseScreen {
         playerLabel.setPosition(100, 50);
         table.add(playerLabel).padBottom(30);
         table.row();
-        table.add(scrollpane).width(600).height(700);
+        table.add(scrollpane).width(600).height(400);
         table.row();
 
 
@@ -113,7 +111,6 @@ public class GameLobby extends MenuBaseScreen {
         stage.addActor(playBtn);
 
 
-        // Legge inn en scrollpane?? (Container<Slider>)
         // Add all players connected to game to the screen
         playerlist.setItems(dataHolder.getPlayerNames());
         scrollpane.setActor(playerlist);

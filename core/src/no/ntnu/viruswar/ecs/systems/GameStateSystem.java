@@ -29,6 +29,7 @@ public class GameStateSystem extends IteratingSystem {
         this.controller = controller;
     }
     @Override public void update(float deltaTime){
+        super.update(deltaTime);
         IdentifierComponent idc = idMapper.get(player);
         Player p = controller.getPlayers().get(idc.id);
         // hvis man antar at isDead settes et annet sted når du blir

@@ -1,5 +1,7 @@
 package no.ntnu.viruswar.services.data;
 
+import com.badlogic.gdx.utils.Array;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -50,6 +52,14 @@ public class NetworkDataController {
 
     public Map<String, Player> getPlayers() {
         return players;
+    }
+
+    public Array getPlayerNames() {
+        Array playerlist = new Array();
+        for (Map.Entry<String, Player> pl : this.players.entrySet()) {
+            playerlist.add(pl.getValue().getName());
+        }
+        return playerlist;
     }
 
     public void removePlayer(String id) {

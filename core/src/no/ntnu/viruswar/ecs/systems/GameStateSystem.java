@@ -35,12 +35,17 @@ public class GameStateSystem extends IteratingSystem {
     @Override public void update(float deltaTime){
         IdentifierComponent idc = idMapper.get(player);
         Player p = controller.getPlayers().get(idc.id);
+        // hvis man antar at isDead settes et annet sted når du blir
+        // konsumert av noen:
         if (isDead){ //placeholder. get from db.  if p.isDead()
             context.getScreens().push(new EndScreen(context, p, false));
         }
         else if (isWinner){ //placeholder. get from db. if p.isWinner()
             context.getScreens().push(new EndScreen(context, p, true));
         }
+        // else iffen over der man antar at db variablen iswinner
+        // settes et annet sted når alle andre er konsumert, eller:
+        // else if controller.getPlayers.size == 1 push new winner screen
     }
 
     @Override

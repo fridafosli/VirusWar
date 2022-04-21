@@ -17,8 +17,6 @@ public class GameStateSystem extends IteratingSystem {
     private Context context;
     private LobbyController controller;
     private Entity player;
-    private boolean isDead = false; //placeholder for for fb variable
-    private boolean isWinner = false; //placeholder for fb variable
     private final ComponentMapper<IdentifierComponent> idMapper;
 
 
@@ -34,10 +32,10 @@ public class GameStateSystem extends IteratingSystem {
         Player p = controller.getPlayers().get(idc.id);
         // hvis man antar at isDead settes et annet sted når du blir
         // konsumert av noen:
-        if (isDead){ //placeholder. get from db.  if p.isDead()
+        if (p.isLooser()){
             context.getScreens().push(new EndScreen(context, p, false));
         }
-        else if (isWinner){ //placeholder. get from db. if p.isWinner()
+        else if (p.isWinner()){
             context.getScreens().push(new EndScreen(context, p, true));
         }
         // else iffen over der man antar at db variablen iswinner

@@ -80,10 +80,20 @@ public class FirebaseBackendService implements BackendService {
         ref.child("/started").setValue(true);
     }
 
-
     @Override
     public void removePlayerFromGame(String gamePin, String playerId) {
         myRef.child(gamePin + "/players/" + playerId).removeValue();
+    }
+
+    @Override
+    public void setToWinner(String gamePin, Player player) {
+        DatabaseReference ref = database.getReference(gamePin + "/players/" + player.getId());
+        ref.child("/winner").setValue(true);
+    }
+    @Override
+    public void setToLooser(String gamePin, Player player) {
+        DatabaseReference ref = database.getReference(gamePin + "/players/" + player.getId());
+        ref.child("/looser").setValue(true);
     }
 
     @Override

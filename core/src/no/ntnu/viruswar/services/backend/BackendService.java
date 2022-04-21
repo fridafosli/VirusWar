@@ -20,7 +20,6 @@ public interface BackendService {
      * Adds player to game with the given game-pin. If game pin is not used, a new game is created.
      *
      * @param gamePin The game pin to add the player to
-     * @param player  The player to be added to the game
      */
 
     void startGame(String gamePin);
@@ -47,6 +46,22 @@ public interface BackendService {
      * @param playerId id of the player
      */
     void removePlayerFromGame(String gamePin, String playerId);
+
+    /**
+     * Sets a player as the winner of the game.
+     *
+     * @param gamePin  pin of the game
+     * @param player the player
+     */
+    void setToWinner(String gamePin, Player player);
+
+    /**
+     * Sets a player as a looser of the game.
+     *
+     * @param gamePin  pin of the game
+     * @param player  the player
+     */
+    void setToLooser(String gamePin, Player player);
 
     /**
      * Stores all players in a game in dataHolder.players. Is updated when players are added,

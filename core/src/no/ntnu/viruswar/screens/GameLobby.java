@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.data.NetworkDataController;
@@ -20,8 +22,8 @@ public class GameLobby extends MenuBaseScreen {
     private final TextButton backBtn;
     private final TextButton playBtn;
     private final NetworkDataController dataHolder = new NetworkDataController();
-    private String playertext = "";
-    private final Label playerDisplay;
+    private final ScrollPane scrollpane;
+    private final List<String> playerlist;
 
     protected GameLobby(final Context context, final boolean host, final String pin, final Player player) {
         super(context);
@@ -30,6 +32,9 @@ public class GameLobby extends MenuBaseScreen {
         this.host = host;
         this.pin = pin;
         this.player = player;
+        this.playerlist = new List(skin);
+        this.scrollpane = new ScrollPane(playerlist, skin);
+
 
         context.getBackend().setPlayersEventListener(this.dataHolder, this.pin);
 
@@ -37,7 +42,6 @@ public class GameLobby extends MenuBaseScreen {
         final Label no_pls = new Label("", skin); // Label that displays no opponents message when playbutton is pressed
         Label pinLabel = new Label("Game Pin: " + this.pin, skin);
         Label playerLabel = new Label("Players: ", skin);
-        this.playerDisplay = new Label(playertext + "", skin);
 
         // Add the labels to the table
         table.padTop(30);
@@ -49,7 +53,7 @@ public class GameLobby extends MenuBaseScreen {
         playerLabel.setPosition(100, 50);
         table.add(playerLabel).padBottom(30);
         table.row();
-        table.add(playerDisplay);
+        table.add(scrollpane).width(600).height(400);
         table.row();
 
 
@@ -107,12 +111,10 @@ public class GameLobby extends MenuBaseScreen {
         stage.addActor(playBtn);
 
 
-        // Legge inn en scrollpane?? (Container<Slider>)
         // Add all players connected to game to the screen
-        for (Player pl : dataHolder.getPlayers().values()) {
-            playertext += pl.getName() + " \n ";
-        }
-        playerDisplay.setText(playertext);
+        playerlist.setItems(dataHolder.getPlayerNames());
+        scrollpane.setActor(playerlist);
+        scrollpane.setScrollingDisabled(true, false);
 
     }
 
@@ -120,18 +122,8 @@ public class GameLobby extends MenuBaseScreen {
     @Override
     public void render(float dt) {
         // Add all players connected to game to the screen
-        playertext = "";
-        int count = 0;
-        for (Player pl : dataHolder.getPlayers().values()) {
-            if (count < 1) {
-                playertext += pl.getName() + " \t & \t ";
-                count++;
-            } else {
-                playertext += pl.getName() + " \n & \t ";
-                count = 0;
-            }
-        }
-        playerDisplay.setText(playertext);
+        playerlist.clear();
+        playerlist.setItems(dataHolder.getPlayerNames());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(dt);
         stage.draw();

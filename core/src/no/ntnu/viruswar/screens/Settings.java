@@ -1,31 +1,24 @@
 package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
+
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import javax.swing.text.View;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.assets.AssetManager;
 
 public class Settings extends ContextScreen {
 
@@ -43,13 +36,13 @@ public class Settings extends ContextScreen {
         stage = new Stage(new ScreenViewport());
 
         Label volumeLabel= new Label("Set music volume",skin);
-        volumeLabel.setPosition((Gdx.graphics.getWidth()-1000)/2,750);
+        volumeLabel.setPosition((Gdx.graphics.getWidth()-400)/2,750);
         stage.addActor(volumeLabel);
         Label highVolume= new Label("100%",skin);
-        highVolume.setPosition(Gdx.graphics.getWidth()-1000,560);
+        highVolume.setPosition(Gdx.graphics.getWidth()-600,560);
         stage.addActor(highVolume);
         Label lowVolume= new Label("0%",skin);
-        lowVolume.setPosition(Gdx.graphics.getWidth()-1660,560);
+        lowVolume.setPosition(Gdx.graphics.getWidth()-1500,560);
         stage.addActor(lowVolume);
         // Sets volume slider
         final Slider slider= new Slider( 0,  1,  0.1f, false, skin);
@@ -66,7 +59,7 @@ public class Settings extends ContextScreen {
         Container<Slider> container=new Container<>(slider);
         container.setTransform(true);
 
-        container.setPosition((Gdx.graphics.getWidth()-600)/2,600);
+        container.setPosition((Gdx.graphics.getWidth()-container.getWidth())/2,600);
         container.setScale(Gdx.graphics.getHeight() / 250);
 
         stage.addActor(container);

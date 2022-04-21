@@ -15,6 +15,7 @@ import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.services.backend.BackendModel;
 import no.ntnu.viruswar.services.backend.model.Player;
 import no.ntnu.viruswar.services.lobby.LobbyController;
+import no.ntnu.viruswar.utils.Constants;
 
 public class ScoreSystem extends IteratingSystem {
 
@@ -22,6 +23,7 @@ public class ScoreSystem extends IteratingSystem {
     private final Context context;
     private final ComponentMapper<PlayerComponent> playerMapper;
     private final ComponentMapper<IdentifierComponent> idMapper;
+    private final ComponentMapper<TransformComponent> transMapper;
     private final LobbyController lobbyController;
     private LeadTextComponent textComp = new LeadTextComponent();
     private float leadpoints = 0;
@@ -34,11 +36,12 @@ public class ScoreSystem extends IteratingSystem {
         this.lobbyController = lobbycontroller;
         this.playerMapper = ComponentMapper.getFor(PlayerComponent.class);
         this.idMapper = ComponentMapper.getFor(IdentifierComponent.class);
+        this.transMapper = ComponentMapper.getFor(TransformComponent.class);
         entityQueue = new Array<Entity>();
         this.engine = engine;
         Entity ent = engine.createEntity();
         ent.add(textComp); // ta med position component også
-        ent.add(new TransformComponent(100,100));
+        ent.add(new TransformComponent(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT / 2));
         engine.addEntity(ent);
     }
 
@@ -49,7 +52,11 @@ public class ScoreSystem extends IteratingSystem {
 
         for (Entity entity : entityQueue) {
             IdentifierComponent idc = idMapper.get(entity);
+            TransformComponent tc = transMapper.get(entity);
+            PlayerComponent pc = playerMapper.get(entity);
             Player p = lobbyController.getPlayers().get(idc.id);
+            tc.position.x = 10;
+            tc.position.y = Constants.GAME_WORLD_HEIGHT;
             if (p.getPoints() > leadpoints) {
                 leadpoints = p.getPoints();
                 lead = p.getName();

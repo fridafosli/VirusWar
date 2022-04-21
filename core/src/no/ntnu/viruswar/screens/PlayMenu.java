@@ -21,7 +21,7 @@ public class PlayMenu extends MenuBaseScreen {
     private final TextField pin_input;
     private final TextField nick_input;
     private final TextField host_nick_input;
-
+    private final NetworkDataController playHolder = new NetworkDataController();
 
     private final NetworkDataController dataHolder = new NetworkDataController();
 
@@ -126,12 +126,12 @@ public class PlayMenu extends MenuBaseScreen {
                     return;
                 }
 
-                NetworkDataController playerHolder = new NetworkDataController();
-                context.getBackend().setPlayersEventListener(dataHolder, pin_input.getText());
-
-                System.out.println(dataHolder.getPlayers().entrySet().size());
-                System.out.println(dataHolder.getPlayers().entrySet());
-                if (dataHolder.getPlayers().entrySet().size() > 14) {
+                context.getBackend().setPlayersEventListener(playHolder, pin_input.getText());
+                //context.getBackend().
+                System.out.println(playHolder.getPlayers().values().size());
+                System.out.println(playHolder.activeGamePinsContainsPin(pin_input.getText()));
+                //System.out.println(dataHolder.);
+                if (playHolder.getPlayers().values().size() > 2) {
                     error.setText("\n Gameroom full.");
                     Thread timer = new Thread() {
                         public void run() {

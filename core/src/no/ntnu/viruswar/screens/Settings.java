@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -40,40 +41,16 @@ public class Settings extends ContextScreen {
 
         //skin.getFont("default-font").getData().setScale(scale);
         stage = new Stage(new ScreenViewport());
-        final Drawable volumeOn= new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("volume.png"))));
-        final Drawable volumeOff = new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("no-sound.png"))));
-        final int i= 0;
-        boolean buttonOn;
-        final ImageButton sound = new ImageButton(skin);
-        sound.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isPressed){
-                    v.setBackgroundResource(R.drawable.normal);
-                }else{
-                    v.setBackgroundResource(R.drawable.pressed);
-                }
-                isPressed = !isPressed; // reverse
-            }
-        });
 
-
-    }
-
-
-        sound.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!buttonOn) {
-                    buttonOn = true;
-                    imageButton.setBackground(getResources().getDrawable(R.drawable.button_is_on));
-                } else {
-                    buttonOn = false;
-                    imageButton.setBackground(getResources().getDrawable(R.drawable.button_is_off));
-                }
-            }
-        });
-        stage.addActor(sound);
+        Label volumeLabel= new Label("Set music volume",skin);
+        volumeLabel.setPosition((Gdx.graphics.getWidth()-1000)/2,750);
+        stage.addActor(volumeLabel);
+        Label highVolume= new Label("100%",skin);
+        highVolume.setPosition(Gdx.graphics.getWidth()-1000,560);
+        stage.addActor(highVolume);
+        Label lowVolume= new Label("0%",skin);
+        lowVolume.setPosition(Gdx.graphics.getWidth()-1660,560);
+        stage.addActor(lowVolume);
         // Sets volume slider
         final Slider slider= new Slider( 0,  1,  0.1f, false, skin);
         slider.setVisualPercent(context.getAssets().getVolume());
@@ -89,7 +66,7 @@ public class Settings extends ContextScreen {
         Container<Slider> container=new Container<>(slider);
         container.setTransform(true);
 
-        container.setPosition((Gdx.graphics.getWidth()-600)/2,300);
+        container.setPosition((Gdx.graphics.getWidth()-600)/2,600);
         container.setScale(Gdx.graphics.getHeight() / 250);
 
         stage.addActor(container);
@@ -110,8 +87,7 @@ public class Settings extends ContextScreen {
 
         stage.addActor(backBtn);
         // Set the background
-        background = new Sprite(new Texture(Gdx.files.internal("settings.png")));
-        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
     }
 
 
@@ -124,7 +100,6 @@ public class Settings extends ContextScreen {
     public void render(float dt) {
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         context.getBatch().begin();
-        background.draw(context.getBatch());
         context.getBatch().end();
 
         stage.act(dt);

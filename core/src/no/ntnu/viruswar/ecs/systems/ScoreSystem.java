@@ -12,17 +12,22 @@ import java.util.Comparator;
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.VelocityComponent;
+import no.ntnu.viruswar.services.data.NetworkDataController;
 
 public class ScoreSystem extends SortedIteratingSystem {
 
     private final Array<Entity> entityQueue;
     private final Context context;
     private final ComponentMapper<PlayerComponent> playerMapper;
+    private final NetworkDataController dataHolder = new NetworkDataController();
+    private final String pin;
 
-    public ScoreSystem(Family family, Comparator<Entity> comparator, int priority, Context context) {
+    public ScoreSystem(Family family, Comparator<Entity> comparator, int priority, Context context, String pin) {
         super(family.all(PlayerComponent.class).get(), comparator, priority);
         this.context = context;
         this.playerMapper = ComponentMapper.getFor(PlayerComponent.class);
+        this.pin = pin;
+        context.getBackend().setPlayersEventListener(this.dataHolder, this.pin);
         entityQueue = new Array<Entity>();
     }
 

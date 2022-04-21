@@ -43,10 +43,9 @@ public class EndScreen extends MenuBaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("back to main menu", "clicked");
-                context.getScreens().pop();
-                context.getScreens().pop();
-                context.getScreens().pop();
-                context.getScreens().pop();
+                while (!(context.getScreens().peek() instanceof MainMenu)) {
+                    context.getScreens().pop();
+                }
             }
         });
         stage.addActor(backBtn);

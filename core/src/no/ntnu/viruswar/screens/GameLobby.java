@@ -72,11 +72,20 @@ public class GameLobby extends MenuBaseScreen {
             }
         });
         stage.addActor(backBtn);
-
+        TextButton customizeBtn = new TextButton("Customize", skin);
+        customizeBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("custom", "clicked");
+                context.getScreens().push(new Custom(context, player));
+            }
+        });
+        customizeBtn.setPosition((Gdx.graphics.getWidth() - customizeBtn.getWidth()) / 2, 30);
+        stage.addActor(customizeBtn);
 
         // Set up Play-button
         playBtn = new TextButton("Play", skin);
-        playBtn.setPosition(Gdx.graphics.getWidth() - 200, 50);
+        playBtn.setPosition(Gdx.graphics.getWidth() - 200, 30);
         playBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -111,6 +120,7 @@ public class GameLobby extends MenuBaseScreen {
         scrollpane.setScrollingDisabled(true, false);
 
     }
+
 
     @Override
     public void render(float dt) {

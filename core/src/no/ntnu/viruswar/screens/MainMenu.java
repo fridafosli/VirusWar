@@ -1,6 +1,10 @@
 package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -13,6 +17,7 @@ public class MainMenu extends MenuBaseScreen {
     private final TextButton playBtn;
     private final TextButton tutorialBtn;
     private final TextButton settingsBtn;
+    private Sprite background;
 
 
     public MainMenu(final Context context) {
@@ -48,6 +53,8 @@ public class MainMenu extends MenuBaseScreen {
                 context.getScreens().push(new Settings(context));
             }
         });
+        background = new Sprite(new Texture(Gdx.files.internal("virusWar.png")));
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // add buttons to table
         table.padTop(scale * 100);
@@ -56,6 +63,9 @@ public class MainMenu extends MenuBaseScreen {
         table.add(tutorialBtn).padBottom(scale * 50);
         table.row();
         table.add(settingsBtn);
+        tutorialBtn.setColor(Color.RED);
+        settingsBtn.setColor(Color.RED);
+        playBtn.setColor(Color.RED);
     }
 
     @Override
@@ -65,7 +75,11 @@ public class MainMenu extends MenuBaseScreen {
 
     @Override
     public void render(float dt) {
+        SpriteBatch sb= context.getBatch();
         stage.act(dt);
+        sb.begin();
+        background.draw(sb);
+        sb.end();
         stage.draw();
     }
 

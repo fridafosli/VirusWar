@@ -9,6 +9,8 @@ import no.ntnu.viruswar.ecs.factories.VirusFactory;
 import no.ntnu.viruswar.ecs.factories.WorldFactory;
 import no.ntnu.viruswar.ecs.systems.CameraSystem;
 import no.ntnu.viruswar.ecs.systems.ConsumingSystem;
+import no.ntnu.viruswar.ecs.systems.DecideLooserSystem;
+import no.ntnu.viruswar.ecs.systems.DecideWinnerSystem;
 import no.ntnu.viruswar.ecs.systems.LootSpawnSystem;
 import no.ntnu.viruswar.ecs.systems.MapShrinkSystem;
 import no.ntnu.viruswar.ecs.systems.PlayerControlSystem;
@@ -42,6 +44,8 @@ public class GameScreen extends ContextScreen {
         engine.addSystem(new ConsumingSystem());
         engine.addSystem(new RenderingSystem(context.getBatch(), camera, new EntityComparator()));
         engine.addSystem(new LootSpawnSystem(1, mapEntity)); //change to bigger spawn interval
+        engine.addSystem(new DecideWinnerSystem(context));
+        engine.addSystem(new DecideLooserSystem(context));
         engine.addEntity(VirusFactory.createVirus(engine, 100, 100, false));
         engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));
     }

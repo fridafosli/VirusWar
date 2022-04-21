@@ -31,8 +31,8 @@ public class NetworkDataController {
         return activeGamePins.contains(pin);
     }
 
-    public void addPlayer(float x, float y, float points) {
-        Player p = new Player(x, y, points, "blue", "name");
+    public void addPlayer(float x, float y, float points, String name) {
+        Player p = new Player(x, y, points, "blue", name);
         players.put(p.getId(), p);
     }
 

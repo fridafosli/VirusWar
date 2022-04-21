@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.utils.Array;
 import no.ntnu.viruswar.context.Context;
+import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
 import no.ntnu.viruswar.ecs.componenets.IdentifierComponent;
 import no.ntnu.viruswar.ecs.componenets.LeadTextComponent;
@@ -24,6 +25,7 @@ public class ScoreSystem extends IteratingSystem {
     private final ComponentMapper<PlayerComponent> playerMapper;
     private final ComponentMapper<IdentifierComponent> idMapper;
     private final ComponentMapper<TransformComponent> transMapper;
+
     private final LobbyController lobbyController;
     private LeadTextComponent textComp = new LeadTextComponent();
     private float leadpoints = 0;
@@ -55,15 +57,15 @@ public class ScoreSystem extends IteratingSystem {
             TransformComponent tc = transMapper.get(entity);
             PlayerComponent pc = playerMapper.get(entity);
             Player p = lobbyController.getPlayers().get(idc.id);
-            textComp.position.x = 10;
-            textComp.position.y = Constants.GAME_WORLD_HEIGHT;
+            textComp.position.x = tc.position.x - Constants.GAME_WORLD_WIDTH;
+            textComp.position.y = tc.position.y -3 + Constants.GAME_WORLD_HEIGHT/2;
             if (p.getPoints() > leadpoints) {
                 leadpoints = p.getPoints();
                 lead = p.getName();
             }
         }
 
-        textComp.leadPlayer = "Lead: " + lead + leadpoints + "ps";
+        textComp.leadPlayer = "Lead: " + lead + " " + leadpoints + "ps";
 
         entityQueue.clear();
     }

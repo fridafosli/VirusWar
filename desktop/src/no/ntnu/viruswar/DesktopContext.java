@@ -15,12 +15,22 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
+    public void startGame(String gamePin) {
+
+    }
+
+    @Override
     public void addPlayerToGame(String gamePin, Player player) {
 
     }
 
     @Override
     public void updatePlayerPosition(String gamePin, String playerId, float x, float y, float points) {
+
+    }
+
+    @Override
+    public void setLobbyStateListener(BackendModel dataHolder, String gamePin) {
 
     }
 

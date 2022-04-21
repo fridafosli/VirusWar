@@ -37,7 +37,7 @@ public class DecideWinnerSystem extends IteratingSystem {
             IdentifierComponent idc = idMapper.get(entityQueue.get(0));
             Player player = controller.getPlayers().get(idc.id);
             context.getScreens().push(new EndScreen(context, player, true));
-
+            controller.removePlayer(); // bit unsure about this
             // TODO: update something in firebase?
 
         }

@@ -9,7 +9,6 @@ public class TransformComponent implements Component {
 
     public TransformComponent(float x, float y) {
         position = new Vector3(x, y, 0);
-
     }
 }
 

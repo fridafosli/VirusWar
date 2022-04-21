@@ -39,6 +39,7 @@ public class DecideLooserSystem extends IteratingSystem {
             IdentifierComponent idc = idMapper.get(entity);
             Player player = controller.getPlayers().get(idc.id);
             context.getScreens().push(new EndScreen(context, player, false));
+            controller.removePlayer(); // bit unsure on this?
             // TODO: update something in firebase?
         }
 

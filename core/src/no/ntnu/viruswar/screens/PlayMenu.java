@@ -80,6 +80,7 @@ public class PlayMenu extends MenuBaseScreen {
                         gamePin += VALID_CHARS.charAt(ch);
                     }
                 }
+
                 System.out.println(gamePin);
                 Player host = new Player(0, 0, 0, "default", host_nick_input.getText());
                 context.getBackend().addPlayerToGame(gamePin, host);
@@ -124,6 +125,29 @@ public class PlayMenu extends MenuBaseScreen {
                     timer.start();
                     return;
                 }
+
+                NetworkDataController playerHolder = new NetworkDataController();
+                context.getBackend().setPlayersEventListener(dataHolder, pin_input.getText());
+
+                System.out.println(dataHolder.getPlayers().entrySet().size());
+                System.out.println(dataHolder.getPlayers().entrySet());
+                if (dataHolder.getPlayers().entrySet().size() > 14) {
+                    error.setText("\n Gameroom full.");
+                    Thread timer = new Thread() {
+                        public void run() {
+                            try {
+                                sleep(5000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            } finally {
+                                error.setText("");
+                            }
+                        }
+                    };
+                    timer.start();
+                    return;
+                }
+
                 Gdx.app.log("join", "clicked");
                 Player player = new Player(0, 0, 0, "blue", nick_input.getText());
                 context.getBackend().addPlayerToGame(pin_input.getText(), player);

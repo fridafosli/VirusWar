@@ -140,11 +140,8 @@ public class PlayMenu extends MenuBaseScreen {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                //context.getBackend()
-                System.out.println(dataHolder.activeGamePinsContainsPin(pin_input.getText())); // Den finner denne med dataholder
-                System.out.println(dataHolder.getPlayers().values().size()); // Den finner denne med dataholder
                 //System.out.println(dataHolder.);
-                if (playHolder.getPlayers().values().size() > 2) {
+                if (dataHolder.getPlayers().values().size() > 19) {
                     error.setText("\n Gameroom full.");
                     Thread timer = new Thread() {
                         public void run() {

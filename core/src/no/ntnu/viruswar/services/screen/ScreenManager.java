@@ -48,6 +48,10 @@ public class ScreenManager {
             }
         }
     }
+
+    public Screen peek() {
+        return this.screens.peek();
+    }
 }
 
 

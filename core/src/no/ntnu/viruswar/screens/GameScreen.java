@@ -59,7 +59,7 @@ public class GameScreen extends ContextScreen {
         engine.addSystem(new GameStateSystem(context, controller));
         engine.addSystem(new ScoreSystem(engine, controller));
         engine.addSystem(new TextRenderSystem(1, context.getBatch(), camera));
-        engine.addSystem(new QuitButtonSystem(context.getBatch(), context, 1));
+        engine.addSystem(new QuitButtonSystem(touchController, engine, context, camera, 1));
         engine.addEntity(VirusFactory.createPlayerVirus(engine, 100, 100, controller.getState().getPlayerId()));
         //engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));
 

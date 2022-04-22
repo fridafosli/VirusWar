@@ -5,6 +5,8 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 public class TouchController implements InputProcessor {
 
@@ -22,6 +24,11 @@ public class TouchController implements InputProcessor {
         calcVec3 = calcVec3.set(touchScreenLocation, 0);
         camera.unproject(calcVec3);
         return calcVec3;
+    }
+
+    public Boolean touchQuitButton(float x, float y) {
+        //return touchScreenLocation.x > x && touchScreenLocation.y > y;
+        return calcVec3.x > x && calcVec3.y > y;
     }
 
     @Override

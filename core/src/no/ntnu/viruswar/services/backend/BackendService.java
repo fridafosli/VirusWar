@@ -16,6 +16,14 @@ public interface BackendService {
      */
     void setGamePinEventListener(BackendModel dataHolder);
 
+
+    /**
+     * Deletes the game with specified gamepin.
+     *
+     * @param gamePin  game to be deleted
+     */
+    void removeGame(String gamePin);
+
     /**
      * Adds player to game with the given game-pin. If game pin is not used, a new game is created.
      *

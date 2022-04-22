@@ -13,12 +13,13 @@ import no.ntnu.viruswar.services.backend.model.Player;
 public class EndScreen extends MenuBaseScreen {
 
 
-    public EndScreen(final Context context, final Player player, boolean winner) {
+    public EndScreen(final Context context, String gamePin, final Player player, boolean winner) {
         super(context);
 
         String text;
         if (winner) {
             text = "WINNER";
+            context.getBackend().removeGame(gamePin);
         }
         else {
             text = "You died loser ";

@@ -15,6 +15,11 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
+    public void removeGame(String gamePin) {
+
+    }
+
+    @Override
     public void startGame(String gamePin) {
 
     }
@@ -36,6 +41,16 @@ class DesktopBackendService implements BackendService {
 
     @Override
     public void removePlayerFromGame(String gamePin, String playerId) {
+
+    }
+
+    @Override
+    public void setToWinner(String gamePin, Player player) {
+
+    }
+
+    @Override
+    public void setToLooser(String gamePin, Player player) {
 
     }
 

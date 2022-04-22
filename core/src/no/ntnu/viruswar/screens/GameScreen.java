@@ -23,6 +23,7 @@ import no.ntnu.viruswar.ecs.systems.TextRenderSystem;
 import no.ntnu.viruswar.ecs.utils.Camera;
 import no.ntnu.viruswar.ecs.utils.EntityComparator;
 import no.ntnu.viruswar.ecs.utils.TouchController;
+import no.ntnu.viruswar.services.backend.model.Player;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 import no.ntnu.viruswar.services.screen.Screen;
 

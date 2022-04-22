@@ -60,6 +60,12 @@ public class FirebaseBackendService implements BackendService {
         });
     }
 
+    @Override
+    public void removeGame(String gamePin) {
+        myRef.child(gamePin).removeValue();
+        System.out.println("Game ended: " + gamePin);
+    }
+
 
     @Override
     public void addPlayerToGame(String gamePin, Player player) {

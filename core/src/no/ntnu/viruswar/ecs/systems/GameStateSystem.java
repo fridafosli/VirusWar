@@ -33,10 +33,10 @@ public class GameStateSystem extends IteratingSystem {
         // hvis man antar at isDead settes et annet sted når du blir
         // konsumert av noen:
         if (p.isLooser()){
-            context.getScreens().push(new EndScreen(context, p, false));
+            context.getScreens().push(new EndScreen(context, controller.getPin(), p, false));
         }
         else if (p.isWinner()){
-            context.getScreens().push(new EndScreen(context, p, true));
+            context.getScreens().push(new EndScreen(context, controller.getPin(), p, true));
         }
         // else iffen over der man antar at db variablen iswinner
         // settes et annet sted når alle andre er konsumert, eller:

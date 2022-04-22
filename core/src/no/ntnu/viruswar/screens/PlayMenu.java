@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import java.util.concurrent.TimeUnit;
+
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.data.NetworkDataController;
 import no.ntnu.viruswar.services.data.Player;
@@ -27,10 +29,14 @@ public class PlayMenu extends MenuBaseScreen {
 
     protected PlayMenu(final Context context) {
         super(context);
+
         context.getBackend().setGamePinEventListener(dataHolder);
+
+
         pin_input = new TextField("", skin);
         nick_input = new TextField("", skin);
         host_nick_input = new TextField("", skin);
+        final String testPin= pin_input.getText();
 
         // Create labels
         Label label1 = new Label("Create Game:", skin);
@@ -40,12 +46,12 @@ public class PlayMenu extends MenuBaseScreen {
         Label label5 = new Label("Nickname: ", skin);
         final Label error = new Label("", skin);
 
-
         // Set up Create button
         createBtn = new TextButton("Create", skin);
         createBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+
                 if (host_nick_input.getText().length() < 1) {
                     error.setText("Please fill nickname to create game.");
                     Thread timer = new Thread() {
@@ -85,6 +91,7 @@ public class PlayMenu extends MenuBaseScreen {
                 Player host = new Player(0, 0, 0, "default", host_nick_input.getText());
                 context.getBackend().addPlayerToGame(gamePin, host);
                 context.getScreens().push(new GameLobby(context, true, gamePin, host));
+
             }
         });
 
@@ -93,6 +100,7 @@ public class PlayMenu extends MenuBaseScreen {
         joinBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+
                 if (pin_input.getText().length() < 1 && nick_input.getText().length() < 1) {
                     error.setText("\n Please fill gamepin and nickname to join.");
                     Thread timer = new Thread() {
@@ -126,10 +134,15 @@ public class PlayMenu extends MenuBaseScreen {
                     return;
                 }
 
-                context.getBackend().setPlayersEventListener(playHolder, pin_input.getText());
-                //context.getBackend().
-                System.out.println(playHolder.getPlayers().values().size());
-                System.out.println(playHolder.activeGamePinsContainsPin(pin_input.getText()));
+                context.getBackend().setPlayersEventListener(dataHolder, pin_input.getText());
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //context.getBackend()
+                System.out.println(dataHolder.activeGamePinsContainsPin(pin_input.getText())); // Den finner denne med dataholder
+                System.out.println(dataHolder.getPlayers().values().size()); // Den finner denne med dataholder
                 //System.out.println(dataHolder.);
                 if (playHolder.getPlayers().values().size() > 2) {
                     error.setText("\n Gameroom full.");

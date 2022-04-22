@@ -22,7 +22,7 @@ import no.ntnu.viruswar.services.data.Player;
 public class Custom extends MenuBaseScreen{
     protected Stage stage;
     protected Sprite playerVirus;
-    private Color color;
+    private String color;
     private TextButton backBtn;
     private TextButton colorChangePlus;
     private TextButton colorChangeMinus;
@@ -33,11 +33,10 @@ public class Custom extends MenuBaseScreen{
     private Context context;
 
 
-    public Custom(final Context context, final Player player){
+public Custom(final Context context, final Player player){
         super(context);
         this.context=context;
         this.player= player;
-
         //Sets the stage
         stage = new Stage(new ScreenViewport());
 
@@ -112,13 +111,12 @@ public class Custom extends MenuBaseScreen{
 
     }
     private void setPlayerVirus(boolean initial, boolean add){
-        playerVirus= new Sprite(new Texture("virus.png"));
 
-        List<Color> colors= Arrays.asList(Color.BLUE,Color.PINK,Color.CYAN, Color.RED, Color.GREEN, Color.MAGENTA, Color.BROWN,
-                Color.FIREBRICK, Color.FOREST, Color.PURPLE, Color.CORAL, Color.LIME, Color.SKY,Color.ORANGE, Color.OLIVE,Color.YELLOW, Color.VIOLET, Color.WHITE,Color.GOLDENROD, Color.SALMON, Color.MAROON, Color.NAVY);
+
+        List<String> colors= Arrays.asList("v1", "v2", "v3", "v4", "v5", "v6", "v7");
 
         if(initial){
-            colorIndex=colors.indexOf(Color.valueOf(player.getColor()));
+            colorIndex=colors.indexOf(player.getColor());
 
         }
         else if(add){
@@ -128,8 +126,9 @@ public class Custom extends MenuBaseScreen{
             colorIndex=(colorIndex==0)?colors.size()-1:colorIndex-1;
 
         }
-
         color= colors.get(colorIndex);
+        playerVirus= new Sprite(new Texture(color+".PNG"));
+
 
 
     }
@@ -140,7 +139,6 @@ public class Custom extends MenuBaseScreen{
         stage.act(dt);
 
         SpriteBatch sb= context.getBatch();
-        sb.setColor(color);
         sb.begin();
         sb.draw(playerVirus, (int)(Gdx.graphics.getWidth()/2)-50,(int)(Gdx.graphics.getHeight()/2)-400, 800,800);
         sb.end();

@@ -23,7 +23,7 @@ public class MainMenu extends MenuBaseScreen {
 
     public MainMenu(final Context context) {
         super(context);
-
+        context.getAssets().setMusic(true,1f);
         // Create the play-button
         playBtn = new TextButton("Play", skin);
         playBtn.setHeight(Gdx.graphics.getHeight());

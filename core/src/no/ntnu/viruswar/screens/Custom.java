@@ -24,7 +24,7 @@ import no.ntnu.viruswar.utils.Constants;
 
 public class Custom extends MenuBaseScreen {
     protected Sprite playerVirus;
-    private Color color;
+    private String color;
     private TextButton backBtn;
     private TextButton colorChangePlus;
     private TextButton colorChangeMinus;
@@ -57,7 +57,7 @@ public class Custom extends MenuBaseScreen {
         stage.addActor(backBtn);
 
         //Sets up color change button (right)
-        colorChangePlus = new TextButton(">", skin);
+        colorChangePlus = new TextButton("   >  ", skin);
         colorChangePlus.setPosition(Constants.SCREEN_WIDTH_SCALE * 90,
                 Gdx.graphics.getHeight() / 2f - colorChangePlus.getHeight() / 2);
         colorChangePlus.addListener(new ClickListener() {
@@ -70,7 +70,7 @@ public class Custom extends MenuBaseScreen {
         stage.addActor(colorChangePlus);
 
         //Sets up color change button (left)
-        colorChangeMinus = new TextButton("<", skin);
+        colorChangeMinus = new TextButton("  <   ", skin);
         colorChangeMinus.setPosition(Constants.SCREEN_WIDTH_SCALE * 45,
                 Gdx.graphics.getHeight() / 2f - colorChangeMinus.getHeight() / 2);
         colorChangeMinus.addListener(new ClickListener() {
@@ -91,6 +91,7 @@ public class Custom extends MenuBaseScreen {
             public void clicked(InputEvent event, float x, float y) {
                 player.setColor(color.toString());
                 player.setName(usernameInput.getText());
+                context.getScreens().pop();
             }
         });
         stage.addActor(submitBtn);
@@ -117,14 +118,13 @@ public class Custom extends MenuBaseScreen {
 
     }
 
-    private void setPlayerVirus(boolean initial, boolean add) {
-        playerVirus = new Sprite(new Texture("virus.png"));
+    private void setPlayerVirus(boolean initial, boolean add){
 
-        List<Color> colors = Arrays.asList(Color.BLUE, Color.PINK, Color.CYAN, Color.RED, Color.GREEN, Color.MAGENTA, Color.BROWN,
-                Color.FIREBRICK, Color.FOREST, Color.PURPLE, Color.CORAL, Color.LIME, Color.SKY, Color.ORANGE, Color.OLIVE, Color.YELLOW, Color.VIOLET, Color.WHITE, Color.GOLDENROD, Color.SALMON, Color.MAROON, Color.NAVY);
+
+        List<String> colors= Arrays.asList("v1", "v2", "v3", "v4", "v5", "v6", "v7");
 
         if (initial) {
-            colorIndex = colors.indexOf(Color.valueOf(player.getColor()));
+            colorIndex = colors.indexOf(player.getColor());
 
         } else if (add) {
             colorIndex = (colorIndex == colors.size() - 1) ? 0 : colorIndex + 1;
@@ -133,8 +133,8 @@ public class Custom extends MenuBaseScreen {
 
         }
 
-        color = colors.get(colorIndex);
-
+        color= colors.get(colorIndex);
+        playerVirus= new Sprite(new Texture(color+".PNG"));
 
     }
 
@@ -143,8 +143,8 @@ public class Custom extends MenuBaseScreen {
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(dt);
 
-        SpriteBatch sb = context.getBatch();
-        sb.setColor(color);
+
+        SpriteBatch sb= context.getBatch();
         sb.begin();
         sb.draw(playerVirus, (int) Constants.SCREEN_WIDTH_SCALE * 50, (int) Constants.SCREEN_HEIGHT_SCALE * 50 - Constants.SCREEN_WIDTH_SCALE * 40 / 2,
                 Constants.SCREEN_WIDTH_SCALE * 40, Constants.SCREEN_WIDTH_SCALE * 40);

@@ -32,10 +32,9 @@ public class Player {
     }
 
     public String generateColor(){
-        List<Color> colors= Arrays.asList(Color.BLUE,Color.PINK,Color.CYAN, Color.RED, Color.GREEN, Color.MAGENTA, Color.BROWN,
-                Color.FIREBRICK, Color.FOREST, Color.PURPLE, Color.CORAL, Color.LIME, Color.SKY,Color.ORANGE, Color.OLIVE,Color.YELLOW, Color.VIOLET, Color.WHITE,Color.GOLDENROD, Color.SALMON, Color.MAROON, Color.NAVY);
+        List<String> colors= Arrays.asList("v1", "v2", "v3", "v4", "v5", "v6", "v7");
         int colorIndex= (int)(Math.random()*(colors.size()-1));
-        return (colors.get(colorIndex)).toString();
+        return colors.get(colorIndex);
     }
 
     public void setColor(String color){

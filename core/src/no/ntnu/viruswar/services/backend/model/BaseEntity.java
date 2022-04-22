@@ -11,6 +11,8 @@ abstract public class BaseEntity {
     private String path;
     public float x;
     public float y;
+    private float velocityX;
+    private float velocityY;
     private float size;
 
     public BaseEntity() {
@@ -22,6 +24,8 @@ abstract public class BaseEntity {
         this.path = path;
         this.x = x;
         this.y = y;
+        this.velocityX = 0;
+        this.velocityY = 0;
         this.size = size;
         this.consumed = false;
     }
@@ -53,6 +57,14 @@ abstract public class BaseEntity {
 
     public boolean isConsumed() {
         return consumed;
+    }
+
+    public float getVelocityX() {
+        return velocityX;
+    }
+
+    public float getVelocityY() {
+        return velocityY;
     }
 
     @SuppressWarnings("DefaultLocale")

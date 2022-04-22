@@ -22,7 +22,7 @@ public class OnlineDeleteSystem extends IteratingSystem {
     private final Context context;
 
     public OnlineDeleteSystem(Context context, LobbyController lobby) {
-        super(Family.all(IdentifierComponent.class, LootComponent.class).get());
+        super(Family.all(IdentifierComponent.class, LootComponent.class, DeletedComponent.class).get());
         this.idMapper = ComponentMapper.getFor(IdentifierComponent.class);
         this.lobby = lobby;
         this.context = context;
@@ -35,7 +35,8 @@ public class OnlineDeleteSystem extends IteratingSystem {
 
         for (Map.Entry<String, Entity> entity : entityMap.entrySet()) {
             if (!lobby.getLoots().containsKey(entity.getKey())) {
-                this.context.getBackend().removeLootFromGame(lobby.getPin(), entity.getKey());
+                getEngine().removeEntity(entity.getValue());
+                //this.context.getBackend().removeLootFromGame(lobby.getPin(), entity.getKey());
             }
         }
 

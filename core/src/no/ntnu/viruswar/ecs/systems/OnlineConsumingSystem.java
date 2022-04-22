@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Array;
 
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.componenets.ConsumableComponent;
+import no.ntnu.viruswar.ecs.componenets.DeletedComponent;
 import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
 import no.ntnu.viruswar.ecs.componenets.IdentifierComponent;
@@ -52,7 +53,7 @@ public class OnlineConsumingSystem extends IteratingSystem {
                 continue;
             }
 
-            // If the distance is smaller than the combined radii the the entities overlap
+            // If the distance is smaller than the combined radii the entities overlap
             float distance = clientPos.cpy().sub(transformMapper.get(entity).position).len();
 
            // Find the smallest and largest entity; the smallest will be absorbed into the largest
@@ -63,6 +64,7 @@ public class OnlineConsumingSystem extends IteratingSystem {
 
                 // Hide the smallest entity
                 smallest.add(new HiddenComponent());
+                smallest.add(new DeletedComponent());
                 consumableMapper.get(smallest).isConsumed = true;
 
                 // If the client is the smallest entity, set its consumed state in the backend.

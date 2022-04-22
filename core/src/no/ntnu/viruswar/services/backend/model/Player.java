@@ -5,8 +5,7 @@ public class Player extends BaseEntity {
 
     private String skin;
     private String name;
-    private float velocityX;
-    private float velocityY;
+
 
     // Default constructor required for calls to DataSnapshot
     public Player(){};
@@ -15,8 +14,7 @@ public class Player extends BaseEntity {
         super("players", x, y, points);
         this.name = name;
         this.skin = skin;
-        velocityX = 0;
-        velocityY = 0;
+
     }
 
     public String getSkin() {
@@ -24,14 +22,6 @@ public class Player extends BaseEntity {
     }
 
     public String getName() { return name; }
-
-    public float getVelocityX() {
-        return velocityX;
-    }
-
-    public float getVelocityY() {
-        return velocityY;
-    }
 
     public void setSkin(String skin) {
         this.skin = skin;

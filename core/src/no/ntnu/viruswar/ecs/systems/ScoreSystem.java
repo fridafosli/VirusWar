@@ -21,10 +21,7 @@ import no.ntnu.viruswar.utils.Constants;
 public class ScoreSystem extends IteratingSystem {
 
     private final Array<Entity> entityQueue;
-    private final Context context;
-    private final ComponentMapper<PlayerComponent> playerMapper;
     private final ComponentMapper<IdentifierComponent> idMapper;
-    private final ComponentMapper<TransformComponent> transMapper;
 
     private final LobbyController lobbyController;
     private LeadTextComponent textComp = new LeadTextComponent();
@@ -32,18 +29,14 @@ public class ScoreSystem extends IteratingSystem {
     private String lead = "tie";
     private final Engine engine;
 
-    public ScoreSystem(Engine engine, Context context, LobbyController lobbycontroller) {
+    public ScoreSystem(Engine engine, LobbyController lobbycontroller) {
         super(Family.all(PlayerComponent.class).exclude(HiddenComponent.class).get());
-        this.context = context;
         this.lobbyController = lobbycontroller;
-        this.playerMapper = ComponentMapper.getFor(PlayerComponent.class);
         this.idMapper = ComponentMapper.getFor(IdentifierComponent.class);
-        this.transMapper = ComponentMapper.getFor(TransformComponent.class);
         entityQueue = new Array<Entity>();
         this.engine = engine;
         Entity ent = engine.createEntity();
-        ent.add(textComp); // ta med position component også
-        ent.add(new TransformComponent(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT / 2));
+        ent.add(textComp);
         engine.addEntity(ent);
     }
 
@@ -54,29 +47,18 @@ public class ScoreSystem extends IteratingSystem {
 
         for (Entity entity : entityQueue) {
             IdentifierComponent idc = idMapper.get(entity);
-            TransformComponent tc = transMapper.get(entity);
-            PlayerComponent pc = playerMapper.get(entity);
             Player p = lobbyController.getPlayers().get(idc.id);
-            textComp.position.x = tc.position.x - Constants.GAME_WORLD_WIDTH;
-            textComp.position.y = tc.position.y -3 + Constants.GAME_WORLD_HEIGHT/2;
             if (p.getPoints() > leadpoints) {
                 leadpoints = p.getPoints();
                 lead = p.getName();
             }
         }
 
-        textComp.leadPlayer = "Lead: " + lead + " " + leadpoints + "ps";
+        textComp.leadPlayer = "Lead: " + lead + " " + leadpoints + " points";
 
         entityQueue.clear();
     }
 
-    public float getLeadpoints() {
-        return leadpoints;
-    }
-
-    public String getLead() {
-        return lead;
-    }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {

@@ -6,11 +6,10 @@ import com.badlogic.gdx.Gdx;
 
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.factories.ActorFactory;
-import no.ntnu.viruswar.ecs.factories.VirusFactory;
 import no.ntnu.viruswar.ecs.factories.WorldFactory;
-import no.ntnu.viruswar.ecs.systems.BackendSystem;
+import no.ntnu.viruswar.ecs.systems.OnlineSendUserSystem;
 import no.ntnu.viruswar.ecs.systems.CameraSystem;
-import no.ntnu.viruswar.ecs.systems.ConsumingSystem;
+import no.ntnu.viruswar.ecs.systems.OnlineConsumingSystem;
 import no.ntnu.viruswar.ecs.systems.LootSpawnSystem;
 import no.ntnu.viruswar.ecs.systems.MapShrinkSystem;
 import no.ntnu.viruswar.ecs.systems.OnlineControlSystem;
@@ -47,10 +46,10 @@ public class GameScreen extends ContextScreen {
         engine.addSystem(new CameraSystem(camera));
         engine.addSystem(new PlayerControlSystem(touchController));
         engine.addSystem(new PlayerMovementSystem(mapEntity));
-        engine.addSystem(new ConsumingSystem(context, lobby));
+        engine.addSystem(new OnlineConsumingSystem(context, lobby));
         engine.addSystem(new RenderingSystem(context.getBatch(), camera, new EntityComparator()));
         engine.addSystem(new LootSpawnSystem(5, mapEntity, context, lobby)); //change to bigger spawn interval
-        engine.addSystem(new BackendSystem(context, lobby));
+        engine.addSystem(new OnlineSendUserSystem(context, lobby));
         engine.addSystem(new OnlineSpawnSystem(context, lobby));
         engine.addSystem(new OnlineDeleteSystem(context, lobby));
         engine.addSystem(new OnlineControlSystem(context, lobby));

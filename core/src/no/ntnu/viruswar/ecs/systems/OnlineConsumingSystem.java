@@ -16,7 +16,7 @@ import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 
-public class ConsumingSystem extends IteratingSystem {
+public class OnlineConsumingSystem extends IteratingSystem {
 
     private final ComponentMapper<ConsumableComponent> consumableMapper;
     private final ComponentMapper<TransformComponent> transformMapper;
@@ -27,7 +27,7 @@ public class ConsumingSystem extends IteratingSystem {
     private final Context context;
     private final LobbyController lobby;
 
-    public ConsumingSystem(Context context, LobbyController lobby) {
+    public OnlineConsumingSystem(Context context, LobbyController lobby) {
         super(Family.all(ConsumableComponent.class, TransformComponent.class, DimensionComponent.class, IdentifierComponent.class).exclude(HiddenComponent.class).get());
         this.consumableMapper = ComponentMapper.getFor(ConsumableComponent.class);
         this.transformMapper = ComponentMapper.getFor(TransformComponent.class);
@@ -51,15 +51,22 @@ public class ConsumingSystem extends IteratingSystem {
             if (entity.equals(clientPlayer) || consumableMapper.get(entity).isConsumed || consumableMapper.get(clientPlayer).isConsumed) {
                 continue;
             }
+
+            // If the distance is smaller than the combined radii the the entities overlap
             float distance = clientPos.cpy().sub(transformMapper.get(entity).position).len();
+
+           // Find the smallest and largest entity; the smallest will be absorbed into the largest
             if (distance < rectangleMapper.get(entity).getRadius() + rectangleMapper.get(clientPlayer).getRadius()) {
                 Entity smallest = (clientSize < consumableMapper.get(entity).size) ? clientPlayer : entity;
                 Entity largest = (smallest == entity) ? clientPlayer : entity;
                 consumableMapper.get(largest).size += consumableMapper.get(smallest).size;
+
+                // Hide the smallest entity
                 smallest.add(new HiddenComponent());
                 consumableMapper.get(smallest).isConsumed = true;
 
-                if (idMapper.get(smallest).id == idMapper.get(clientPlayer).id) {
+                // If the client is the smallest entity, set its consumed state in the backend.
+                if (idMapper.get(smallest).id.equals(idMapper.get(clientPlayer).id)) {
                     context.getBackend().setEntityConsumedState(lobby.getPin(), lobby.getPlayers().get(idMapper.get(smallest).id), true);
                 }
 

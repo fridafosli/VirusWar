@@ -58,10 +58,10 @@ public class OnlineControlSystem extends IteratingSystem {
             vcc.velocity.set(new Vector3(player.getVelocityX(), player.getVelocityY(), 0));
             coc.size = player.getPoints();
 
-
             if (player.isConsumed()) {
                 entity.add(new HiddenComponent());
             }
+
         }
         entityQueue.clear();
     }

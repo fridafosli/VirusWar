@@ -12,7 +12,7 @@ import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 
-public class BackendSystem extends IteratingSystem {
+public class OnlineSendUserSystem extends IteratingSystem {
 
     private final ComponentMapper<TransformComponent> transformMapper;
     private final ComponentMapper<ConsumableComponent> sizeMapper;
@@ -20,7 +20,7 @@ public class BackendSystem extends IteratingSystem {
     private final Context context;
     private final LobbyController controller;
 
-    public BackendSystem(Context context, LobbyController controller)  {
+    public OnlineSendUserSystem(Context context, LobbyController controller)  {
         super(Family.all(TransformComponent.class, ConsumableComponent.class, PlayerComponent.class).get());
         this.controller = controller;
         this.context = context;
@@ -37,7 +37,6 @@ public class BackendSystem extends IteratingSystem {
         context.getBackend().updatePlayerPosition(controller.getState().getPin(), controller.getState().getPlayerId(),pos.x, pos.y, size.size);
         context.getBackend().setEntityConsumedState(controller.getPin(), controller.getPlayers().get(controller.getState().getPlayerId()), size.isConsumed);
         entity = null;
-
     }
 
     @Override

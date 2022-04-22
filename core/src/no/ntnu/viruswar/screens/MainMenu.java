@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
+import no.ntnu.viruswar.utils.Constants;
 
 
 public class MainMenu extends MenuBaseScreen {
@@ -57,10 +58,10 @@ public class MainMenu extends MenuBaseScreen {
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // add buttons to table
-        table.padTop(scale * 100);
-        table.add(playBtn).padBottom(scale * 50);
+        table.padTop(Constants.SCREEN_HEIGHT_SCALE * 20);
+        table.add(playBtn).padBottom(Constants.SCREEN_HEIGHT_SCALE * 20);
         table.row();
-        table.add(tutorialBtn).padBottom(scale * 50);
+        table.add(tutorialBtn).padBottom(Constants.SCREEN_HEIGHT_SCALE * 20);
         table.row();
         table.add(settingsBtn);
         tutorialBtn.setColor(Color.RED);

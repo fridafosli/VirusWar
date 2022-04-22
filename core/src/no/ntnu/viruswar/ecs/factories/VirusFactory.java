@@ -1,7 +1,7 @@
 package no.ntnu.viruswar.ecs.factories;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.PooledEngine;
+import com.badlogic.ashley.core.Engine;
 
 import no.ntnu.viruswar.ecs.componenets.ConsumableComponent;
 import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
@@ -18,7 +18,7 @@ public class VirusFactory {
 
     static float initial_size = 50;
 
-    static public Entity createVirus(PooledEngine engine, float x, float y, String id) {
+    static public Entity createVirus(Engine engine, float x, float y, String id) {
         Entity entity = engine.createEntity();
 
         entity.add(new IdentifierComponent(id));
@@ -39,30 +39,17 @@ public class VirusFactory {
 
         entity.add(new ConsumableComponent(initial_size));
 
-
-//        if (!online) {
-//            entity.add(new PlayerComponent());
-//        } else {
-//            entity.add(new OnlineComponent());
-//        }
-
         return entity;
     }
 
 
-    static public Entity createPlayerVirus(PooledEngine engine, float x, float y, String id) {
+    static public Entity createPlayerVirus(Engine engine, float x, float y, String id) {
         Entity entity = createVirus(engine, x, y, id);
         entity.add(new PlayerComponent());
         return entity;
     }
 
-    static public Entity createOnlineVirus(PooledEngine engine, float x, float y, String id) {
-        Entity entity = createVirus(engine, x, y, id);
-        entity.add(new OnlineComponent());
-        return entity;
-    }
-
-    static public Entity createOnlineVirus(PooledEngine engine, Player player) {
+    static public Entity createOnlineVirus(Engine engine, Player player) {
         Entity entity = createVirus(engine, player.x, player.y, player.getId());
         entity.add(new OnlineComponent());
         return entity;

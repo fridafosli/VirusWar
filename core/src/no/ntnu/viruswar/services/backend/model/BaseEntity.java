@@ -6,30 +6,32 @@ import java.util.UUID;
 
 abstract public class BaseEntity {
 
+    private boolean consumed;
     private String id;
-    private String name;
+    private String path;
     public float x;
     public float y;
     private float size;
 
     public BaseEntity() {
-        // Default constructor required for calls to DataSnapshot.getValue(Loot.class)
+        // Default constructor required for calls to DataSnapshot.getValue(BaseEntity.class)
     }
 
-    protected BaseEntity(String name, float x, float y, float size) {
+    protected BaseEntity(String path, float x, float y, float size) {
         this.id = UUID.randomUUID().toString();
-        this.name = name;
+        this.path = path;
         this.x = x;
         this.y = y;
         this.size = size;
+        this.consumed = false;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getPath() {
+        return path;
     }
 
     public void setPos(Vector3 pos) {
@@ -43,6 +45,14 @@ abstract public class BaseEntity {
 
     public float getPoints() {
         return size;
+    }
+
+    public void setConsumed(boolean state) {
+        consumed = state;
+    }
+
+    public boolean isConsumed() {
+        return consumed;
     }
 
     @SuppressWarnings("DefaultLocale")

@@ -6,7 +6,7 @@ public class Loot extends BaseEntity {
     public Loot(){};
 
     public Loot(float x, float y, float size) {
-        super("Loot", x, y, size);
+        super("loot", x, y, size);
     }
 
 }

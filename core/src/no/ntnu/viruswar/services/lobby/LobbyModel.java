@@ -1,6 +1,6 @@
 package no.ntnu.viruswar.services.lobby;
 
-public class Model {
+public class LobbyModel {
     protected Boolean isHost;
     protected String pin;
     protected String playerId;
@@ -22,4 +22,6 @@ public class Model {
     public String getPlayerId() {
         return playerId;
     }
+
+
 }

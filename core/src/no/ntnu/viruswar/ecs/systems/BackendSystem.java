@@ -20,8 +20,8 @@ public class BackendSystem extends IteratingSystem {
     private final Context context;
     private final LobbyController controller;
 
-    public BackendSystem(Context context, LobbyController controller) {
-        super(Family.all(TransformComponent.class, PlayerComponent.class, ConsumableComponent.class).get());
+    public BackendSystem(Context context, LobbyController controller)  {
+        super(Family.all(TransformComponent.class, ConsumableComponent.class, PlayerComponent.class).get());
         this.controller = controller;
         this.context = context;
         this.sizeMapper = ComponentMapper.getFor(ConsumableComponent.class);
@@ -31,15 +31,17 @@ public class BackendSystem extends IteratingSystem {
     @Override
     public void update(float dt) {
         super.update(dt);
+        if (entity == null) return;
         Vector3 pos = transformMapper.get(entity).position;
-        float size = sizeMapper.get(entity).size;
-        context.getBackend().updatePlayerPosition(controller.getState().getPin(), controller.getState().getPlayerId(),pos.x, pos.y, size);
-
+        ConsumableComponent size = sizeMapper.get(entity);
+        context.getBackend().updatePlayerPosition(controller.getState().getPin(), controller.getState().getPlayerId(),pos.x, pos.y, size.size);
+        context.getBackend().setEntityConsumedState(controller.getPin(), controller.getPlayers().get(controller.getState().getPlayerId()), size.isConsumed);
+        entity = null;
 
     }
 
     @Override
-    protected void processEntity(Entity entity, float deltaTime) {
+    protected void processEntity(Entity entity, float dt) {
         this.entity = entity;
     }
 }

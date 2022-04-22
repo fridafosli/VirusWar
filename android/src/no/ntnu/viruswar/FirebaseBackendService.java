@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.badlogic.gdx.utils.compression.lzma.Base;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,6 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import no.ntnu.viruswar.services.backend.BackendModel;
 import no.ntnu.viruswar.services.backend.BackendService;
+import no.ntnu.viruswar.services.backend.model.BaseEntity;
 import no.ntnu.viruswar.services.backend.model.Loot;
 import no.ntnu.viruswar.services.backend.model.Player;
 
@@ -28,9 +30,14 @@ public class FirebaseBackendService implements BackendService {
         myRef = database.getReference();
     }
 
+    private String buildPath(String gamePin, BaseEntity entity) {
+        return String.format("%s/%s/%s", gamePin, entity.getPath(), entity.getId());
+    }
+
     @Override
     public void setGamePinEventListener(final BackendModel dataHolder) {
-        myRef.addChildEventListener(new ChildEventListener() {
+
+        ChildEventListener listener = new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 System.out.println("GamePin added: " + snapshot.getKey());
@@ -57,13 +64,16 @@ public class FirebaseBackendService implements BackendService {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
-        });
+        };
+
+        myRef.addChildEventListener(listener);
+
     }
 
 
     @Override
-    public void addPlayerToGame(String gamePin, Player player) {
-        myRef.child(gamePin + "/players/" + player.getId()).setValue(player);
+    public void addEntityToGame(String gamePin, BaseEntity entity) {
+        myRef.child(buildPath(gamePin, entity)).setValue(entity);
     }
 
     @Override
@@ -78,6 +88,12 @@ public class FirebaseBackendService implements BackendService {
     public void startGame(String gamePin) {
         DatabaseReference ref = database.getReference(gamePin);
         ref.child("/started").setValue(true);
+    }
+
+    @Override
+    public void setEntityConsumedState(String gamePin, BaseEntity entity, boolean state) {
+        DatabaseReference ref = database.getReference(buildPath(gamePin, entity));
+        ref.child("/consumed").setValue(state);
     }
 
 
@@ -111,20 +127,20 @@ public class FirebaseBackendService implements BackendService {
         myRef.child(gamePin + "/players").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                System.out.println("Player added: " + snapshot.getValue(Player.class).getName());
+                System.out.println("Player added: " + snapshot.getValue(Player.class).getPath());
                 dataHolder.addPlayer(snapshot.getValue(Player.class));
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                System.out.println("Player whit name: " + snapshot.getValue(Player.class).getName() + " changed.");
+                System.out.println("Player whit name: " + snapshot.getValue(Player.class).getPath() + " changed.");
                 dataHolder.updatePlayer(snapshot.getKey(), snapshot.getValue(Player.class));
 
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                System.out.println("Player removed: " + snapshot.getValue(Player.class).getName());
+                System.out.println("Player removed: " + snapshot.getValue(Player.class).getPath());
                 dataHolder.removePlayer(snapshot.getKey());
             }
 
@@ -164,14 +180,14 @@ public class FirebaseBackendService implements BackendService {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                System.out.println("Player whit name: " + snapshot.getValue(Player.class).getName() + " changed.");
+                System.out.println("Player whit name: " + snapshot.getValue(Player.class).getPath() + " changed.");
                 dataholder.updatePlayer(snapshot.getKey(), snapshot.getValue(Player.class));
 
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                System.out.println("Player removed: " + snapshot.getValue(Player.class).getName());
+                System.out.println("Player removed: " + snapshot.getValue(Player.class).getPath());
                 dataholder.removePlayer(snapshot.getKey());
             }
 

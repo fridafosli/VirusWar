@@ -41,8 +41,8 @@ public class ScreenManager {
         if (isNotEmpty()) {
             Screen old = screens.pop();
             if (isNotEmpty()) {
-                getScreen().show();
                 old.hide();
+                getScreen().show();
             } else {
                 screens.push(old);
             }

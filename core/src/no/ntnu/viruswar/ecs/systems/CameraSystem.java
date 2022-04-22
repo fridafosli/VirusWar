@@ -26,7 +26,9 @@ public class CameraSystem extends IteratingSystem {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        camera.setPosition(transformMapper.get(player).position);
+        if (player != null) {
+            camera.setPosition(transformMapper.get(player).position);
+        }
     }
 
     @Override

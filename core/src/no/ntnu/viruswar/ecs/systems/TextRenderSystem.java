@@ -9,35 +9,34 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
 import no.ntnu.viruswar.ecs.componenets.LeadTextComponent;
-import no.ntnu.viruswar.ecs.componenets.TransformComponent;
+import no.ntnu.viruswar.ecs.utils.Camera;
 
 public class TextRenderSystem extends IteratingSystem {
 
-
     private final ComponentMapper<LeadTextComponent> leadMapper;
-    private final ComponentMapper<TransformComponent> transformMapper;
     private final Array<Entity> entityQueue;
     private final SpriteBatch batch;
     private final BitmapFont font = new BitmapFont();
+    private final Camera camera;
 
-    public TextRenderSystem(int priority, SpriteBatch batch) {
-        super(Family.all(LeadTextComponent.class, TransformComponent.class).get(), priority);
+    public TextRenderSystem(int priority, SpriteBatch batch, Camera camera) {
+        super(Family.all(LeadTextComponent.class).get(), priority);
         this.leadMapper = ComponentMapper.getFor(LeadTextComponent.class);
-        this.transformMapper = ComponentMapper.getFor(TransformComponent.class);
-
+        this.camera = camera;
         this.entityQueue = new Array<Entity>();
         this.batch = batch;
+        //font.getData().setScale(0.7f, 0.7f);
+
     }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-
-        batch.begin();
         Entity entity = entityQueue.first();
-        TransformComponent trc = transformMapper.get(entity);
         LeadTextComponent ltc = leadMapper.get(entity);
-        this.font.draw(batch, ltc.leadPlayer, ltc.position.x, ltc.position.y);
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        this.font.draw(batch, ltc.leadPlayer, camera.position.x + 5 -camera.viewportWidth/2, camera.position.y-5+camera.viewportHeight/2);
         batch.end();
     }
 

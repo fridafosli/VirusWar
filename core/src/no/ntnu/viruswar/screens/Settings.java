@@ -1,16 +1,20 @@
 package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import no.ntnu.viruswar.context.Context;
@@ -24,11 +28,28 @@ public class Settings extends ContextScreen {
     public Settings(final Context context) {
         super(context);
         // Create the skin
+        stage = new Stage(new ScreenViewport());
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         skin.getFont("default-font").getData().setScale(Constants.FONT_SCALE);
+        Drawable volOn= new TextureRegionDrawable(new Texture(Gdx.files.internal("volOn.png")));
+        Drawable volOff= new TextureRegionDrawable(new Texture(Gdx.files.internal("volOff.png")));
 
+       /* Drawable volOff= new TextureRegionDrawable(new Texture(Gdx.files.internal("v2.PNG")));
+        Drawable checkImage= new TextureRegionDrawable(new Texture(Gdx.files.internal("v2.PNG")));*/
+        ImageButton sound = new ImageButton(volOn,volOff, volOff);
+        sound.setScale(20);
+
+
+        /*sound.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("soundButton", "clicked");
+            }
+        });*/
+        //sound.setPosition(200,300);
+        stage.addActor(sound);
         //skin.getFont("default-font").getData().setScale(scale);
-        stage = new Stage(new ScreenViewport());
+
 
         Label volumeLabel= new Label("Set music volume",skin);
         volumeLabel.setPosition(Gdx.graphics.getWidth()/2f - volumeLabel.getWidth(), Gdx.graphics.getHeight()/2 - volumeLabel.getHeight()/2);

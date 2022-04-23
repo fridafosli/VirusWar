@@ -45,7 +45,7 @@ public class GameLobby extends MenuBaseScreen {
 
 
         // Set up Back-button
-        TextButton backBtn = new TextButton("Back", skin);
+        TextButton backBtn = new TextButton("Leave", skin);
         backBtn.setPosition(0, Gdx.graphics.getHeight() - 70);
         backBtn.addListener(new ClickListener() {
             @Override

@@ -8,6 +8,7 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.factories.ActorFactory;
 import no.ntnu.viruswar.ecs.factories.WorldFactory;
 import no.ntnu.viruswar.ecs.systems.CameraSystem;
+import no.ntnu.viruswar.ecs.systems.GameStateSystem;
 import no.ntnu.viruswar.ecs.systems.LootSpawnSystem;
 import no.ntnu.viruswar.ecs.systems.MapShrinkSystem;
 import no.ntnu.viruswar.ecs.systems.OnlineConsumingSystem;
@@ -18,6 +19,8 @@ import no.ntnu.viruswar.ecs.systems.OnlineSpawnSystem;
 import no.ntnu.viruswar.ecs.systems.PlayerControlSystem;
 import no.ntnu.viruswar.ecs.systems.PlayerMovementSystem;
 import no.ntnu.viruswar.ecs.systems.RenderingSystem;
+import no.ntnu.viruswar.ecs.systems.ScoreSystem;
+import no.ntnu.viruswar.ecs.systems.TextRenderSystem;
 import no.ntnu.viruswar.ecs.systems.UpdateSizeSystem;
 import no.ntnu.viruswar.ecs.utils.Camera;
 import no.ntnu.viruswar.ecs.utils.EntityComparator;
@@ -54,6 +57,9 @@ public class GameScreen extends ContextScreen {
         engine.addSystem(new OnlineDeleteSystem(lobby));
         engine.addSystem(new OnlineControlSystem(context, lobby));
         engine.addSystem(new UpdateSizeSystem());
+        engine.addSystem(new GameStateSystem(context, lobby));
+        engine.addSystem(new ScoreSystem(engine, lobby));
+        engine.addSystem(new TextRenderSystem(1, context.getBatch(), camera));
         engine.addEntity(ActorFactory.UserVirus(engine, lobby.getPlayers().get(lobby.getState().getPlayerId())));
     }
 

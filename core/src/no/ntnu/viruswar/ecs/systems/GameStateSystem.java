@@ -36,7 +36,7 @@ public class GameStateSystem extends IteratingSystem {
         // hvis man antar at isDead settes et annet sted når du blir
         // konsumert av noen:
         if (p.consumed){
-            context.getScreens().push(new EndScreen(context, p, false));
+            context.getScreens().push(new EndScreen(context, controller.getPin(), p, false));
         }
         else if (!p.consumed ){
             int count = 0;
@@ -46,7 +46,7 @@ public class GameStateSystem extends IteratingSystem {
                 }
             }
             if (count == 1) {
-                context.getScreens().push(new EndScreen(context,p, true));
+                context.getScreens().push(new EndScreen(context, controller.getPin(), p, true));
             }
         }
         // else iffen over der man antar at db variablen iswinner

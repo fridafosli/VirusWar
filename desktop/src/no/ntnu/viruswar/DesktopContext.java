@@ -35,6 +35,11 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
+    public void removeGame(String gamePin) {
+
+    }
+
+    @Override
     public void updatePlayerPosition(String gamePin, String playerId, float x, float y, float points) {
 
     }

@@ -69,6 +69,11 @@ public class FirebaseBackendService implements BackendService {
 
     }
 
+    @Override
+    public void removeGame(String gamePin) {
+        myRef.child(gamePin).removeValue();
+        System.out.println("Game ended: " + gamePin);
+    }
 
     @Override
     public void addEntityToGame(String gamePin, BaseEntity entity) {

@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.data.Player;
+import no.ntnu.viruswar.services.lobby.LobbyController;
 
 public class Custom extends MenuBaseScreen{
     protected Stage stage;
@@ -29,14 +30,12 @@ public class Custom extends MenuBaseScreen{
     private TextButton submitBtn;
     private int colorIndex;
     private TextField usernameInput;
-    private Player player;
-    private Context context;
+    private final LobbyController lobby;
 
 
-    public Custom(final Context context, final Player player){
+    public Custom(final Context context, final LobbyController lobby){
         super(context);
-        this.context=context;
-        this.player= player;
+        this.lobby = lobby;
 
         //Sets the stage
         stage = new Stage(new ScreenViewport());
@@ -47,7 +46,7 @@ public class Custom extends MenuBaseScreen{
 
         //Sets username text field
         usernameInput = new TextField("username", skin);
-        usernameInput.setText(player.getName());
+        usernameInput.setText(lobby.getUserPlayer().getName());
         usernameInput.setPosition(400,Gdx.graphics.getHeight() - 600);
         stage.addActor(usernameInput);
 
@@ -103,8 +102,8 @@ public class Custom extends MenuBaseScreen{
         submitBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                player.setColor(color.toString());
-                player.setName(usernameInput.getText());
+//                lobby.getUserPlayer().setColor(color.toString());
+//                player.setName(usernameInput.getText());
             }
         });
         stage.addActor(submitBtn);
@@ -115,20 +114,20 @@ public class Custom extends MenuBaseScreen{
 
         List<Color> colors= Arrays.asList(Color.BLUE,Color.PINK,Color.CYAN, Color.RED, Color.GREEN, Color.MAGENTA, Color.BROWN,
                 Color.FIREBRICK, Color.FOREST, Color.PURPLE, Color.CORAL, Color.LIME, Color.SKY,Color.ORANGE, Color.OLIVE,Color.YELLOW, Color.VIOLET, Color.WHITE,Color.GOLDENROD, Color.SALMON, Color.MAROON, Color.NAVY);
-
-        if(initial){
-            colorIndex=colors.indexOf(Color.valueOf(player.getColor()));
-
-        }
-        else if(add){
-            colorIndex=(colorIndex==colors.size()-1)?0:colorIndex+1;
-        }
-        else{
-            colorIndex=(colorIndex==0)?colors.size()-1:colorIndex-1;
-
-        }
-
-        color= colors.get(colorIndex);
+//
+//        if(initial){
+//            colorIndex=colors.indexOf(Color.valueOf(player.getColor()));
+//
+//        }
+//        else if(add){
+//            colorIndex=(colorIndex==colors.size()-1)?0:colorIndex+1;
+//        }
+//        else{
+//            colorIndex=(colorIndex==0)?colors.size()-1:colorIndex-1;
+//
+//        }
+//
+//        color= colors.get(colorIndex);
 
 
     }

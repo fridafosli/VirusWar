@@ -14,10 +14,10 @@ import no.ntnu.viruswar.context.Context;
 
 public class Settings extends ContextScreen {
 
+    private final TextButton backBtn;
     protected Stage stage;
     protected Skin skin;
     protected Sprite background;
-    private final TextButton backBtn;
 
     public Settings(final Context context) {
         super(context);

@@ -5,8 +5,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import no.ntnu.viruswar.services.backend.model.Loot;
-import no.ntnu.viruswar.services.backend.model.Player;
+import no.ntnu.viruswar.services.models.Loot;
+import no.ntnu.viruswar.services.models.Player;
 
 public class BackendModel {
 

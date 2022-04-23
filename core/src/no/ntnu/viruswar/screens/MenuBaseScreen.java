@@ -8,8 +8,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.screen.Screen;
-import no.ntnu.viruswar.services.screen.ScreenManager;
 
 abstract class MenuBaseScreen extends ContextScreen {
 

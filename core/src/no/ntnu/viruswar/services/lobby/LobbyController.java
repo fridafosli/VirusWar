@@ -12,21 +12,15 @@ import no.ntnu.viruswar.screens.GameLobby;
 import no.ntnu.viruswar.screens.GameScreen;
 import no.ntnu.viruswar.screens.PlayMenu;
 import no.ntnu.viruswar.services.backend.BackendModel;
-import no.ntnu.viruswar.services.backend.model.BaseEntity;
-import no.ntnu.viruswar.services.backend.model.Loot;
-import no.ntnu.viruswar.services.backend.model.Player;
-
-//enum State {
-//    MENU, CREATE, LOBBY, GAME
-//}
-
+import no.ntnu.viruswar.services.models.Loot;
+import no.ntnu.viruswar.services.models.Player;
 
 public class LobbyController {
 
     private final LobbyModel lobbyModel;
     private final Context context;
     private final BackendModel backendModel;
-    
+
 
     public LobbyController(Context context) {
         this.context = context;
@@ -36,15 +30,32 @@ public class LobbyController {
 
     }
 
+    static void displayText(String message, final Label output, final long duration) {
+        output.setText(message);
+        Thread timer = new Thread() {
+            public void run() {
+                try {
+                    sleep(duration * 1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    output.setText("");
+
+                }
+            }
+        };
+        timer.start();
+    }
+
     public LobbyModel getState() {
         return this.lobbyModel;
     }
 
     public void joinLobby(String pin, String nick, Label label) {
-         if (pin.length() < 1 && nick.length() < 1) {
+        if (pin.length() < 1 && nick.length() < 1) {
             displayText("\n Please fill gamepin and nickname to join.", label, 5);
-            return; 
-         }
+            return;
+        }
 
         if (!backendModel.activeGamePinsContainsPin(pin)) {
             displayText("Gamepin not valid", label, 5);
@@ -87,7 +98,6 @@ public class LobbyController {
         context.getBackend().setLootEventListener(this.backendModel, pin);
     }
 
-
     void toMenu() {
         this.context.getBackend().setGamePinEventListener(this.backendModel);
         context.getScreens().push(new PlayMenu(context));
@@ -107,38 +117,25 @@ public class LobbyController {
         context.getBackend().removePlayerFromGame(lobbyModel.pin, lobbyModel.playerId);
     }
 
-    static void displayText(String message, final Label output, final long duration) {
-        output.setText(message);
-        Thread timer = new Thread() {
-            public void run() {
-                try {
-                   sleep(duration * 1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    output.setText("");
-
-                }
-            }
-        };
-        timer.start();
+    public Map<String, Player> getPlayers() {
+        return this.backendModel.getPlayers();
     }
 
-   public Map<String, Player> getPlayers() {
-      return this.backendModel.getPlayers();
-   }
-
-   public Map<String, Loot> getLoots() {
+    public Map<String, Loot> getLoots() {
         return this.backendModel.getLoots();
-   }
+    }
+
+    public boolean entityIsConsumed(String entityId) {
+        return (getLoots().containsKey(entityId) && getLoots().get(entityId).consumed ||
+                getPlayers().containsKey(entityId) && getPlayers().get(entityId).consumed);
+    }
 
 
-
-  public String getPin() {
+    public String getPin() {
         return lobbyModel.pin;
     }
 
-  public Boolean isStarted() {
+    public Boolean isStarted() {
         return backendModel.isGameStarted;
-  }
+    }
 }

@@ -11,13 +11,14 @@ import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 import no.ntnu.viruswar.ecs.componenets.IdentifierComponent;
 import no.ntnu.viruswar.ecs.componenets.LootComponent;
 import no.ntnu.viruswar.ecs.componenets.OnlineComponent;
+import no.ntnu.viruswar.ecs.componenets.OnlinePathComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.TextureComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.ecs.componenets.VelocityComponent;
 import no.ntnu.viruswar.services.assets.AssetManager;
-import no.ntnu.viruswar.services.backend.model.Loot;
-import no.ntnu.viruswar.services.backend.model.Player;
+import no.ntnu.viruswar.services.models.Loot;
+import no.ntnu.viruswar.services.models.Player;
 import no.ntnu.viruswar.utils.Constants;
 
 public class ActorFactory {
@@ -54,6 +55,7 @@ public class ActorFactory {
         Entity entity = BaseActor(engine, player.getId(), pos.x, pos.y, 50, "virus");
         entity.add(new PlayerComponent());
         entity.add(new VelocityComponent());
+        entity.add(new OnlinePathComponent(player.getPath()));
         return entity;
     }
 
@@ -61,12 +63,14 @@ public class ActorFactory {
         Entity entity = BaseActor(engine, player.getId(), player.x, player.y, player.getPoints(), "virus");
         entity.add(new OnlineComponent());
         entity.add(new VelocityComponent());
+        entity.add(new OnlinePathComponent(player.getPath()));
         return entity;
     }
 
     public static Entity Loot(Engine engine, Loot loot) {
         Entity entity = BaseActor(engine, loot.getId(), loot.x, loot.y, loot.getPoints(), "loot");
         entity.add(new LootComponent());
+        entity.add(new OnlinePathComponent(loot.getPath()));
         return entity;
     }
 }

@@ -7,13 +7,13 @@ import com.badlogic.gdx.Gdx;
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.factories.ActorFactory;
 import no.ntnu.viruswar.ecs.factories.WorldFactory;
-import no.ntnu.viruswar.ecs.systems.OnlineSendUserSystem;
 import no.ntnu.viruswar.ecs.systems.CameraSystem;
-import no.ntnu.viruswar.ecs.systems.OnlineConsumingSystem;
 import no.ntnu.viruswar.ecs.systems.LootSpawnSystem;
 import no.ntnu.viruswar.ecs.systems.MapShrinkSystem;
+import no.ntnu.viruswar.ecs.systems.OnlineConsumingSystem;
 import no.ntnu.viruswar.ecs.systems.OnlineControlSystem;
 import no.ntnu.viruswar.ecs.systems.OnlineDeleteSystem;
+import no.ntnu.viruswar.ecs.systems.OnlineSendUserSystem;
 import no.ntnu.viruswar.ecs.systems.OnlineSpawnSystem;
 import no.ntnu.viruswar.ecs.systems.PlayerControlSystem;
 import no.ntnu.viruswar.ecs.systems.PlayerMovementSystem;
@@ -28,8 +28,8 @@ public class GameScreen extends ContextScreen {
 
     private final Camera camera;
     private final TouchController touchController;
-    private PooledEngine engine;
     private final LobbyController lobby;
+    private PooledEngine engine;
 
     public GameScreen(Context context, LobbyController controller) {
         super(context);
@@ -51,7 +51,7 @@ public class GameScreen extends ContextScreen {
         engine.addSystem(new LootSpawnSystem(5, mapEntity, context, lobby)); //change to bigger spawn interval
         engine.addSystem(new OnlineSendUserSystem(context, lobby));
         engine.addSystem(new OnlineSpawnSystem(context, lobby));
-        engine.addSystem(new OnlineDeleteSystem(context, lobby));
+        engine.addSystem(new OnlineDeleteSystem(lobby));
         engine.addSystem(new OnlineControlSystem(context, lobby));
         engine.addSystem(new UpdateSizeSystem());
         engine.addEntity(ActorFactory.UserVirus(engine, lobby.getPlayers().get(lobby.getState().getPlayerId())));

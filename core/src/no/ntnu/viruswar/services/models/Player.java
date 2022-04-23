@@ -1,14 +1,13 @@
-package no.ntnu.viruswar.services.backend.model;
+package no.ntnu.viruswar.services.models;
 
 public class Player extends BaseEntity {
-
 
     private String skin;
     private String name;
 
-
     // Default constructor required for calls to DataSnapshot
-    public Player(){};
+    public Player() {
+    }
 
     public Player(float x, float y, float points, String skin, String name) {
         super("players", x, y, points);
@@ -21,11 +20,12 @@ public class Player extends BaseEntity {
         return skin;
     }
 
-    public String getName() { return name; }
-
     public void setSkin(String skin) {
         this.skin = skin;
     }
 
+    public String getName() {
+        return name;
+    }
 
 }

@@ -1,32 +1,30 @@
-package no.ntnu.viruswar.services.backend.model;
-
-import com.badlogic.gdx.math.Vector3;
+package no.ntnu.viruswar.services.models;
 
 import java.util.UUID;
 
 abstract public class BaseEntity {
 
-    private boolean consumed;
-    private String id;
-    private String path;
     public float x;
     public float y;
+    public boolean consumed;
+    private String id;
+    private String path;
     private float velocityX;
     private float velocityY;
-    private float size;
+    private float points;
 
     public BaseEntity() {
         // Default constructor required for calls to DataSnapshot.getValue(BaseEntity.class)
     }
 
-    protected BaseEntity(String path, float x, float y, float size) {
+    protected BaseEntity(String path, float x, float y, float points) {
         this.id = UUID.randomUUID().toString();
         this.path = path;
         this.x = x;
         this.y = y;
         this.velocityX = 0;
         this.velocityY = 0;
-        this.size = size;
+        this.points = points;
         this.consumed = false;
     }
 
@@ -38,26 +36,21 @@ abstract public class BaseEntity {
         return path;
     }
 
-    public void setPos(Vector3 pos) {
-        this.x = pos.x;
-        this.y = pos.y;
-    }
-
-    public void setPoints(float size) {
-        this.size = size;
-    }
-
     public float getPoints() {
-        return size;
+        return points;
     }
 
-    public void setConsumed(boolean state) {
-        consumed = state;
+    public void setPoints(float points) {
+        this.points = points;
     }
 
-    public boolean isConsumed() {
-        return consumed;
-    }
+//    public boolean getConsumed() {
+//        return consumed;
+//    }
+//
+//    public void setConsumed(boolean consumed) {
+//        this.consumed = consumed;
+//    }
 
     public float getVelocityX() {
         return velocityX;
@@ -70,7 +63,7 @@ abstract public class BaseEntity {
     @SuppressWarnings("DefaultLocale")
     @Override
     public String toString() {
-        return String.format("{ id=%s, x=%.2f, y=%.2f, size=%.2f }", id, x, y, size);
+        return String.format("{ id=%s, x=%.2f, y=%.2f, size=%.2f }", id, x, y, points);
     }
 
 }

@@ -12,12 +12,12 @@ import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 public class UpdateSizeSystem extends IteratingSystem {
 
     private final Array<Entity> entityQueue;
-    private final ComponentMapper<ConsumableComponent> consumMapper;
+    private final ComponentMapper<ConsumableComponent> consumeMapper;
     private final ComponentMapper<DimensionComponent> dimMapper;
 
     public UpdateSizeSystem() {
         super(Family.all(ConsumableComponent.class, DimensionComponent.class).get());
-        this.consumMapper = ComponentMapper.getFor(ConsumableComponent.class);
+        this.consumeMapper = ComponentMapper.getFor(ConsumableComponent.class);
         this.dimMapper = ComponentMapper.getFor(DimensionComponent.class);
         this.entityQueue = new Array<>();
     }
@@ -26,7 +26,7 @@ public class UpdateSizeSystem extends IteratingSystem {
     public void update(float deltaTime) {
         super.update(deltaTime);
         for (Entity entity : entityQueue) {
-            float size = consumMapper.get(entity).size;
+            float size = consumeMapper.get(entity).size;
             dimMapper.get(entity).setSize(size);
         }
     }

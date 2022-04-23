@@ -1,8 +1,7 @@
 package no.ntnu.viruswar.services.backend;
 
-import no.ntnu.viruswar.services.backend.model.BaseEntity;
-import no.ntnu.viruswar.services.backend.model.Loot;
-import no.ntnu.viruswar.services.backend.model.Player;
+import no.ntnu.viruswar.services.models.BaseEntity;
+import no.ntnu.viruswar.services.models.Loot;
 
 /**
  * Interface for communicating whit the database. Implementation in
@@ -15,7 +14,7 @@ public interface BackendService {
      *
      * @param dataHolder where the data is stored
      */
-     void setGamePinEventListener(BackendModel dataHolder);
+    void setGamePinEventListener(BackendModel dataHolder);
 
     /**
      * Sets the game state to started
@@ -23,14 +22,14 @@ public interface BackendService {
     void startGame(String gamePin);
 
 
-    void setEntityConsumedState(String gamePin, BaseEntity entity, boolean state);
+    void setEntityConsumedState(String gamePin, String path, String entityId, boolean state);
 
 
     /**
      * Adds loot to game with the given game-pin. If game pin is not used, a new game is created.
      *
      * @param gamePin the game pin to add the loot to
-     * @param entity    The entity to be added to the game
+     * @param entity  The entity to be added to the game
      */
     void addEntityToGame(String gamePin, BaseEntity entity);
 

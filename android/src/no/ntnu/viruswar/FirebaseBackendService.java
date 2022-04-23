@@ -7,7 +7,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.badlogic.gdx.utils.compression.lzma.Base;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,9 +16,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import no.ntnu.viruswar.services.backend.BackendModel;
 import no.ntnu.viruswar.services.backend.BackendService;
-import no.ntnu.viruswar.services.backend.model.BaseEntity;
-import no.ntnu.viruswar.services.backend.model.Loot;
-import no.ntnu.viruswar.services.backend.model.Player;
+import no.ntnu.viruswar.services.models.BaseEntity;
+import no.ntnu.viruswar.services.models.Loot;
+import no.ntnu.viruswar.services.models.Player;
 
 public class FirebaseBackendService implements BackendService {
     FirebaseDatabase database;
@@ -91,8 +90,8 @@ public class FirebaseBackendService implements BackendService {
     }
 
     @Override
-    public void setEntityConsumedState(String gamePin, BaseEntity entity, boolean state) {
-        DatabaseReference ref = database.getReference(buildPath(gamePin, entity));
+    public void setEntityConsumedState(String gamePin, String path, String id, boolean state) {
+        DatabaseReference ref = database.getReference(String.format("%s/%s/%s", gamePin, path, id));
         ref.child("/consumed").setValue(state);
     }
 

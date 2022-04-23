@@ -2,10 +2,9 @@ package no.ntnu.viruswar;
 
 
 import no.ntnu.viruswar.services.backend.BackendService;
-import no.ntnu.viruswar.services.backend.model.BaseEntity;
-import no.ntnu.viruswar.services.backend.model.Loot;
+import no.ntnu.viruswar.services.models.BaseEntity;
+import no.ntnu.viruswar.services.models.Loot;
 import no.ntnu.viruswar.services.backend.BackendModel;
-import no.ntnu.viruswar.services.backend.model.Player;
 
 class DesktopBackendService implements BackendService {
 
@@ -16,7 +15,7 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
-    public void setEntityAliveState(String gamePin, BaseEntity entity, boolean state) {
+    public void setEntityConsumedState(String gamePin, String path, String entityId, boolean state) {
 
     }
 
@@ -32,11 +31,6 @@ class DesktopBackendService implements BackendService {
 
     @Override
     public void setGamePinEventListener(BackendModel dataHolder) {
-
-    }
-
-    @Override
-    public void addPlayerToGame(String gamePin, Player player) {
 
     }
 

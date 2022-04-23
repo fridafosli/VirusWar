@@ -11,17 +11,15 @@ import java.util.Map;
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.componenets.IdentifierComponent;
 import no.ntnu.viruswar.ecs.factories.ActorFactory;
-import no.ntnu.viruswar.ecs.factories.LootFactory;
-import no.ntnu.viruswar.ecs.factories.VirusFactory;
-import no.ntnu.viruswar.services.backend.model.Loot;
-import no.ntnu.viruswar.services.backend.model.Player;
 import no.ntnu.viruswar.services.lobby.LobbyController;
+import no.ntnu.viruswar.services.models.Loot;
+import no.ntnu.viruswar.services.models.Player;
 
 public class OnlineSpawnSystem extends IteratingSystem {
 
+    final Context context;
     private final HashMap<String, Entity> entityMap;
     private final LobbyController controller;
-    final Context context;
     private final ComponentMapper<IdentifierComponent> idMapper;
 
 

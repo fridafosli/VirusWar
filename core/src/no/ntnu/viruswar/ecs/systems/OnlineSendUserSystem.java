@@ -16,11 +16,11 @@ public class OnlineSendUserSystem extends IteratingSystem {
 
     private final ComponentMapper<TransformComponent> transformMapper;
     private final ComponentMapper<ConsumableComponent> sizeMapper;
-    private Entity entity;
     private final Context context;
     private final LobbyController controller;
+    private Entity entity;
 
-    public OnlineSendUserSystem(Context context, LobbyController controller)  {
+    public OnlineSendUserSystem(Context context, LobbyController controller) {
         super(Family.all(TransformComponent.class, ConsumableComponent.class, PlayerComponent.class).get());
         this.controller = controller;
         this.context = context;
@@ -34,8 +34,7 @@ public class OnlineSendUserSystem extends IteratingSystem {
         if (entity == null) return;
         Vector3 pos = transformMapper.get(entity).position;
         ConsumableComponent size = sizeMapper.get(entity);
-        context.getBackend().updatePlayerPosition(controller.getState().getPin(), controller.getState().getPlayerId(),pos.x, pos.y, size.size);
-        context.getBackend().setEntityConsumedState(controller.getPin(), controller.getPlayers().get(controller.getState().getPlayerId()), size.isConsumed);
+        context.getBackend().updatePlayerPosition(controller.getState().getPin(), controller.getState().getPlayerId(), pos.x, pos.y, size.size);
         entity = null;
     }
 

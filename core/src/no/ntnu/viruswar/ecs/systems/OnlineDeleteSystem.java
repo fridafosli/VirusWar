@@ -4,47 +4,44 @@ import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.utils.Array;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import no.ntnu.viruswar.context.Context;
+import no.ntnu.viruswar.ecs.componenets.ConsumableComponent;
 import no.ntnu.viruswar.ecs.componenets.DeletedComponent;
+import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
 import no.ntnu.viruswar.ecs.componenets.IdentifierComponent;
-import no.ntnu.viruswar.ecs.componenets.LootComponent;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 
 public class OnlineDeleteSystem extends IteratingSystem {
 
     private final LobbyController lobby;
-    private final HashMap<String, Entity> entityMap;
+    private final Array<Entity> entityQueue;
     private final ComponentMapper<IdentifierComponent> idMapper;
-    private final Context context;
 
-    public OnlineDeleteSystem(Context context, LobbyController lobby) {
-        super(Family.all(IdentifierComponent.class, LootComponent.class, DeletedComponent.class).get());
+    public OnlineDeleteSystem(LobbyController lobby) {
+        super(Family.all(IdentifierComponent.class, ConsumableComponent.class).exclude(DeletedComponent.class).get());
         this.idMapper = ComponentMapper.getFor(IdentifierComponent.class);
         this.lobby = lobby;
-        this.context = context;
-        this.entityMap = new HashMap();
+        this.entityQueue = new Array<>();
     }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        for (Map.Entry<String, Entity> entity : entityMap.entrySet()) {
-            if (!lobby.getLoots().containsKey(entity.getKey())) {
-                getEngine().removeEntity(entity.getValue());
-                //this.context.getBackend().removeLootFromGame(lobby.getPin(), entity.getKey());
+        // If the entity is marked as consumed on the backend, mark it as deleted in the ecs
+        for (Entity entity : entityQueue) {
+            if (lobby.entityIsConsumed(idMapper.get(entity).id)) {
+                entity.add(new HiddenComponent());
+                entity.add(new DeletedComponent());
             }
         }
 
-        entityMap.clear();
+        entityQueue.clear();
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        entityMap.put(idMapper.get(entity).id, entity);
+        entityQueue.add(entity);
     }
 }

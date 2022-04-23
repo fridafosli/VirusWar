@@ -12,7 +12,7 @@ public class PinGenerator {
             int ch = (int) Math.floor(Math.random() * VALID_CHARS.length());
             pin += VALID_CHARS.charAt(ch);
         }
-        
+
         return pin;
     }
 

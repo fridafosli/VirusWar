@@ -15,8 +15,8 @@ import no.ntnu.viruswar.ecs.componenets.OnlineComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.ecs.componenets.VelocityComponent;
-import no.ntnu.viruswar.services.backend.model.Player;
 import no.ntnu.viruswar.services.lobby.LobbyController;
+import no.ntnu.viruswar.services.models.Player;
 
 
 public class OnlineControlSystem extends IteratingSystem {
@@ -28,7 +28,7 @@ public class OnlineControlSystem extends IteratingSystem {
     private final ComponentMapper<ConsumableComponent> sizeMapper;
     private final ComponentMapper<VelocityComponent> velocityMapper;
     private final Context context;
-    private float timeSinceLastUpdate = Float.POSITIVE_INFINITY;
+    private final float timeSinceLastUpdate = Float.POSITIVE_INFINITY;
 
     public OnlineControlSystem(Context context, LobbyController lobby) {
         super(Family.all(TransformComponent.class, OnlineComponent.class, IdentifierComponent.class, ConsumableComponent.class, VelocityComponent.class).exclude(HiddenComponent.class, PlayerComponent.class).get());
@@ -57,10 +57,6 @@ public class OnlineControlSystem extends IteratingSystem {
             trc.position.y = player.y;
             vcc.velocity.set(new Vector3(player.getVelocityX(), player.getVelocityY(), 0));
             coc.size = player.getPoints();
-
-            if (player.isConsumed()) {
-                entity.add(new HiddenComponent());
-            }
 
         }
         entityQueue.clear();

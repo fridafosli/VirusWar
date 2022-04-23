@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.backend.BackendModel;
-import no.ntnu.viruswar.services.backend.model.Player;
 import no.ntnu.viruswar.services.lobby.LobbyController;
+import no.ntnu.viruswar.services.models.Player;
 
 public class GameLobby extends MenuBaseScreen {
 
@@ -18,9 +18,9 @@ public class GameLobby extends MenuBaseScreen {
     private final TextButton playBtn;
     private final Label errorLabel;
     private final BackendModel dataHolder = new BackendModel();
-    private String playertext = "";
     private final Label playerDisplay;
-    private LobbyController controller;
+    private String playertext = "";
+    private final LobbyController controller;
 
     public GameLobby(final Context context, final LobbyController controller) {
         super(context);

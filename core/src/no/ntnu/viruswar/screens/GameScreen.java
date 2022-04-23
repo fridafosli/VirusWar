@@ -55,8 +55,6 @@ public class GameScreen extends ContextScreen {
         engine.addSystem(new OnlineControlSystem(context, lobby));
         engine.addSystem(new UpdateSizeSystem());
         engine.addEntity(ActorFactory.UserVirus(engine, lobby.getPlayers().get(lobby.getState().getPlayerId())));
-        //engine.addEntity(VirusFactory.createVirus(engine, 150, 150, true));
-
     }
 
     private void update(float dt) {

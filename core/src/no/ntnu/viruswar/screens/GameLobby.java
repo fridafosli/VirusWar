@@ -6,31 +6,29 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.backend.BackendModel;
 import no.ntnu.viruswar.services.lobby.LobbyController;
-import no.ntnu.viruswar.services.models.Player;
 
 public class GameLobby extends MenuBaseScreen {
 
-    private final TextButton backBtn;
-    private final TextButton playBtn;
     private final Label errorLabel;
-    private final BackendModel dataHolder = new BackendModel();
-    private final Label playerDisplay;
-    private String playertext = "";
-    private final LobbyController controller;
+    private final LobbyController lobby;
+    private final List<String> playerList;
 
-    public GameLobby(final Context context, final LobbyController controller) {
+    public GameLobby(final Context context, final LobbyController lobby) {
         super(context);
-        this.controller = controller;
+        this.lobby = lobby;
+        this.playerList = new List(skin);
+        ScrollPane scrollpane = new ScrollPane(playerList, skin);
+
 
         // Initialize labels
         errorLabel = new Label("", skin); // Label that displays no opponents message when playbutton is pressed
-        Label pinLabel = new Label("Game Pin: " + controller.getPin(), skin);
+        Label pinLabel = new Label("Game Pin: " + lobby.getPin(), skin);
         Label playerLabel = new Label("Players: ", skin);
-        this.playerDisplay = new Label(playertext + "", skin);
 
         // Add the labels to the table
         table.padTop(30);
@@ -42,65 +40,68 @@ public class GameLobby extends MenuBaseScreen {
         playerLabel.setPosition(100, 50);
         table.add(playerLabel).padBottom(30);
         table.row();
-        table.add(playerDisplay);
+        table.add(scrollpane).width(600).height(400);
         table.row();
 
 
         // Set up Back-button
-        backBtn = new TextButton("Back", skin);
+        TextButton backBtn = new TextButton("Back", skin);
         backBtn.setPosition(0, Gdx.graphics.getHeight() - 70);
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("back", "clicked");
-                controller.removePlayer();
+                lobby.removePlayer();
                 context.getScreens().pop();
             }
         });
         stage.addActor(backBtn);
-
+        TextButton customizeBtn = new TextButton("Customize", skin);
+        customizeBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                Gdx.app.log("custom", "clicked");
+                context.getScreens().push(new Custom(context, lobby));
+            }
+        });
+        customizeBtn.setPosition((Gdx.graphics.getWidth() - customizeBtn.getWidth()) / 2, 30);
+        stage.addActor(customizeBtn);
 
         // Set up Play-button
-        playBtn = new TextButton("Play", skin);
-        playBtn.setPosition(Gdx.graphics.getWidth() - 200, 50);
+        TextButton playBtn = new TextButton("Play", skin);
+        playBtn.setPosition(Gdx.graphics.getWidth() - 200, 30);
         playBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                controller.toGame(errorLabel);
+                lobby.toGame(errorLabel);
             }
         });
         stage.addActor(playBtn);
 
 
-        // Legge inn en scrollpane?? (Container<Slider>)
         // Add all players connected to game to the screen
-        for (Player pl : dataHolder.getPlayers().values()) {
-            playertext += pl.getName() + " \n ";
-        }
-        playerDisplay.setText(playertext);
+        playerList.setItems(lobby.getPlayers().values().toString());
+        scrollpane.setActor(playerList);
+        scrollpane.setScrollingDisabled(true, false);
 
     }
+
+
+
 
     @Override
     public void render(float dt) {
 
-        if (controller.isStarted()) {
-            controller.toGame(errorLabel);
+        if (lobby.isStarted()) {
+            lobby.toGame(errorLabel);
         }
 
         // Add all players connected to game to the screen
-        playertext = "";
-        int count = 0;
-        for (Player pl : controller.getPlayers().values()) {
-            if (count < 1) {
-                playertext += pl.getName() + " \t & \t ";
-                count++;
-            } else {
-                playertext += pl.getName() + " \n & \t ";
-                count = 0;
-            }
-        }
-        playerDisplay.setText(playertext);
+        playerList.clear();
+
+
+
+        playerList.setItems(lobby.getPlayers().values().toString());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(dt);
         stage.draw();

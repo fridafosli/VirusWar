@@ -71,6 +71,7 @@ public class LobbyController {
         context.getBackend().setLobbyStateListener(this.backendModel, getPin());
     }
 
+
     public void createLobby(String nick, Label label) {
         if (nick.length() < 1) {
             displayText("Please fill nickname to create game.", label, 5);
@@ -119,6 +120,10 @@ public class LobbyController {
 
     public Map<String, Player> getPlayers() {
         return this.backendModel.getPlayers();
+    }
+
+    public Player getUserPlayer() {
+        return this.backendModel.getPlayer(this.getState().playerId);
     }
 
     public Map<String, Loot> getLoots() {

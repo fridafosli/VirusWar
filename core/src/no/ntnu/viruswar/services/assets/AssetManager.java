@@ -16,6 +16,9 @@ public class AssetManager {
         textureMap.put("virus", new Texture("virus.png"));
         textureMap.put("loot", new Texture("person.png"));
         textureMap.put("map", new Texture("hueCircle.png"));
+        textureMap.put("win", new Texture("winnerScreen.png"));
+        textureMap.put("lose", new Texture("loseScreen.png"));
+
     }
 
     public static AssetManager getInstance() {

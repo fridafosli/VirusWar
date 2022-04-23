@@ -11,7 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.backend.model.Player;
+import no.ntnu.viruswar.services.assets.AssetManager;
+import no.ntnu.viruswar.services.models.Player;
 
 
 public class EndScreen extends MenuBaseScreen {
@@ -19,11 +20,12 @@ public class EndScreen extends MenuBaseScreen {
 
     public EndScreen(final Context context, String gamePin, final Player player, boolean winner) {
         super(context);
+        Texture win = AssetManager.getInstance().getTexture("win");
 
         String text;
         if (winner) {
             text = "WINNER";
-            context.getBackend().removeGame(gamePin);
+            //context.getBackend().removeGame(gamePin);
             background = new Sprite(new Texture(Gdx.files.internal("winScreen.png")));
         }
         else {
@@ -82,7 +84,7 @@ public class EndScreen extends MenuBaseScreen {
         SpriteBatch sb= context.getBatch();
         stage.act(dt);
         sb.begin();
-        background.draw(sb);
+        //background.draw(sb);
         sb.end();
 
         stage.draw();

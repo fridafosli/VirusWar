@@ -9,8 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.backend.BackendModel;
-import no.ntnu.viruswar.services.backend.model.Player;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 
 public class PlayMenu extends MenuBaseScreen {

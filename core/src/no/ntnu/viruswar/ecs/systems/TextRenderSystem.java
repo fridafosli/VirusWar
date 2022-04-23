@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
+import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.componenets.LeadTextComponent;
 import no.ntnu.viruswar.ecs.utils.Camera;
 
@@ -19,12 +20,12 @@ public class TextRenderSystem extends IteratingSystem {
     private final BitmapFont font = new BitmapFont();
     private final Camera camera;
 
-    public TextRenderSystem(int priority, SpriteBatch batch, Camera camera) {
+    public TextRenderSystem(int priority, Context context, Camera camera) {
         super(Family.all(LeadTextComponent.class).get(), priority);
         this.leadMapper = ComponentMapper.getFor(LeadTextComponent.class);
         this.camera = camera;
         this.entityQueue = new Array<Entity>();
-        this.batch = batch;
+        this.batch = context.getBatch();
         //font.getData().setScale(0.7f, 0.7f);
 
     }

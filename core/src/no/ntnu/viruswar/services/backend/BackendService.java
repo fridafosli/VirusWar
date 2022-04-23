@@ -1,7 +1,7 @@
 package no.ntnu.viruswar.services.backend;
 
-import no.ntnu.viruswar.services.backend.model.Loot;
-import no.ntnu.viruswar.services.backend.model.Player;
+import no.ntnu.viruswar.services.models.BaseEntity;
+import no.ntnu.viruswar.services.models.Loot;
 
 /**
  * Interface for communicating whit the database. Implementation in
@@ -16,23 +16,22 @@ public interface BackendService {
      */
     void setGamePinEventListener(BackendModel dataHolder);
 
-
     /**
-     * Deletes the game with specified gamepin.
-     *
-     * @param gamePin  game to be deleted
+     * Sets the game state to started
      */
-    void removeGame(String gamePin);
-
-    /**
-     * Adds player to game with the given game-pin. If game pin is not used, a new game is created.
-     *
-     * @param gamePin The game pin to add the player to
-     */
-
     void startGame(String gamePin);
 
-    void addPlayerToGame(String gamePin, Player player);
+
+    void setEntityConsumedState(String gamePin, String path, String entityId, boolean state);
+
+
+    /**
+     * Adds loot to game with the given game-pin. If game pin is not used, a new game is created.
+     *
+     * @param gamePin the game pin to add the loot to
+     * @param entity  The entity to be added to the game
+     */
+    void addEntityToGame(String gamePin, BaseEntity entity);
 
     /**
      * Updates the players position and points in a game.
@@ -54,22 +53,6 @@ public interface BackendService {
      * @param playerId id of the player
      */
     void removePlayerFromGame(String gamePin, String playerId);
-
-    /**
-     * Sets a player as the winner of the game.
-     *
-     * @param gamePin  pin of the game
-     * @param player the player
-     */
-    void setToWinner(String gamePin, Player player);
-
-    /**
-     * Sets a player as a looser of the game.
-     *
-     * @param gamePin  pin of the game
-     * @param player  the player
-     */
-    void setToLooser(String gamePin, Player player);
 
     /**
      * Stores all players in a game in dataHolder.players. Is updated when players are added,

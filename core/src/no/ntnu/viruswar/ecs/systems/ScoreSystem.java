@@ -6,17 +6,12 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.utils.Array;
-import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
 import no.ntnu.viruswar.ecs.componenets.IdentifierComponent;
 import no.ntnu.viruswar.ecs.componenets.LeadTextComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
-import no.ntnu.viruswar.ecs.componenets.TransformComponent;
-import no.ntnu.viruswar.services.backend.BackendModel;
-import no.ntnu.viruswar.services.backend.model.Player;
+import no.ntnu.viruswar.services.models.Player;
 import no.ntnu.viruswar.services.lobby.LobbyController;
-import no.ntnu.viruswar.utils.Constants;
 
 public class ScoreSystem extends IteratingSystem {
 
@@ -25,7 +20,7 @@ public class ScoreSystem extends IteratingSystem {
 
     private final LobbyController lobbyController;
     private LeadTextComponent textComp = new LeadTextComponent();
-    private float leadpoints = 0;
+    private float leadPoints = 0;
     private String lead = "tie";
     private final Engine engine;
 
@@ -43,18 +38,18 @@ public class ScoreSystem extends IteratingSystem {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        this.leadpoints = 0;
+        this.leadPoints = 0;
 
         for (Entity entity : entityQueue) {
             IdentifierComponent idc = idMapper.get(entity);
             Player p = lobbyController.getPlayers().get(idc.id);
-            if (p.getPoints() > leadpoints) {
-                leadpoints = p.getPoints();
+            if (p.getPoints() > leadPoints) {
+                leadPoints = p.getPoints();
                 lead = p.getName();
             }
         }
 
-        textComp.leadPlayer = "Lead: " + lead + " " + leadpoints + " points";
+        textComp.leadPlayer = "Lead: " + lead + " " + leadPoints + " points";
 
         entityQueue.clear();
     }

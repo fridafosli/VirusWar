@@ -14,10 +14,10 @@ import no.ntnu.viruswar.context.Context;
 
 public class Settings extends ContextScreen {
 
+    private final TextButton backBtn;
     protected Stage stage;
     protected Skin skin;
     protected Sprite background;
-    private final TextButton backBtn;
 
     public Settings(final Context context) {
         super(context);
@@ -41,7 +41,7 @@ public class Settings extends ContextScreen {
         stage.addActor(backBtn);
 
         // Set the background
-        background = new Sprite(new Texture(Gdx.files.internal("settings.png")));
+        background = new Sprite(new Texture(Gdx.files.internal("basicBackground.png")));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 

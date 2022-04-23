@@ -2,22 +2,12 @@ package no.ntnu.viruswar;
 
 
 import no.ntnu.viruswar.services.backend.BackendService;
-import no.ntnu.viruswar.services.backend.model.Loot;
+import no.ntnu.viruswar.services.models.BaseEntity;
+import no.ntnu.viruswar.services.models.Loot;
 import no.ntnu.viruswar.services.backend.BackendModel;
-import no.ntnu.viruswar.services.backend.model.Player;
 
 class DesktopBackendService implements BackendService {
 
-
-    @Override
-    public void setGamePinEventListener(BackendModel dataHolder) {
-
-    }
-
-    @Override
-    public void removeGame(String gamePin) {
-
-    }
 
     @Override
     public void startGame(String gamePin) {
@@ -25,12 +15,12 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
-    public void addPlayerToGame(String gamePin, Player player) {
+    public void setEntityConsumedState(String gamePin, String path, String entityId, boolean state) {
 
     }
 
     @Override
-    public void updatePlayerPosition(String gamePin, String playerId, float x, float y, float points) {
+    public void addEntityToGame(String gamePin, BaseEntity entity) {
 
     }
 
@@ -40,17 +30,17 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
+    public void setGamePinEventListener(BackendModel dataHolder) {
+
+    }
+
+    @Override
+    public void updatePlayerPosition(String gamePin, String playerId, float x, float y, float points) {
+
+    }
+
+    @Override
     public void removePlayerFromGame(String gamePin, String playerId) {
-
-    }
-
-    @Override
-    public void setToWinner(String gamePin, Player player) {
-
-    }
-
-    @Override
-    public void setToLooser(String gamePin, Player player) {
 
     }
 

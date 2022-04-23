@@ -9,7 +9,7 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.componenets.IdentifierComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.screens.EndScreen;
-import no.ntnu.viruswar.services.backend.model.Player;
+import no.ntnu.viruswar.services.models.Player;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 
 public class GameStateSystem extends IteratingSystem {
@@ -32,10 +32,10 @@ public class GameStateSystem extends IteratingSystem {
         Player p = controller.getPlayers().get(idc.id);
         // hvis man antar at isDead settes et annet sted når du blir
         // konsumert av noen:
-        if (p.isLooser()){
+        if (p.consumed){
             context.getScreens().push(new EndScreen(context, controller.getPin(), p, false));
         }
-        else if (p.isWinner()){
+        else if (!p.consumed && controller.getPlayers().values().size() ==1){
             context.getScreens().push(new EndScreen(context, controller.getPin(), p, true));
         }
         // else iffen over der man antar at db variablen iswinner

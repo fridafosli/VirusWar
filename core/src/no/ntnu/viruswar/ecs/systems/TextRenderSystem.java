@@ -25,7 +25,6 @@ public class TextRenderSystem extends IteratingSystem {
         this.camera = camera;
         this.entityQueue = new Array<Entity>();
         this.batch = batch;
-        //font.getData().setScale(0.7f, 0.7f);
 
     }
 

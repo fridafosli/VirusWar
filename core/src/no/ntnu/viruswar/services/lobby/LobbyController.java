@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.factories.ActorFactory;
@@ -49,11 +50,11 @@ public class LobbyController {
     }
 
     public Array getPlayerNames() {
-        Array playerlist = new Array();
+        Array players = new Array();
         for (Map.Entry<String, Player> pl : backendModel.getPlayers().entrySet()) {
-            playerlist.add(pl.getValue().getName());
+            players.add(pl.getValue().getName());
         }
-        return playerlist;
+        return players;
     }
 
     public LobbyModel getState() {
@@ -68,6 +69,23 @@ public class LobbyController {
 
         if (!backendModel.activeGamePinsContainsPin(pin)) {
             displayText("Gamepin not valid", label, 5);
+            return;
+        }
+
+        if (!backendModel.activeGamePinsContainsPin(pin)) {
+            displayText("Gamepin not valid", label, 5);
+            return;
+        }
+
+        context.getBackend().setPlayersEventListener(backendModel, pin);
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (backendModel.getPlayers().values().size() > 19) {
+            displayText("Gameroom full.", label, 5);
             return;
         }
 
@@ -114,10 +132,12 @@ public class LobbyController {
     }
 
     public void toGame(final Label output) {
-        if (backendModel.getPlayers().values().size() < 1) { // < 1 for testing
+        if (backendModel.getPlayers().values().size() < 2) {
             displayText("Cannot start game without opponents", output, 5);
             return;
         }
+
+
         Gdx.app.log("play", "clicked");
         context.getBackend().startGame(lobbyModel.getPin());
         context.getScreens().push(new GameScreen(context, this));

@@ -21,17 +21,30 @@ public class PlayMenu extends MenuBaseScreen {
     private final TextButton joinBtn;
     private final TextField pin_input;
     private final TextField nick_input;
+    private final TextField host_nick_input;
+
 
     private final LobbyController lobby;
 
 
     public PlayMenu(final Context context) {
         super(context);
+
         this.lobby = new LobbyController(context);
 
         pin_input = new TextField("", skin);
         pin_input.setMaxLength(60);
         nick_input = new TextField("", skin);
+        host_nick_input = new TextField("", skin);
+        final String testPin = pin_input.getText();
+
+        // Create labels
+        Label label1 = new Label("Create Game:", skin);
+        Label label2 = new Label("Join Game By PIN:", skin);
+        Label label3 = new Label("Game pin: ", skin);
+        Label label4 = new Label("Nickname: ", skin);
+        Label label5 = new Label("Nickname: ", skin);
+        final Label error = new Label("", skin);
 
         // Create labels
         // Label CreateLabel = new Label("Create Game:", skin);c
@@ -49,6 +62,7 @@ public class PlayMenu extends MenuBaseScreen {
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("create", "clicked");
                 lobby.createLobby(nick_input.getText(), errorLabel);
+
             }
         });
 
@@ -58,7 +72,6 @@ public class PlayMenu extends MenuBaseScreen {
         joinBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-
                 Gdx.app.log("join", "clicked");
                 lobby.joinLobby(pin_input.getText(), nick_input.getText(), errorLabel);
             }

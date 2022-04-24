@@ -14,24 +14,22 @@ import no.ntnu.viruswar.services.models.Player;
 public class ScoreSystem extends IteratingSystem {
 
     private final LobbyController lobbyController;
-    private final Engine engine;
-    private LeadTextComponent textComp = new LeadTextComponent();
-    private float leadPoints = 0;
+    private final LeadTextComponent textComp = new LeadTextComponent();
     private String lead;
 
     public ScoreSystem(Engine engine, LobbyController lobbycontroller) {
         super(Family.all(PlayerComponent.class).exclude(HiddenComponent.class).get());
         this.lobbyController = lobbycontroller;
-        this.engine = engine;
         Entity ent = engine.createEntity();
         ent.add(textComp);
         engine.addEntity(ent);
     }
 
+    @SuppressWarnings("DefaultLocale")
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        this.leadPoints = 0;
+        float leadPoints = 0;
 
         for (Player p : lobbyController.getPlayers().values()) {
             if (p.getPoints() > leadPoints) {
@@ -43,7 +41,7 @@ public class ScoreSystem extends IteratingSystem {
             textComp.leadPlayer = "Tie";
 
         } else {
-            textComp.leadPlayer = "Lead: " + lead + " " + leadPoints + " points";
+            textComp.leadPlayer = String.format("Lead: %s %.0f points", lead, leadPoints);
         }
     }
 

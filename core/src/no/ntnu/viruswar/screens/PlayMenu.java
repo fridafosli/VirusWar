@@ -36,7 +36,7 @@ public class PlayMenu extends MenuBaseScreen {
         pin_input.setMaxLength(60);
         nick_input = new TextField("", skin);
         host_nick_input = new TextField("", skin);
-        final String testPin= pin_input.getText();
+        final String testPin = pin_input.getText();
 
         // Create labels
         Label label1 = new Label("Create Game:", skin);

@@ -1,20 +1,21 @@
-package no.ntnu.viruswar.services.data;
-
-import com.badlogic.gdx.utils.Array;
+package no.ntnu.viruswar.services.backend;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-// Gjorde den public, si fra dersom det er et problem
-public class NetworkDataController {
+import no.ntnu.viruswar.services.models.Loot;
+import no.ntnu.viruswar.services.models.Player;
+
+public class BackendModel {
 
     private final Collection<String> activeGamePins = new ArrayList<>();
     private final Map<String, Player> players = new HashMap<>();
-    private final Map<String, Loot> lootList = new HashMap<>();
+    private final Map<String, Loot> loots = new HashMap<>();
+    public boolean isGameStarted = false;
 
-    public NetworkDataController() {
+    public BackendModel() {
 
     }
 
@@ -32,7 +33,8 @@ public class NetworkDataController {
     }
 
     public void addPlayer(float x, float y, float points, String name) {
-        Player p = new Player(x, y, points, "blue", name);
+        // TODO: Set skin index
+        Player p = new Player(x, y, points, 0, name);
         players.put(p.getId(), p);
     }
 
@@ -54,24 +56,16 @@ public class NetworkDataController {
         return players;
     }
 
-    public Array getPlayerNames() {
-        Array playerlist = new Array();
-        for (Map.Entry<String, Player> pl : this.players.entrySet()) {
-            playerlist.add(pl.getValue().getName());
-        }
-        return playerlist;
-    }
-
     public void removePlayer(String id) {
         players.remove(id);
     }
 
     public void addLoot(Loot loot) {
-        this.lootList.put(loot.getId(), loot);
+        this.loots.put(loot.getId(), loot);
     }
 
     public Loot getLootById(String id) {
-        return lootList.get(id);
+        return loots.get(id);
     }
 
     /*
@@ -90,8 +84,8 @@ public class NetworkDataController {
         public void removePlayer(String id) {
             players.remove(id);
         }*/
-    public Map<String, Loot> getLootList() {
-        return lootList;
+    public Map<String, Loot> getLoots() {
+        return loots;
     }
 
 }

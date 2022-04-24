@@ -2,6 +2,7 @@ package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
+import no.ntnu.viruswar.utils.Constants;
 
 
 public class MainMenu extends MenuBaseScreen {
@@ -18,11 +20,12 @@ public class MainMenu extends MenuBaseScreen {
     private final TextButton tutorialBtn;
     private final TextButton settingsBtn;
     private Sprite background;
+    private OrthographicCamera cam = new OrthographicCamera();
 
 
     public MainMenu(final Context context) {
         super(context);
-
+        context.getAssets().setMusic(true, 1f);
         // Create the play-button
         playBtn = new TextButton("Play", skin);
         playBtn.setHeight(Gdx.graphics.getHeight());
@@ -57,10 +60,10 @@ public class MainMenu extends MenuBaseScreen {
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // add buttons to table
-        table.padTop(scale * 100);
-        table.add(playBtn).padBottom(scale * 50);
+        table.padTop(Constants.SCREEN_HEIGHT_SCALE * 20);
+        table.add(playBtn).padBottom(Constants.SCREEN_HEIGHT_SCALE * 20);
         table.row();
-        table.add(tutorialBtn).padBottom(scale * 50);
+        table.add(tutorialBtn).padBottom(Constants.SCREEN_HEIGHT_SCALE * 20);
         table.row();
         table.add(settingsBtn);
         tutorialBtn.setColor(Color.RED);
@@ -75,11 +78,13 @@ public class MainMenu extends MenuBaseScreen {
 
     @Override
     public void render(float dt) {
-        SpriteBatch sb= context.getBatch();
+        cam.setToOrtho(false);
+        context.getBatch().setProjectionMatrix(cam.combined);
+        SpriteBatch sb = context.getBatch();
         stage.act(dt);
-        sb.begin();
-        background.draw(sb);
-        sb.end();
+        context.getBatch().begin();
+        background.draw(context.getBatch());
+        context.getBatch().end();
         stage.draw();
     }
 
@@ -87,5 +92,6 @@ public class MainMenu extends MenuBaseScreen {
     public void dispose() {
 
     }
+
 
 }

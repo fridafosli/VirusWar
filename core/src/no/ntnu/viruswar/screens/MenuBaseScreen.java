@@ -8,10 +8,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import no.ntnu.viruswar.context.Context;
+import no.ntnu.viruswar.utils.Constants;
 
 abstract class MenuBaseScreen extends ContextScreen {
-
-    final protected float scale = Gdx.graphics.getHeight() / 300;
     protected Stage stage;
     protected Skin skin;
     protected Table table;
@@ -19,7 +18,7 @@ abstract class MenuBaseScreen extends ContextScreen {
     protected MenuBaseScreen(Context context) {
         super(context);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-        skin.getFont("default-font").getData().setScale(scale);
+        skin.getFont("default-font").getData().setScale(Constants.FONT_SCALE);
         stage = new Stage(new ScreenViewport());
         table = new Table();
         table.setWidth(stage.getWidth());
@@ -32,5 +31,11 @@ abstract class MenuBaseScreen extends ContextScreen {
     @Override
     public void show() {
         Gdx.input.setInputProcessor(stage);
+    }
+
+    @Override
+    public void hide() {
+        Gdx.input.setOnscreenKeyboardVisible(false);
+        stage.unfocusAll();
     }
 }

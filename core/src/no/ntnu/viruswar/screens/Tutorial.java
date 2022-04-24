@@ -14,16 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.screen.Screen;
 
 public class Tutorial extends ContextScreen {
 
-    protected Stage stage;
-    protected Skin skin;
     private final TextButton backBtn;
     private final TextButton nextBtn;
     private final TextButton prevBtn;
     private final List<Image> pages = new ArrayList<Image>();
+    protected Stage stage;
+    protected Skin skin;
     private int page = 0;
 
 

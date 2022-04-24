@@ -31,7 +31,6 @@ public class MapShrinkSystem extends IntervalIteratingSystem {
     }
 
     private void shrink() {
-
         DimensionComponent dc = dimensionMapper.get(mapEntity);
         dc.add(-10);
     }

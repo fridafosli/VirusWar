@@ -16,6 +16,7 @@ public class TouchController implements InputProcessor {
     public TouchController(Camera camera) {
         this.camera = camera;
         Gdx.input.setInputProcessor(this);
+        isTouching = false;
     }
 
     public Vector3 getTouchInWorld() {
@@ -23,6 +24,11 @@ public class TouchController implements InputProcessor {
         camera.unproject(calcVec3);
         return calcVec3;
     }
+
+    public Boolean touchQuitButton(float x, float y) {
+        return !isTouching && calcVec3.x > x && calcVec3.y > y;
+    }
+
 
     @Override
     public boolean keyDown(int keycode) {

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.utils.Constants;
 
 public class Tutorial extends ContextScreen {
 
@@ -31,12 +30,12 @@ public class Tutorial extends ContextScreen {
         super(context);
 
         skin = new Skin(Gdx.files.internal("uiskin.json"));
-        skin.getFont("default-font").getData().setScale(Constants.FONT_SCALE);
+        //skin.getFont("default-font").getData().setScale(scale);
         stage = new Stage(new ScreenViewport());
 
         // Creating the back button
         backBtn = new TextButton("Back", skin);
-        backBtn.setPosition(0, Gdx.graphics.getHeight() - backBtn.getHeight());
+        backBtn.setPosition(0, Gdx.graphics.getHeight() - 50);
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

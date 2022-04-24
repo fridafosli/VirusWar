@@ -16,6 +16,7 @@ public class AssetManager {
     private final HashMap<String, Texture> textureMap;
     private final Music music= Gdx.audio.newMusic(Gdx.files.internal("virusSong.mp3"));
     private float musicVolume;
+    private Boolean play;
     private AssetManager() {
         textureMap = new HashMap<>();
         textureMap.put("virus", new Texture("virus.png"));
@@ -42,9 +43,13 @@ public class AssetManager {
     public float getVolume(){
         return musicVolume;
     }
+    public boolean getPlaying(){
+        return play;
+    }
 
     public void setMusic(boolean play, float volume){
-        musicVolume=volume;
+        this.musicVolume=volume;
+        this.play=play;
         music.setLooping(true);
         if(play){
             music.play();

@@ -48,8 +48,8 @@ public class GameLobby extends MenuBaseScreen {
 
 
         // Set up Back-button
-        Button backBtn = new TextButton("Back", skin);
-        backBtn.setPosition(0, Gdx.graphics.getHeight() - backBtn.getHeight());
+        TextButton backBtn = new TextButton("Leave", skin);
+        backBtn.setPosition(0, Gdx.graphics.getHeight() - 70);
 
         backBtn.addListener(new ClickListener() {
             @Override
@@ -85,9 +85,8 @@ public class GameLobby extends MenuBaseScreen {
         });
         stage.addActor(playBtn);
 
-
         // Add all players connected to game to the screen
-        playerList.setItems(lobby.getPlayers().values().toString());
+        playerList.setItems(lobby.getPlayerNames());
         scrollpane.setActor(playerList);
         scrollpane.setScrollingDisabled(true, false);
 
@@ -103,8 +102,7 @@ public class GameLobby extends MenuBaseScreen {
 
         // Add all players connected to game to the screen
         playerList.clear();
-
-        playerList.setItems(lobby.getPlayers().values().toString());
+        playerList.setItems(lobby.getPlayerNames());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(dt);
         stage.draw();

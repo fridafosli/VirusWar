@@ -67,7 +67,7 @@ public class GameLobby extends MenuBaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("custom", "clicked");
-                context.getScreens().push(new Custom(context, lobby));
+                context.getScreens().push(new CustomizationScreen(context, lobby));
             }
         });
         customizeBtn.setPosition((Gdx.graphics.getWidth() - customizeBtn.getWidth()) / 2, 0);

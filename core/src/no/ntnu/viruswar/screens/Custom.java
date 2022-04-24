@@ -12,17 +12,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.assets.AssetManager;
-import no.ntnu.viruswar.utils.Constants;
 import no.ntnu.viruswar.services.lobby.LobbyController;
+import no.ntnu.viruswar.utils.Constants;
 
 public class Custom extends MenuBaseScreen {
+    private final LobbyController lobby;
     protected Sprite playerVirus;
     private TextButton backBtn;
     private TextButton colorChangePlus;
     private TextButton colorChangeMinus;
     private TextButton submitBtn;
     private TextField usernameInput;
-    private final LobbyController lobby;
     private int virusIndex = 0;
 
     public Custom(final Context context, final LobbyController lobby) {
@@ -101,10 +101,10 @@ public class Custom extends MenuBaseScreen {
         table.add(usernameInput).padBottom(Constants.SCREEN_HEIGHT_SCALE * 10);
     }
 
-    private void setPlayerVirus(int increment){
+    private void setPlayerVirus(int increment) {
         virusIndex = (virusIndex + increment) % 6;
-        while (virusIndex<0) virusIndex+=6;
-        playerVirus= new Sprite(AssetManager.getInstance().getViruses(virusIndex));
+        while (virusIndex < 0) virusIndex += 6;
+        playerVirus = new Sprite(AssetManager.getInstance().getViruses(virusIndex));
     }
 
     @Override
@@ -113,7 +113,7 @@ public class Custom extends MenuBaseScreen {
         stage.act(dt);
 
 
-        SpriteBatch sb= context.getBatch();
+        SpriteBatch sb = context.getBatch();
         sb.begin();
         sb.draw(playerVirus, (int) Constants.SCREEN_WIDTH_SCALE * 50, (int) Constants.SCREEN_HEIGHT_SCALE * 50 - Constants.SCREEN_WIDTH_SCALE * 40 / 2,
                 Constants.SCREEN_WIDTH_SCALE * 40, Constants.SCREEN_WIDTH_SCALE * 40);

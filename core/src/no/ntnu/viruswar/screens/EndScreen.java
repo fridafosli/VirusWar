@@ -8,7 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.data.Player;
+import no.ntnu.viruswar.services.models.Player;
 
 public class EndScreen extends MenuBaseScreen {
 
@@ -19,8 +19,7 @@ public class EndScreen extends MenuBaseScreen {
         String text;
         if (winner) {
             text = "WINNER";
-        }
-        else {
+        } else {
             text = "You died loser ";
         }
 

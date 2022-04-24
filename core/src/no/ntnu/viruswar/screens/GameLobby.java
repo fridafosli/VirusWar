@@ -6,15 +6,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 import no.ntnu.viruswar.context.Context;
-
-import no.ntnu.viruswar.utils.Constants;
 import no.ntnu.viruswar.services.lobby.LobbyController;
+import no.ntnu.viruswar.utils.Constants;
 
 public class GameLobby extends MenuBaseScreen {
 
@@ -71,7 +70,7 @@ public class GameLobby extends MenuBaseScreen {
                 context.getScreens().push(new Custom(context, lobby));
             }
         });
-        customizeBtn.setPosition((Gdx.graphics.getWidth() - customizeBtn.getWidth()) / 2,0);
+        customizeBtn.setPosition((Gdx.graphics.getWidth() - customizeBtn.getWidth()) / 2, 0);
         stage.addActor(customizeBtn);
 
         // Set up Play-button
@@ -93,8 +92,6 @@ public class GameLobby extends MenuBaseScreen {
         scrollpane.setScrollingDisabled(true, false);
 
     }
-
-
 
 
     @Override

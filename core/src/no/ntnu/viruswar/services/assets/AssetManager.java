@@ -14,9 +14,10 @@ public class AssetManager {
     static private AssetManager instance;
     private final TextureAtlas viruses;
     private final HashMap<String, Texture> textureMap;
-    private final Music music= Gdx.audio.newMusic(Gdx.files.internal("virusSong.mp3"));
+    private final Music music = Gdx.audio.newMusic(Gdx.files.internal("virusSong.mp3"));
     private float musicVolume;
     private Boolean play;
+
     private AssetManager() {
         textureMap = new HashMap<>();
         textureMap.put("virus", new Texture("virus.png"));
@@ -40,25 +41,27 @@ public class AssetManager {
         return viruses.findRegion(name);
     }
 
-    public float getVolume(){
+    public float getVolume() {
         return musicVolume;
     }
-    public boolean getPlaying(){
+
+    public boolean getPlaying() {
         return play;
     }
 
-    public void setMusic(boolean play, float volume){
-        this.musicVolume=volume;
-        this.play=play;
+    public void setMusic(boolean play, float volume) {
+        this.musicVolume = volume;
+        this.play = play;
         music.setLooping(true);
-        if(play){
+        if (play) {
             music.play();
             music.setVolume(volume);
-        }
-        else{
+        } else {
             music.stop();
         }
-    };
+    }
+
+    ;
 
     public Texture getTexture(String name) {
         return instance.textureMap.get(name);

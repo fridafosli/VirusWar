@@ -63,7 +63,7 @@ public class LobbyController {
         }
 
         Vector2 pos = ActorFactory.randomPos(100);
-        Player player = new Player(pos.x, pos.y, 30, "blue", nick);
+        Player player = new Player(pos.x, pos.y, 30, 0, nick);
         lobbyModel.set(false, pin, player.getId());
         context.getBackend().addEntityToGame(pin, player);
         subscribeToEntities(pin);
@@ -87,7 +87,7 @@ public class LobbyController {
             pin = PinGenerator.generate(pinLength);
         }
 
-        Player host = new Player(0, 0, 0, "default", nick);
+        Player host = new Player(0, 0, 0, 0, nick);
         context.getBackend().addEntityToGame(pin, host);
         lobbyModel.set(true, pin, host.getId());
         subscribeToEntities(pin);
@@ -142,5 +142,13 @@ public class LobbyController {
 
     public Boolean isStarted() {
         return backendModel.isGameStarted;
+    }
+
+    public void setNickname(String nickname) {
+        context.getBackend().setNickname(getPin(), getState().getPlayerId(), nickname);
+    }
+
+    public void setSkin(int skinIndex) {
+        context.getBackend().setPlayerSkin(getPin(), getState().getPlayerId(), skinIndex);
     }
 }

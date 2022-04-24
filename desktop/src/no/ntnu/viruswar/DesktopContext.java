@@ -63,5 +63,15 @@ class DesktopBackendService implements BackendService {
     public void setLootEventListener(BackendModel dataHolder, String gamePin) {
 
     }
+
+    @Override
+    public void setPlayerSkin(String gamePin, String id, int skinIndex) {
+
+    }
+
+    @Override
+    public void setNickname(String gamePin, String id, String nickname) {
+
+    }
 }
 

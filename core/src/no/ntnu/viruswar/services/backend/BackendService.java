@@ -87,4 +87,8 @@ public interface BackendService {
      */
     void setLootEventListener(BackendModel dataHolder, String gamePin);
 
+    void setPlayerSkin(String gamePin, String id, int skinIndex);
+
+    void setNickname(String gamePin, String id, String nickname);
+
 }

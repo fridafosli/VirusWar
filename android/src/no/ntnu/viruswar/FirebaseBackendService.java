@@ -33,6 +33,10 @@ public class FirebaseBackendService implements BackendService {
         return String.format("%s/%s/%s", gamePin, entity.getPath(), entity.getId());
     }
 
+    private DatabaseReference playerRef(String gamePin, String id) {
+        return database.getReference(String.format("%s/%s/%s", gamePin, "players", id));
+    }
+
     @Override
     public void setGamePinEventListener(final BackendModel dataHolder) {
 
@@ -95,6 +99,15 @@ public class FirebaseBackendService implements BackendService {
         ref.child("/consumed").setValue(state);
     }
 
+    @Override
+    public void setPlayerSkin(String gamePin, String id, int skinIndex) {
+        playerRef(gamePin, id).child("/skinIndex").setValue(skinIndex);
+    }
+
+    @Override
+    public void setNickname(String gamePin, String id, String nickname) {
+        playerRef(gamePin, id).child("/name").setValue(nickname);
+    }
 
     @Override
     public void removePlayerFromGame(String gamePin, String playerId) {

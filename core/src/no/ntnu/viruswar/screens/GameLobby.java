@@ -78,9 +78,8 @@ public class GameLobby extends MenuBaseScreen {
         });
         stage.addActor(playBtn);
 
-
         // Add all players connected to game to the screen
-        playerList.setItems(lobby.getPlayers().values().toString());
+        playerList.setItems(lobby.getPlayerNames());
         scrollpane.setActor(playerList);
         scrollpane.setScrollingDisabled(true, false);
 
@@ -101,7 +100,7 @@ public class GameLobby extends MenuBaseScreen {
 
 
 
-        playerList.setItems(lobby.getPlayers().values().toString());
+        playerList.setItems(lobby.getPlayerNames());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(dt);
         stage.draw();

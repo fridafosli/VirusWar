@@ -3,6 +3,7 @@ package no.ntnu.viruswar.services.lobby;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.Map;
 
@@ -45,6 +46,13 @@ public class LobbyController {
             }
         };
         timer.start();
+    }
+    public Array getPlayerNames() {
+        Array playerlist = new Array();
+        for (Map.Entry<String, Player> pl : backendModel.getPlayers().entrySet()) {
+            playerlist.add(pl.getValue().getName());
+        }
+        return playerlist;
     }
 
     public LobbyModel getState() {

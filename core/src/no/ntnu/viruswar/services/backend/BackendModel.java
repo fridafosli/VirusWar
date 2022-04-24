@@ -57,14 +57,6 @@ public class BackendModel {
         return players;
     }
 
-    public Array getPlayerNames() {
-        Array playerlist = new Array();
-        for (Map.Entry<String, Player> pl : this.players.entrySet()) {
-            playerlist.add(pl.getValue().getName());
-        }
-        return playerlist;
-    }
-
     public void removePlayer(String id) {
         players.remove(id);
     }

@@ -1,6 +1,7 @@
 package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.models.Player;
+import no.ntnu.viruswar.utils.Constants;
 
 public class EndScreen extends MenuBaseScreen {
     private Sprite background;
@@ -24,8 +26,7 @@ public class EndScreen extends MenuBaseScreen {
             background = new Sprite(new Texture(Gdx.files.internal("winScreen.png")));
 
             context.getBackend().removeGame(gamePin);
-        }
-        else {
+        } else {
             background = new Sprite(new Texture(Gdx.files.internal("loseScreen.png")));
 
         }
@@ -37,13 +38,14 @@ public class EndScreen extends MenuBaseScreen {
 
 
         // Add the labels to the stage
-        scoreLabel.setPosition(780, 550);
+        scoreLabel.setPosition(Gdx.graphics.getWidth()/2f - scoreLabel.getWidth() /2f,Constants.SCREEN_HEIGHT_SCALE * 55);
         stage.addActor(scoreLabel);
 
 
         // Set up Back-button, pops the user back to main menu
         TextButton backBtn = new TextButton("Main Menu", skin);
-        backBtn.setPosition(780, 400);
+        backBtn.setPosition(Gdx.graphics.getWidth() / 2f - backBtn.getWidth() / 2f, Constants.SCREEN_HEIGHT_SCALE * 45);
+        backBtn.setColor(Color.RED);
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

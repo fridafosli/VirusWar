@@ -1,6 +1,5 @@
 package no.ntnu.viruswar.ecs;
 
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.InputProcessor;
@@ -41,7 +40,7 @@ public class OnlineEngine {
         this.context = context;
         this.lobby = lobby;
         camera = new Camera();
-        touchController = new TouchController(camera); 
+        touchController = new TouchController(camera);
     }
 
     public void init() {
@@ -66,7 +65,7 @@ public class OnlineEngine {
         engine.addSystem(new QuitButtonSystem(touchController, engine, context, camera, 1));
         engine.addEntity(ActorFactory.UserVirus(engine, lobby.getPlayers().get(lobby.getState().getPlayerId())));
     }
-    
+
     public void update(float dt) {
         if (engine == null) {
             init();
@@ -77,5 +76,5 @@ public class OnlineEngine {
     public InputProcessor getInputProcessor() {
         return touchController;
     }
-    
+
 }

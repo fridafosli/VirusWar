@@ -15,7 +15,7 @@ import no.ntnu.viruswar.services.assets.AssetManager;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 import no.ntnu.viruswar.utils.Constants;
 
-public class Custom extends MenuBaseScreen {
+public class CustomizationScreen extends MenuBaseScreen {
     private final LobbyController lobby;
     protected Sprite playerVirus;
     private TextButton backBtn;
@@ -25,7 +25,7 @@ public class Custom extends MenuBaseScreen {
     private TextField usernameInput;
     private int virusIndex = 0;
 
-    public Custom(final Context context, final LobbyController lobby) {
+    public CustomizationScreen(final Context context, final LobbyController lobby) {
         super(context);
         this.lobby = lobby;
         setPlayerVirus(virusIndex);

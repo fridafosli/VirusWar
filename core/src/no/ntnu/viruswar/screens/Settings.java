@@ -34,10 +34,21 @@ public class Settings extends ContextScreen {
         // Create the skin
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         skin.getFont("default-font").getData().setScale(Constants.FONT_SCALE);
-        final Drawable volOn= new TextureRegionDrawable(new Texture(Gdx.files.internal("volOn.png")));
-        Drawable volOff= new TextureRegionDrawable(new Texture(Gdx.files.internal("volOff.png")));
 
-        final ImageButton sound = new ImageButton(volOn,volOff, volOff);
+        // Setting up mute button
+        final Drawable volOnTexture = new TextureRegionDrawable(new Texture(Gdx.files.internal("volOn.png")));
+        Drawable volOffTexture = new TextureRegionDrawable(new Texture(Gdx.files.internal("volOff.png")));
+        final ImageButton muteBtn = new ImageButton(volOnTexture, volOffTexture, volOffTexture);
+        muteBtn.addListener(new ClickListener() {
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                context.getAssets().setMusic(!context.getAssets().getPlaying(), context.getAssets().getVolume());
+            }
+        });
+        muteBtn.setSize(Constants.SCREEN_WIDTH_SCALE * 6, Constants.SCREEN_WIDTH_SCALE * 6);
+        muteBtn.setPosition(Gdx.graphics.getWidth() / 2f - muteBtn.getWidth() / 2, Constants.SCREEN_HEIGHT_SCALE * 35);
+        stage.addActor(muteBtn);
 
 
         Label volumeLabel = new Label("Set music volume", skin);
@@ -58,23 +69,7 @@ public class Settings extends ContextScreen {
             }
         });
 
-        sound.addListener(new ClickListener() {
 
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                context.getAssets().setMusic(!context.getAssets().getPlaying(), context.getAssets().getVolume());
-
-            }
-        });
-        sound.setSize(150,150);
-        /*sound.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.log("soundButton", "clicked");
-            }
-        });*/
-        sound.setPosition(350,(Gdx.graphics.getHeight()-150) / 2);
-        stage.addActor(sound);
         // put slider in container for scaling
         Container<Slider> container = new Container<>(slider);
         container.setTransform(true);
@@ -102,7 +97,6 @@ public class Settings extends ContextScreen {
         });
         stage.addActor(backBtn);
         // Set the background
-
     }
 
 

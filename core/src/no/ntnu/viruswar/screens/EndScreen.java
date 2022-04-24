@@ -2,6 +2,9 @@ package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -11,29 +14,30 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.models.Player;
 
 public class EndScreen extends MenuBaseScreen {
-
+    private Sprite background;
+    private OrthographicCamera cam = new OrthographicCamera();
 
     public EndScreen(final Context context, String gamePin, final Player player, boolean winner) {
         super(context);
 
-        String text;
         if (winner) {
-            text = "WINNER";
+            background = new Sprite(new Texture(Gdx.files.internal("winScreen.png")));
+
             context.getBackend().removeGame(gamePin);
         }
         else {
-            text = "You died loser ";
+            background = new Sprite(new Texture(Gdx.files.internal("loseScreen.png")));
+
         }
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
 
         // Initialize labels
-        Label dieLabel = new Label(text, skin);
         Label scoreLabel = new Label("Score: " + player.getPoints(), skin);
 
 
         // Add the labels to the stage
-        dieLabel.setPosition(780, 700);
         scoreLabel.setPosition(780, 550);
-        stage.addActor(dieLabel);
         stage.addActor(scoreLabel);
 
 
@@ -51,28 +55,21 @@ public class EndScreen extends MenuBaseScreen {
             }
         });
         stage.addActor(backBtn);
-
     }
-/*
-    @Override
-    protected void handleInput() {
-
-    }
-
-    @Override
-    public void update(float dt) {
-
-    }
-*/
 
 
     @Override
     public void render(float dt) {
-        //context.getBatch().begin();
+        cam.setToOrtho(false);
+        context.getBatch().setProjectionMatrix(cam.combined);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
+        stage.act(dt);
+        context.getBatch().begin();
+        background.draw(context.getBatch());
+        context.getBatch().end();
 
+        stage.draw();
 
     }
 

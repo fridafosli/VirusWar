@@ -15,6 +15,7 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.models.Player;
 import no.ntnu.viruswar.utils.Constants;
 
+
 public class EndScreen extends MenuBaseScreen {
     private Sprite background;
     private OrthographicCamera cam = new OrthographicCamera();
@@ -24,14 +25,11 @@ public class EndScreen extends MenuBaseScreen {
 
         if (winner) {
             background = new Sprite(new Texture(Gdx.files.internal("winScreen.png")));
-
             context.getBackend().removeGame(gamePin);
         } else {
             background = new Sprite(new Texture(Gdx.files.internal("loseScreen.png")));
-
         }
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
 
         // Initialize labels
         Label scoreLabel = new Label("Score: " + player.getPoints(), skin);
@@ -40,7 +38,6 @@ public class EndScreen extends MenuBaseScreen {
         // Add the labels to the stage
         scoreLabel.setPosition(Gdx.graphics.getWidth()/2f - scoreLabel.getWidth() /2f,Constants.SCREEN_HEIGHT_SCALE * 55);
         stage.addActor(scoreLabel);
-
 
         // Set up Back-button, pops the user back to main menu
         TextButton backBtn = new TextButton("Main Menu", skin);

@@ -1,16 +1,19 @@
 package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
 
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.lobby.LobbyController;
+import no.ntnu.viruswar.utils.Constants;
 
 public class GameLobby extends MenuBaseScreen {
 
@@ -31,8 +34,8 @@ public class GameLobby extends MenuBaseScreen {
         Label playerLabel = new Label("Players: ", skin);
 
         // Add the labels to the table
-        table.padTop(30);
-        table.add(errorLabel).padBottom(30);
+        table.padTop(Constants.SCREEN_HEIGHT_SCALE * 5);
+        table.add(errorLabel).padBottom(Constants.SCREEN_HEIGHT_SCALE * 5);
         table.row();
         pinLabel.setPosition(100, 20);
         table.add(pinLabel).padBottom(30);
@@ -47,6 +50,7 @@ public class GameLobby extends MenuBaseScreen {
         // Set up Back-button
         TextButton backBtn = new TextButton("Leave", skin);
         backBtn.setPosition(0, Gdx.graphics.getHeight() - 70);
+
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -56,6 +60,8 @@ public class GameLobby extends MenuBaseScreen {
             }
         });
         stage.addActor(backBtn);
+
+        // Set up Customize-button
         TextButton customizeBtn = new TextButton("Customize", skin);
         customizeBtn.addListener(new ClickListener() {
             @Override
@@ -64,12 +70,13 @@ public class GameLobby extends MenuBaseScreen {
                 context.getScreens().push(new Custom(context, lobby));
             }
         });
-        customizeBtn.setPosition((Gdx.graphics.getWidth() - customizeBtn.getWidth()) / 2, 30);
+        customizeBtn.setPosition((Gdx.graphics.getWidth() - customizeBtn.getWidth()) / 2, 0);
         stage.addActor(customizeBtn);
 
         // Set up Play-button
-        TextButton playBtn = new TextButton("Play", skin);
-        playBtn.setPosition(Gdx.graphics.getWidth() - 200, 30);
+        Button playBtn = new TextButton("Play", skin);
+        playBtn.setPosition(Gdx.graphics.getWidth() - playBtn.getWidth(), 0);
+        playBtn.setColor(Color.RED);
         playBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -86,8 +93,6 @@ public class GameLobby extends MenuBaseScreen {
     }
 
 
-
-
     @Override
     public void render(float dt) {
 
@@ -97,9 +102,6 @@ public class GameLobby extends MenuBaseScreen {
 
         // Add all players connected to game to the screen
         playerList.clear();
-
-
-
         playerList.setItems(lobby.getPlayerNames());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(dt);

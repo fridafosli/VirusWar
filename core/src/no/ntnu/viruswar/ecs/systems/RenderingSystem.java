@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.Array;
 
 import no.ntnu.viruswar.ecs.componenets.DimensionComponent;
 import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
-import no.ntnu.viruswar.ecs.componenets.TextureComponent;
+import no.ntnu.viruswar.ecs.componenets.TextureRegionComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.ecs.utils.Camera;
 import no.ntnu.viruswar.ecs.utils.EntityComparator;
@@ -22,16 +22,16 @@ public class RenderingSystem extends SortedIteratingSystem {
     private final OrthographicCamera camera;
     private final EntityComparator comparator;
 
-    private final ComponentMapper<TextureComponent> textureMapper;
+    private final ComponentMapper<TextureRegionComponent> textureMapper;
     private final ComponentMapper<DimensionComponent> rectangleMapper;
     private final ComponentMapper<TransformComponent> transformMapper;
 
     public RenderingSystem(SpriteBatch batch, Camera camera, EntityComparator comparator) {
-        super(Family.all(DimensionComponent.class, TextureComponent.class, TransformComponent.class).exclude(HiddenComponent.class).get(), comparator);
+        super(Family.all(DimensionComponent.class, TransformComponent.class, TextureRegionComponent.class).exclude(HiddenComponent.class).get(), comparator);
 
 
         this.comparator = comparator;
-        textureMapper = ComponentMapper.getFor(TextureComponent.class);
+        textureMapper = ComponentMapper.getFor(TextureRegionComponent.class);
         rectangleMapper = ComponentMapper.getFor(DimensionComponent.class);
         transformMapper = ComponentMapper.getFor(TransformComponent.class);
 
@@ -50,7 +50,7 @@ public class RenderingSystem extends SortedIteratingSystem {
         batch.begin();
 
         for (Entity entity : entityQueue) {
-            TextureComponent texture = textureMapper.get(entity);
+            TextureRegionComponent texture = textureMapper.get(entity);
             DimensionComponent rtc = rectangleMapper.get(entity);
             TransformComponent trc = transformMapper.get(entity);
 

@@ -16,8 +16,8 @@ import no.ntnu.viruswar.services.lobby.LobbyController;
 
 public class GameStateSystem extends IteratingSystem {
 
-    private Context context;
-    private LobbyController controller;
+    private final Context context;
+    private final LobbyController controller;
     private Entity player;
     private final ComponentMapper<IdentifierComponent> idMapper;
 
@@ -33,12 +33,11 @@ public class GameStateSystem extends IteratingSystem {
         IdentifierComponent idc = idMapper.get(player);
         Map<String, Player> players = controller.getPlayers();
         Player p = players.get(idc.id);
-        // hvis man antar at isDead settes et annet sted når du blir
-        // konsumert av noen:
+
         if (p.consumed){
             context.getScreens().push(new EndScreen(context, controller.getPin(), p, false));
         }
-        else if (!p.consumed ){
+        else {
             int count = 0;
             for (Player player: players.values()){
                 if (!player.consumed){
@@ -49,9 +48,6 @@ public class GameStateSystem extends IteratingSystem {
                 context.getScreens().push(new EndScreen(context, controller.getPin(), p, true));
             }
         }
-        // else iffen over der man antar at db variablen iswinner
-        // settes et annet sted når alle andre er konsumert, eller:
-        // else if controller.getPlayers.size == 1 push new winner screen
     }
 
     @Override

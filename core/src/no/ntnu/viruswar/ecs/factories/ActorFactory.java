@@ -47,23 +47,25 @@ public class ActorFactory {
         return entity;
     }
 
+    private static void addVirusComponents(Entity entity, Player player) {
+        entity.add(new VelocityComponent());
+        entity.add(new OnlinePathComponent(player.getPath()));
+        entity.add(new TextureRegionComponent(AssetManager.getInstance().getViruses(player.getSkinIndex())));
+
+    }
+
     public static Entity UserVirus(Engine engine, Player player) {
         Vector2 pos = randomPos(100);
         Entity entity = BaseActor(engine, player.getId(), pos.x, pos.y, 50, "virus");
         entity.add(new PlayerComponent());
-        entity.add(new VelocityComponent());
-        entity.add(new OnlinePathComponent(player.getPath()));
-        entity.add(new TextureRegionComponent(AssetManager.getInstance().getViruses(0)));
+        addVirusComponents(entity, player);
         return entity;
     }
 
     public static Entity OnlineVirus(Engine engine, Player player) {
         Entity entity = BaseActor(engine, player.getId(), player.x, player.y, player.getPoints(), "virus");
         entity.add(new OnlineComponent());
-        entity.add(new VelocityComponent());
-        entity.add(new OnlinePathComponent(player.getPath()));
-        entity.add(new OnlinePathComponent(player.getPath()));
-        entity.add(new TextureRegionComponent(AssetManager.getInstance().getViruses(0)));
+        addVirusComponents(entity, player);
         return entity;
     }
 

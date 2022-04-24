@@ -35,7 +35,8 @@ public class BackendModel {
     }
 
     public void addPlayer(float x, float y, float points, String name) {
-        Player p = new Player(x, y, points, "blue", name);
+        // TODO: Set skin index
+        Player p = new Player(x, y, points, 0, name);
         players.put(p.getId(), p);
     }
 

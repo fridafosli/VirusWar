@@ -65,7 +65,7 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
-    public void setPlayerSkin(String gamePin, String id, String skinName) {
+    public void setPlayerSkin(String gamePin, String id, int skinIndex) {
 
     }
 

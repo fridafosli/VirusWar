@@ -34,7 +34,7 @@ public class FirebaseBackendService implements BackendService {
     }
 
     private DatabaseReference playerRef(String gamePin, String id) {
-        return database.getReference(String.format("%s/%s/%s", gamePin, "player", id));
+        return database.getReference(String.format("%s/%s/%s", gamePin, "players", id));
     }
 
     @Override
@@ -100,13 +100,13 @@ public class FirebaseBackendService implements BackendService {
     }
 
     @Override
-    public void setPlayerSkin(String gamePin, String id, String skinName) {
-        playerRef(gamePin, id).child("name").setValue(skinName);
+    public void setPlayerSkin(String gamePin, String id, int skinIndex) {
+        playerRef(gamePin, id).child("/skinIndex").setValue(skinIndex);
     }
 
     @Override
     public void setNickname(String gamePin, String id, String nickname) {
-        playerRef(gamePin, id).child("name").setValue(nickname);
+        playerRef(gamePin, id).child("/name").setValue(nickname);
     }
 
     @Override

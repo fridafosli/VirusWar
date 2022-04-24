@@ -11,15 +11,15 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.componenets.IdentifierComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.screens.EndScreen;
-import no.ntnu.viruswar.services.models.Player;
 import no.ntnu.viruswar.services.lobby.LobbyController;
+import no.ntnu.viruswar.services.models.Player;
 
 public class GameStateSystem extends IteratingSystem {
 
     private final Context context;
     private final LobbyController controller;
-    private Entity player;
     private final ComponentMapper<IdentifierComponent> idMapper;
+    private Entity player;
 
 
     public GameStateSystem(Context context, LobbyController controller) {
@@ -28,19 +28,20 @@ public class GameStateSystem extends IteratingSystem {
         this.context = context;
         this.controller = controller;
     }
-    @Override public void update(float deltaTime){
+
+    @Override
+    public void update(float deltaTime) {
         super.update(deltaTime);
         IdentifierComponent idc = idMapper.get(player);
         Map<String, Player> players = controller.getPlayers();
         Player p = players.get(idc.id);
 
-        if (p.consumed){
+        if (p.consumed) {
             context.getScreens().push(new EndScreen(context, controller.getPin(), p, false));
-        }
-        else {
+        } else {
             int count = 0;
-            for (Player player: players.values()){
-                if (!player.consumed){
+            for (Player player : players.values()) {
+                if (!player.consumed) {
                     count++;
                 }
             }

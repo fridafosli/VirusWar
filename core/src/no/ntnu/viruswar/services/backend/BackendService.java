@@ -19,7 +19,7 @@ public interface BackendService {
     /**
      * Deletes the game with specified gamepin.
      *
-     * @param gamePin  game to be deleted
+     * @param gamePin game to be deleted
      */
     void removeGame(String gamePin);
 

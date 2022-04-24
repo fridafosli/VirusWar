@@ -36,7 +36,7 @@ public class EndScreen extends MenuBaseScreen {
 
 
         // Add the labels to the stage
-        scoreLabel.setPosition(Gdx.graphics.getWidth()/2f - scoreLabel.getWidth() /2f,Constants.SCREEN_HEIGHT_SCALE * 55);
+        scoreLabel.setPosition(Gdx.graphics.getWidth() / 2f - scoreLabel.getWidth() / 2f, Constants.SCREEN_HEIGHT_SCALE * 55);
         stage.addActor(scoreLabel);
 
         // Set up Back-button, pops the user back to main menu

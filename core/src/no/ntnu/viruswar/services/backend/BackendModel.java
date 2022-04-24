@@ -1,7 +1,5 @@
 package no.ntnu.viruswar.services.backend;
 
-import com.badlogic.gdx.utils.Array;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;

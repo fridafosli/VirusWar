@@ -7,6 +7,7 @@ public class TextureRegionComponent implements Component {
 
     public TextureRegion region = null;
     public int zIndex = 100;
+
     public TextureRegionComponent(TextureRegion region) {
         this.region = region;
     }

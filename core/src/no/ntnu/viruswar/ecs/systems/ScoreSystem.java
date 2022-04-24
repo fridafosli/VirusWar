@@ -4,19 +4,20 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+
 import no.ntnu.viruswar.ecs.componenets.HiddenComponent;
 import no.ntnu.viruswar.ecs.componenets.LeadTextComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
-import no.ntnu.viruswar.services.models.Player;
 import no.ntnu.viruswar.services.lobby.LobbyController;
+import no.ntnu.viruswar.services.models.Player;
 
 public class ScoreSystem extends IteratingSystem {
 
     private final LobbyController lobbyController;
+    private final Engine engine;
     private LeadTextComponent textComp = new LeadTextComponent();
     private float leadPoints = 0;
     private String lead;
-    private final Engine engine;
 
     public ScoreSystem(Engine engine, LobbyController lobbycontroller) {
         super(Family.all(PlayerComponent.class).exclude(HiddenComponent.class).get());
@@ -32,17 +33,16 @@ public class ScoreSystem extends IteratingSystem {
         super.update(deltaTime);
         this.leadPoints = 0;
 
-        for (Player p: lobbyController.getPlayers().values()){
+        for (Player p : lobbyController.getPlayers().values()) {
             if (p.getPoints() > leadPoints) {
                 leadPoints = p.getPoints();
                 lead = p.getName();
             }
         }
-        if (leadPoints == 50){ //NB CHANGE TO 0 I POINTS CHANGED
+        if (leadPoints == 50) { //NB CHANGE TO 0 I POINTS CHANGED
             textComp.leadPlayer = "Tie";
 
-        }
-        else {
+        } else {
             textComp.leadPlayer = "Lead: " + lead + " " + leadPoints + " points";
         }
     }

@@ -36,7 +36,7 @@ public class TextRenderSystem extends IteratingSystem {
         LeadTextComponent ltc = leadMapper.get(entity);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        this.font.draw(batch, ltc.leadPlayer, camera.position.x + 5 -camera.viewportWidth/2, camera.position.y-5+camera.viewportHeight/2);
+        this.font.draw(batch, ltc.leadPlayer, camera.position.x + 5 - camera.viewportWidth / 2, camera.position.y - 5 + camera.viewportHeight / 2);
         batch.end();
     }
 

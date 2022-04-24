@@ -20,15 +20,15 @@ import no.ntnu.viruswar.screens.MainMenu;
 
 public class QuitButtonSystem extends IteratingSystem {
 
-    private TextButton quitBtn;
-    private Context context;
     private final SpriteBatch batch;
     private final Camera camera;
     private final Skin skin;
-    private Entity button;
-    private ButtonComponent buttComp = new ButtonComponent();
     private final Engine engine;
     private final TouchController touchController;
+    private TextButton quitBtn;
+    private Context context;
+    private Entity button;
+    private ButtonComponent buttComp = new ButtonComponent();
 
     public QuitButtonSystem(TouchController tcon, Engine engine, final Context context, Camera camera, int priority) {
         super(Family.all(ButtonComponent.class).get(), priority);
@@ -53,7 +53,7 @@ public class QuitButtonSystem extends IteratingSystem {
         batch.setProjectionMatrix(camera.combined);
         quitBtn.setTransform(true);
         quitBtn.setScale(0.2f);
-        quitBtn.setPosition(camera.position.x - 5 - quitBtn.getWidth()*0.2f + camera.viewportWidth/2, camera.position.y - 5 - quitBtn.getHeight()*0.2f+camera.viewportHeight/2);
+        quitBtn.setPosition(camera.position.x - 5 - quitBtn.getWidth() * 0.2f + camera.viewportWidth / 2, camera.position.y - 5 - quitBtn.getHeight() * 0.2f + camera.viewportHeight / 2);
         if (touchController.touchQuitButton(quitBtn.getX(bottomLeft), quitBtn.getY(bottomLeft))) {
             Gdx.app.log("quit", "clicked");
             while (!(context.getScreens().peek() instanceof MainMenu)) {

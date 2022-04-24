@@ -47,6 +47,7 @@ public class LobbyController {
         };
         timer.start();
     }
+
     public Array getPlayerNames() {
         Array playerlist = new Array();
         for (Map.Entry<String, Player> pl : backendModel.getPlayers().entrySet()) {

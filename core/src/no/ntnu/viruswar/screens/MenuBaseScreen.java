@@ -32,4 +32,10 @@ abstract class MenuBaseScreen extends ContextScreen {
     public void show() {
         Gdx.input.setInputProcessor(stage);
     }
+
+    @Override
+    public void hide() {
+        Gdx.input.setOnscreenKeyboardVisible(false);
+        stage.unfocusAll();
+    }
 }

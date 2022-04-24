@@ -22,6 +22,7 @@ public class Settings extends ContextScreen {
     private Skin skin;
     private Label percentLabel;
 
+
     public Settings(final Context context) {
         super(context);
         skin = new Skin(Gdx.files.internal("uiskin.json"));

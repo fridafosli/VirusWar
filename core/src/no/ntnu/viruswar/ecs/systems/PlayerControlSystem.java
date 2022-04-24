@@ -41,7 +41,7 @@ public class PlayerControlSystem extends IteratingSystem {
             }
             Vector3 touch = touchController.getTouchInWorld();
             Vector3 position = transformMapper.get(entity).position;
-            vcc.velocity.set(touch.cpy().sub(position).nor().scl(touch.cpy().sub(position).len()));
+            vcc.velocity.set(touch.cpy().sub(position).nor().scl(touch.cpy().sub(position).len()).scl(0.5f).clamp(0, 40));
         }
 
         entityQueue.clear();

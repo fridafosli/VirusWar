@@ -1,29 +1,41 @@
 package no.ntnu.viruswar;
 
 
-import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.assets.AssetManager;
 import no.ntnu.viruswar.services.backend.BackendService;
-import no.ntnu.viruswar.services.data.Loot;
-import no.ntnu.viruswar.services.data.NetworkDataController;
-import no.ntnu.viruswar.services.data.Player;
-import no.ntnu.viruswar.services.screen.ScreenManager;
+import no.ntnu.viruswar.services.models.BaseEntity;
+import no.ntnu.viruswar.services.models.Loot;
+import no.ntnu.viruswar.services.backend.BackendModel;
 
 class DesktopBackendService implements BackendService {
 
 
     @Override
-    public void setGamePinEventListener(NetworkDataController dataHolder) {
+    public void startGame(String gamePin) {
 
     }
 
     @Override
-    public void addPlayerToGame(String gamePin, Player player) {
+    public void setEntityConsumedState(String gamePin, String path, String entityId, boolean state) {
 
     }
 
     @Override
-    public void updatePLayerPosition(String gamePin, String playerId, float x, float y, float points) {
+    public void addEntityToGame(String gamePin, BaseEntity entity) {
+
+    }
+
+    @Override
+    public void setLobbyStateListener(BackendModel dataHolder, String gamePin) {
+
+    }
+
+    @Override
+    public void setGamePinEventListener(BackendModel dataHolder) {
+
+    }
+
+    @Override
+    public void updatePlayerPosition(String gamePin, String playerId, float x, float y, float points) {
 
     }
 
@@ -33,7 +45,7 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
-    public void setPlayersEventListener(NetworkDataController dataHolder, String gamePin) {
+    public void setPlayersEventListener(BackendModel dataHolder, String gamePin) {
 
     }
 
@@ -48,7 +60,7 @@ class DesktopBackendService implements BackendService {
     }
 
     @Override
-    public void setLootEventListener(NetworkDataController dataHolder, String gamePin) {
+    public void setLootEventListener(BackendModel dataHolder, String gamePin) {
 
     }
 }

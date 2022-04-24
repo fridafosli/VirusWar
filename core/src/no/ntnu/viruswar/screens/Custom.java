@@ -2,25 +2,21 @@ package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.Arrays;
 import java.util.List;
 
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.services.data.Player;
 import no.ntnu.viruswar.utils.Constants;
+import no.ntnu.viruswar.services.lobby.LobbyController;
 
 public class Custom extends MenuBaseScreen {
     protected Sprite playerVirus;
@@ -31,17 +27,16 @@ public class Custom extends MenuBaseScreen {
     private TextButton submitBtn;
     private int colorIndex;
     private TextField usernameInput;
-    private Player player;
-    private Context context;
+    private final LobbyController lobby;
 
 
-    public Custom(final Context context, final Player player) {
+    public Custom(final Context context, final LobbyController lobby) {
         super(context);
-        this.context = context;
-        this.player = player;
+        this.lobby = lobby;
 
         //Initializes the player color
         setPlayerVirus(true, false);
+
 
 
         // Setting up the back button
@@ -89,9 +84,10 @@ public class Custom extends MenuBaseScreen {
         submitBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                player.setColor(color.toString());
-                player.setName(usernameInput.getText());
+                lobby.setNickname(usernameInput.getText());
+                lobby.setSkin(color);
                 context.getScreens().pop();
+
             }
         });
         stage.addActor(submitBtn);
@@ -104,7 +100,7 @@ public class Custom extends MenuBaseScreen {
 
         //Sets username text field
         usernameInput = new TextField("username", skin);
-        usernameInput.setText(player.getName());
+        usernameInput.setText(lobby.getUserPlayer().getName());
 
         // Put actors in to table
         table.setWidth(Constants.SCREEN_WIDTH_SCALE * 30);
@@ -120,11 +116,10 @@ public class Custom extends MenuBaseScreen {
 
     private void setPlayerVirus(boolean initial, boolean add){
 
-
         List<String> colors= Arrays.asList("v1", "v2", "v3", "v4", "v5", "v6", "v7");
 
         if (initial) {
-            colorIndex = colors.indexOf(player.getColor());
+            colorIndex = colors.indexOf(lobby.getUserPlayer().getSkin());
 
         } else if (add) {
             colorIndex = (colorIndex == colors.size() - 1) ? 0 : colorIndex + 1;
@@ -135,7 +130,6 @@ public class Custom extends MenuBaseScreen {
 
         color= colors.get(colorIndex);
         playerVirus= new Sprite(new Texture(color+".PNG"));
-
     }
 
     @Override

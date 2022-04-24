@@ -1,7 +1,9 @@
 package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,6 +20,7 @@ public class MainMenu extends MenuBaseScreen {
     private final TextButton tutorialBtn;
     private final TextButton settingsBtn;
     private Sprite background;
+    private OrthographicCamera cam = new OrthographicCamera();
 
 
     public MainMenu(final Context context) {
@@ -75,11 +78,12 @@ public class MainMenu extends MenuBaseScreen {
 
     @Override
     public void render(float dt) {
-        SpriteBatch sb= context.getBatch();
+        cam.setToOrtho(false);
+        context.getBatch().setProjectionMatrix(cam.combined);
         stage.act(dt);
-        sb.begin();
-        background.draw(sb);
-        sb.end();
+        context.getBatch().begin();
+        background.draw(context.getBatch());
+        context.getBatch().end();
         stage.draw();
     }
 

@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.utils.Constants;
 
+/*Contains logic related to settings*/
 public class SettingsScreen extends ScreenContext {
     private Stage stage;
     private Skin skin;

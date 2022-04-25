@@ -18,6 +18,7 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 import no.ntnu.viruswar.utils.Constants;
 
+/*Contains logic related to joining a gameroom or creating one*/
 public class PlayMenuScreen extends MenuBaseScreen {
 
     private final TextButton backBtn;

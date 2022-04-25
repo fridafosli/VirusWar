@@ -1,6 +1,7 @@
 package no.ntnu.viruswar.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -33,12 +34,11 @@ public class TutorialScreen extends ScreenContext {
         super(context);
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         skin.getFont("default-font").getData().setScale(Constants.FONT_SCALE);
-        //skin.getFont("default-font").getData().setScale(scale);
         stage = new Stage(new ScreenViewport());
 
         // Creating the back button
         backBtn = new TextButton("Back", skin);
-        backBtn.setPosition(0, Gdx.graphics.getHeight() -backBtn.getHeight());
+        backBtn.setPosition(0, Gdx.graphics.getHeight() - backBtn.getHeight());
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -47,15 +47,15 @@ public class TutorialScreen extends ScreenContext {
             }
         });
         stage.addActor(backBtn);
-        for(int i=0; i<5;i++){
-            Image img1 = new Image(new Texture(Gdx.files.internal("tutImg"+i+".png")));
+
+        // creating the images in the tutorial
+        for (int i = 0; i < 5; i++) {
+            Image img1 = new Image(new Texture(Gdx.files.internal("tutImg" + i + ".png")));
             img1.setSize(Gdx.graphics.getWidth() * 2 / 3f, Gdx.graphics.getHeight() * 2 / 3f);
             img1.setPosition(Gdx.graphics.getWidth() / 2f - img1.getWidth() / 2, Gdx.graphics.getHeight() / 2f - img1.getHeight() / 2);
             pages.add(img1);
 
         }
-        // creating the images in the tutorial
-
         // Setting pages to not visible
         for (Image page : pages) {
             stage.addActor(page);
@@ -66,7 +66,7 @@ public class TutorialScreen extends ScreenContext {
 
         // Setting up the next button
         nextBtn = new TextButton("Next", skin);
-        nextBtn.setPosition(Gdx.graphics.getWidth() / 2f, 20);
+        nextBtn.setPosition(Constants.SCREEN_WIDTH_SCALE * 60 - nextBtn.getWidth() /2f, Constants.SCREEN_HEIGHT_SCALE * 5);
         nextBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -83,7 +83,7 @@ public class TutorialScreen extends ScreenContext {
 
         // Setting up the prev button
         prevBtn = new TextButton("previous", skin);
-        prevBtn.setPosition(Gdx.graphics.getWidth() / 2 - prevBtn.getWidth() - 50, 20);
+        prevBtn.setPosition(Constants.SCREEN_WIDTH_SCALE * 40 - prevBtn.getWidth()/2f, Constants.SCREEN_HEIGHT_SCALE * 5);
         prevBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -105,6 +105,8 @@ public class TutorialScreen extends ScreenContext {
 
     @Override
     public void render(float dt) {
+        Gdx.gl.glClearColor(50/256f,50/256f,50/256f,0.8f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(dt);
         stage.draw();
     }

@@ -15,6 +15,7 @@ import no.ntnu.viruswar.services.lobby.LobbyController;
 import no.ntnu.viruswar.services.models.Loot;
 import no.ntnu.viruswar.services.models.Player;
 
+/*System spawns loot that is published to firebase to the map*/
 public class OnlineSpawnSystem extends IteratingSystem {
 
     final Context context;

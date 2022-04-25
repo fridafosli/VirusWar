@@ -13,6 +13,7 @@ import no.ntnu.viruswar.ecs.factories.ActorFactory;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 import no.ntnu.viruswar.services.models.Loot;
 
+/*System to spawn loots randomly and publishes to firebase*/
 public class LootSpawnSystem extends IntervalSystem {
 
     private final ComponentMapper<DimensionComponent> dimensionMapper;

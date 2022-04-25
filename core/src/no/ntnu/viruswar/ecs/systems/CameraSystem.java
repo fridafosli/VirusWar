@@ -9,6 +9,7 @@ import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.ecs.utils.Camera;
 
+/*System to center player on camera*/
 public class CameraSystem extends IteratingSystem {
     private final ComponentMapper<TransformComponent> transformMapper;
     private final Camera camera;

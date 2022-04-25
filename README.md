@@ -6,6 +6,8 @@ Clone the repo and open `build.gradle` in Android Studio. Make sure to have an A
      style="float: left; margin-right: 10px;" />
 
 # Structure 
+The below directory tree displays the contents of the core-directory.
+
 ```
 ├── VirusWar.java
 ├── context

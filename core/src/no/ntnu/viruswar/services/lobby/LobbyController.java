@@ -72,11 +72,6 @@ public class LobbyController {
             return;
         }
 
-        if (!backendModel.activeGamePinsContainsPin(pin)) {
-            displayText("Gamepin not valid", label, 5);
-            return;
-        }
-
         context.getBackend().setPlayersEventListener(backendModel, pin);
         try {
             TimeUnit.SECONDS.sleep(1);

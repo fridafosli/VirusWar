@@ -13,6 +13,7 @@ import no.ntnu.viruswar.ecs.componenets.LootComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.utils.Constants;
 
+/*System to shrink map over time*/
 public class MapShrinkSystem extends IntervalIteratingSystem {
 
     private final ComponentMapper<DimensionComponent> dimensionMapper;

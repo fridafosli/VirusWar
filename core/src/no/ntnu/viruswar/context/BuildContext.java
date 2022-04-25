@@ -6,6 +6,7 @@ import no.ntnu.viruswar.services.assets.AssetManager;
 import no.ntnu.viruswar.services.backend.BackendService;
 import no.ntnu.viruswar.services.screen.ScreenManager;
 
+/*Defines methods in Context interface connect frontend and backend*/
 public class BuildContext implements Context {
 
     private final BackendService backend;

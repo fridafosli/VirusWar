@@ -2,7 +2,7 @@ package no.ntnu.viruswar.services.models;
 
 import java.util.UUID;
 
-// Basic interface for loot and player to extend
+/*General abstract class defining attributes of an entity*/
 abstract public class BaseEntity {
 
     public float x;
@@ -44,6 +44,14 @@ abstract public class BaseEntity {
     public void setPoints(float points) {
         this.points = points;
     }
+
+//    public boolean getConsumed() {
+//        return consumed;
+//    }
+//
+//    public void setConsumed(boolean consumed) {
+//        this.consumed = consumed;
+//    }
 
     public float getVelocityX() {
         return velocityX;

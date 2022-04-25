@@ -13,7 +13,7 @@ import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.ecs.componenets.VelocityComponent;
 import no.ntnu.viruswar.utils.Constants;
 
-
+/*System to control players movement on the map*/
 public class PlayerMovementSystem extends IteratingSystem {
 
     private final ComponentMapper<VelocityComponent> velocityMapper;

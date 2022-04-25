@@ -1,5 +1,6 @@
 package no.ntnu.viruswar.services.models;
 
+/*Creates a player entity, includes skin and username in addition to what is taken in as parameters in supeclass*/
 public class Player extends BaseEntity {
 
     private int skinIndex;

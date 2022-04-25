@@ -18,7 +18,7 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 import no.ntnu.viruswar.utils.Constants;
 
-// The screen where the user may join a game or create a new game
+/*Contains logic related to joining a gameroom or creating one*/
 public class PlayMenuScreen extends MenuBaseScreen {
 
     private final TextButton backBtn;
@@ -35,11 +35,8 @@ public class PlayMenuScreen extends MenuBaseScreen {
     public PlayMenuScreen(final Context context) {
         super(context);
 
-        // Uses mvc controller for gamelobby to send player to gamelobby
         this.lobby = new LobbyController(context);
 
-        // Set up inputfields for nickname and gamepin
-        // Zoom on pin_input when user is writing to this, so that the keyboard does not cover it
         pin_input = new TextField("", skin);
         pin_input.setMaxLength(60);
         pin_input.addListener(new ClickListener() {
@@ -61,9 +58,32 @@ public class PlayMenuScreen extends MenuBaseScreen {
             }
         });
 
+//        stage.addListener(new ClickListener() {
+//            @Override
+//            public void clicked(InputEvent event, float x, float y) {
+//                Gdx.app.log("Clicked", open + "");
+//                if (open) {
+//                    table.align(Align.center | Align.top);
+//                    table.setPosition(0, Gdx.graphics.getHeight());
+//                }
+//
+//            }
+//        });
+
         nick_input = new TextField("", skin);
+        final String testPin = pin_input.getText();
 
         // Create labels
+        Label label1 = new Label("Create Game:", skin);
+        Label label2 = new Label("Join Game By PIN:", skin);
+        Label label3 = new Label("Game pin: ", skin);
+        Label label4 = new Label("Nickname: ", skin);
+        Label label5 = new Label("Nickname: ", skin);
+        final Label error = new Label("", skin);
+
+        // Create labels
+        // Label CreateLabel = new Label("Create Game:", skin);c
+        // Label joinLabel = new Label("Join Game By PIN:", skin);
         Label pinLabel = new Label("Join Game By PIN: ", skin);
         Label nickLabel = new Label("Nickname: ", skin);
         final Label errorLabel = new Label("", skin);
@@ -96,22 +116,31 @@ public class PlayMenuScreen extends MenuBaseScreen {
 
         // Add actors to Table
         table.padTop(Constants.SCREEN_HEIGHT_SCALE * 10);
+//        HorizontalGroup nickGroup = new HorizontalGroup();
+//        nickGroup.addActor(nickLabel);
+//        nickGroup.addActor(nick_input);
         table.add(null, nickLabel);
         table.row();
         table.add();
         table.add(nick_input).width(400).fill().padBottom(Constants.SCREEN_HEIGHT_SCALE * 10);
         table.row();
         table.add(null, pinLabel);
-        table.row();
+        table.row();//.padRight(table.getColumnWidth(1)/2);
         table.add();
         table.add(pin_input).width(400).fill();
         table.add(joinBtn);
+        //.padBottom(Constants.SCREEN_HEIGHT_SCALE * 10);
 
         table.row().padTop(Constants.SCREEN_HEIGHT_SCALE * 10);
         table.add(null, createBtn).padBottom(Constants.SCREEN_HEIGHT_SCALE * 10);
         table.row();
+//        HorizontalGroup joinGroup = new HorizontalGroup();
+//        joinGroup.addActor(pin_input);
+//        joinGroup.addActor(joinBtn);
 
-        // Error label must be added outside the table to not disturb the textfields.
+        //table.add(null, errorLabel);
+
+//        // Error label must be added outside the table to not disturb the textfields.
         errorLabel.setPosition(0, Constants.SCREEN_HEIGHT_SCALE * 10);
         stage.addActor(errorLabel);
 
@@ -132,6 +161,13 @@ public class PlayMenuScreen extends MenuBaseScreen {
     @Override
     public void render(float dt) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//        if () {
+//            table.align(Align.center | Align.bottom);
+//            table.setPosition(0, Gdx.graphics.getHeight()/2f);
+//        } else {
+//            table.align(Align.center | Align.top);
+//            table.setPosition(0, Gdx.graphics.getHeight());
+//        }
 
         stage.act(dt);
         stage.draw();

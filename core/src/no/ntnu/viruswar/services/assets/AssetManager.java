@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.HashMap;
 
-
+/*Creates a hashmap including the textures and names of entity types, also contains logic related to audio*/
 public class AssetManager {
 
     static private AssetManager instance;

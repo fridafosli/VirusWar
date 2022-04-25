@@ -17,6 +17,7 @@ import no.ntnu.viruswar.services.models.BaseEntity;
 import no.ntnu.viruswar.services.models.Loot;
 import no.ntnu.viruswar.services.models.Player;
 
+/*MVC, contains logic related to creating or joining a lobby. Contains listeners which update db on changes*/
 public class LobbyController {
 
     private final LobbyModel lobbyModel;

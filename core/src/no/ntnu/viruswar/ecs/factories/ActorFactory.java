@@ -21,6 +21,7 @@ import no.ntnu.viruswar.services.models.Loot;
 import no.ntnu.viruswar.services.models.Player;
 import no.ntnu.viruswar.utils.Constants;
 
+/*Makes use of ashley to deifne an entity by using various components. Creates loot or player entity.  */
 public class ActorFactory {
 
     private static final Random random = new Random();
@@ -49,7 +50,7 @@ public class ActorFactory {
         entity.add(new OnlinePathComponent(player.getPath()));
         entity.add(new TextureRegionComponent(AssetManager.getInstance().getViruses(player.getSkinIndex())));
     }
-
+/*Creates player entity*/
     public static Entity UserVirus(Engine engine, Player player) {
         Vector2 pos = randomPos(100);
         Entity entity = BaseActor(engine, player.getId(), pos.x, pos.y, 50);
@@ -57,14 +58,14 @@ public class ActorFactory {
         addVirusComponents(entity, player);
         return entity;
     }
-
+/*Creates onlinecomponent so users can play against each other*/
     public static Entity OnlineVirus(Engine engine, Player player) {
         Entity entity = BaseActor(engine, player.getId(), player.x, player.y, player.getPoints());
         entity.add(new OnlineComponent());
         addVirusComponents(entity, player);
         return entity;
     }
-
+/*Creates Loot entity*/
     public static Entity Loot(Engine engine, Loot loot) {
         Entity entity = BaseActor(engine, loot.getId(), loot.x, loot.y, loot.getPoints());
         entity.add(new LootComponent());

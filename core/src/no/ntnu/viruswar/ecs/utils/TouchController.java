@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
+/*Contains logic for touch, updates when player touches a different position on screen or lets go of screen*/
 public class TouchController implements InputProcessor {
 
     private final Camera camera;

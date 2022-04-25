@@ -11,6 +11,7 @@ import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 import no.ntnu.viruswar.services.models.Player;
 
+/*System keeps track of who is in the lead*/
 public class ScoreSystem extends IteratingSystem {
 
     private final LobbyController lobbyController;

@@ -28,6 +28,7 @@ import no.ntnu.viruswar.ecs.utils.EntityComparator;
 import no.ntnu.viruswar.ecs.utils.TouchController;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 
+/*Adds systems and entities to engine, and updates this */
 public class OnlineEngine {
 
     private final TouchController touchController;

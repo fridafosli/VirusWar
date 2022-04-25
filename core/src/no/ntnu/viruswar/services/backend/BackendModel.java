@@ -7,6 +7,8 @@ import java.util.Map;
 
 import no.ntnu.viruswar.services.models.Loot;
 import no.ntnu.viruswar.services.models.Player;
+/*Main communicator with the backend service in adnroid folder*/
+/*Add player and loot to game, as well as add new game pins, or remove them*/
 
 public class BackendModel {
 

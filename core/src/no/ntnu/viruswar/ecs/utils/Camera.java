@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector3;
 
 import no.ntnu.viruswar.utils.Constants;
 
+/*Updates camera position according to player position*/
 public class Camera extends OrthographicCamera {
 
     final static float aspectRatio = (float) Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();

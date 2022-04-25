@@ -7,6 +7,7 @@ import java.util.Comparator;
 
 import no.ntnu.viruswar.ecs.componenets.TextureRegionComponent;
 
+/*Compares the z indexes for two entities*/
 public class EntityComparator implements Comparator<Entity> {
 
     private final ComponentMapper<TextureRegionComponent> textureMapper;

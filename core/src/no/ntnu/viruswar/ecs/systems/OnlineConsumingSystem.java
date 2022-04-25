@@ -17,6 +17,7 @@ import no.ntnu.viruswar.ecs.componenets.OnlinePathComponent;
 import no.ntnu.viruswar.ecs.componenets.PlayerComponent;
 import no.ntnu.viruswar.ecs.componenets.TransformComponent;
 import no.ntnu.viruswar.services.lobby.LobbyController;
+import no.ntnu.viruswar.services.models.BaseEntity;
 
 public class OnlineConsumingSystem extends IteratingSystem {
 
@@ -70,7 +71,8 @@ public class OnlineConsumingSystem extends IteratingSystem {
                 smallest.add(new DeletedComponent());
                 smallest.add(new HiddenComponent());
                 consumableMapper.get(smallest).isConsumed = true;
-                context.getBackend().setEntityConsumedState(lobby.getPin(), pathMapper.get(entity).pathName, idMapper.get(smallest).id, true);
+                BaseEntity model = lobby.getEntity(idMapper.get(smallest).id);
+                context.getBackend().setEntityConsumedState(lobby.getPin(), model.getPath(), model.getId(), true);
             }
 
         }

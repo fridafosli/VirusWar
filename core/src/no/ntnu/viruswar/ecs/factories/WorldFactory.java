@@ -15,7 +15,7 @@ public class WorldFactory {
     public static Entity createWorld(PooledEngine engine) {
         Entity entity = engine.createEntity();
         DimensionComponent rc = new DimensionComponent(500, 500); //update to actual size
-        TextureRegionComponent txc = new TextureRegionComponent(AssetManager.getInstance().getTextureRegion("hueCircle"));
+        TextureRegionComponent txc = new TextureRegionComponent(AssetManager.getInstance().getTextureRegion("map"));
         MapComponent mc = new MapComponent();
         TransformComponent tc = new TransformComponent(Constants.GAME_WORLD_WIDTH / 2, Constants.GAME_WORLD_HEIGHT / 2);
         txc.zIndex = 0;

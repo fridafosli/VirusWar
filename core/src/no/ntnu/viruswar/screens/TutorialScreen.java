@@ -15,7 +15,7 @@ import java.util.List;
 
 import no.ntnu.viruswar.context.Context;
 
-public class Tutorial extends ContextScreen {
+public class TutorialScreen extends ScreenContext {
 
     private final TextButton backBtn;
     private final TextButton nextBtn;
@@ -26,7 +26,7 @@ public class Tutorial extends ContextScreen {
     private int page = 0;
 
 
-    protected Tutorial(final Context context) {
+    protected TutorialScreen(final Context context) {
         super(context);
 
         skin = new Skin(Gdx.files.internal("uiskin.json"));

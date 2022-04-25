@@ -15,13 +15,13 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 import no.ntnu.viruswar.utils.Constants;
 
-public class GameLobby extends MenuBaseScreen {
+public class GameLobbyScreen extends MenuBaseScreen {
 
     private final Label errorLabel;
     private final LobbyController lobby;
     private final List<String> playerList;
 
-    public GameLobby(final Context context, final LobbyController lobby) {
+    public GameLobbyScreen(final Context context, final LobbyController lobby) {
         super(context);
         this.lobby = lobby;
         this.playerList = new List(skin);
@@ -67,7 +67,7 @@ public class GameLobby extends MenuBaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("custom", "clicked");
-                context.getScreens().push(new CustomizationScreen(context, lobby));
+                context.getScreens().push(new CustomizeScreen(context, lobby));
             }
         });
         customizeBtn.setPosition((Gdx.graphics.getWidth() - customizeBtn.getWidth()) / 2, 0);

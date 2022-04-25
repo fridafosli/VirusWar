@@ -62,7 +62,7 @@ public class LobbyController {
     }
 
     public void joinLobby(String pin, String nick, Label label) {
-        if (pin.length() < 1 && nick.length() < 1) {
+        if (pin.length() < 1 || nick.length() < 1) {
             displayText("\n Please fill gamepin and nickname to join.", label, 5);
             return;
         }

@@ -11,8 +11,8 @@ import no.ntnu.viruswar.ecs.utils.Camera;
 
 public class CameraSystem extends IteratingSystem {
     private final ComponentMapper<TransformComponent> transformMapper;
-    private final Camera camera;
     private Entity player;
+    private Camera camera;
 
     public CameraSystem(Camera camera) {
         super(Family.all(TransformComponent.class, PlayerComponent.class).get());

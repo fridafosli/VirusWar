@@ -18,4 +18,10 @@ public class Camera extends OrthographicCamera {
     public void setPosition(Vector3 position) {
         this.position.set(position);
     }
+
+    public void zoom(float z) {
+        if (this.zoom > 0.7) {
+            this.zoom += 0.02f;
+        }
+    }
 }

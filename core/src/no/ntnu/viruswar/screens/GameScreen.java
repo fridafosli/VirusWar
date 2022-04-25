@@ -21,6 +21,7 @@ public class GameScreen extends ContextScreen {
     @Override
     public void render(float dt) {
         engine.update(dt);
+
     }
 
     @Override
@@ -29,4 +30,3 @@ public class GameScreen extends ContextScreen {
     }
 
 }
-

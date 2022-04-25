@@ -27,6 +27,7 @@ import no.ntnu.viruswar.ecs.utils.Camera;
 import no.ntnu.viruswar.ecs.utils.EntityComparator;
 import no.ntnu.viruswar.ecs.utils.TouchController;
 import no.ntnu.viruswar.services.lobby.LobbyController;
+import no.ntnu.viruswar.ecs.systems.ZoomSystem;
 
 public class OnlineEngine {
 
@@ -63,6 +64,7 @@ public class OnlineEngine {
         engine.addSystem(new ScoreSystem(engine, lobby));
         engine.addSystem(new TextRenderSystem(1, context.getBatch(), camera));
         engine.addSystem(new QuitButtonSystem(touchController, engine, context, camera, 1));
+        engine.addSystem(new ZoomSystem(camera));
         engine.addEntity(ActorFactory.UserVirus(engine, lobby.getPlayers().get(lobby.getState().getPlayerId())));
     }
 

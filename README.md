@@ -5,6 +5,82 @@ Clone the repo and open `build.gradle` in Android Studio. Make sure to have an A
      alt="Markdown Monster icon"
      style="float: left; margin-right: 10px;" />
 
-
 # Structure 
-SETT INN FOLDER STRUCTURE TREE
+```
+├── VirusWar.java
+├── context
+│   ├── BuildContext.java
+│   └── Context.java
+├── ecs
+│   ├── OnlineEngine.java
+│   ├── componenets
+│   │   ├── ButtonComponent.java
+│   │   ├── ConsumableComponent.java
+│   │   ├── DeletedComponent.java
+│   │   ├── DimensionComponent.java
+│   │   ├── HiddenComponent.java
+│   │   ├── IdentifierComponent.java
+│   │   ├── LeadTextComponent.java
+│   │   ├── LootComponent.java
+│   │   ├── MapComponent.java
+│   │   ├── OnlineComponent.java
+│   │   ├── OnlinePathComponent.java
+│   │   ├── PlayerComponent.java
+│   │   ├── TextureRegionComponent.java
+│   │   ├── TransformComponent.java
+│   │   └── VelocityComponent.java
+│   ├── factories
+│   │   ├── ActorFactory.java
+│   │   └── WorldFactory.java
+│   ├── systems
+│   │   ├── CameraSystem.java
+│   │   ├── GameStateSystem.java
+│   │   ├── LootSpawnSystem.java
+│   │   ├── MapShrinkSystem.java
+│   │   ├── OnlineConsumingSystem.java
+│   │   ├── OnlineControlSystem.java
+│   │   ├── OnlineDeleteSystem.java
+│   │   ├── OnlineSendUserSystem.java
+│   │   ├── OnlineSpawnSystem.java
+│   │   ├── PlayerControlSystem.java
+│   │   ├── PlayerMovementSystem.java
+│   │   ├── QuitButtonSystem.java
+│   │   ├── RenderingSystem.java
+│   │   ├── ScoreSystem.java
+│   │   ├── TextRenderSystem.java
+│   │   └── UpdateSizeSystem.java
+│   └── utils
+│       ├── Camera.java
+│       ├── EntityComparator.java
+│       └── TouchController.java
+├── screens
+│   ├── CustomizeScreen.java
+│   ├── EndScreen.java
+│   ├── GameLobbyScreen.java
+│   ├── GameScreen.java
+│   ├── MainMenuScreen.java
+│   ├── MenuBaseScreen.java
+│   ├── PlayMenuScreen.java
+│   ├── ScreenContext.java
+│   ├── SettingsScreen.java
+│   └── TutorialScreen.java
+├── services
+│   ├── assets
+│   │   └── AssetManager.java
+│   ├── backend
+│   │   ├── BackendModel.java
+│   │   └── BackendService.java
+│   ├── lobby
+│   │   ├── LobbyController.java
+│   │   ├── LobbyModel.java
+│   │   └── PinGenerator.java
+│   ├── models
+│   │   ├── BaseEntity.java
+│   │   ├── Loot.java
+│   │   └── Player.java
+│   └── screen
+│       ├── Screen.java
+│       └── ScreenManager.java
+└── utils
+    └── Constants.java
+```

@@ -2,6 +2,7 @@ package no.ntnu.viruswar.services.models;
 
 import java.util.UUID;
 
+/*General abstract class defining attributes of an entity*/
 abstract public class BaseEntity {
 
     public float x;

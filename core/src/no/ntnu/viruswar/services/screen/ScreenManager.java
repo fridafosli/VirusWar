@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.Stack;
 
+/*Defines screen stack, and methods that change the order of the stack, used for buttons such as backbutton*/
 public class ScreenManager {
 
     private final Stack<Screen> screens;

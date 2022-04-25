@@ -4,6 +4,7 @@ package no.ntnu.viruswar.utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
+/*Constants used several places in the code*/
 public class Constants {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 400;

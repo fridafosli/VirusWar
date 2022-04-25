@@ -20,6 +20,8 @@ import no.ntnu.viruswar.services.models.BaseEntity;
 import no.ntnu.viruswar.services.models.Loot;
 import no.ntnu.viruswar.services.models.Player;
 
+
+/*Gets data from the firebade db and sets data when listeners are updated*/
 public class FirebaseBackendService implements BackendService {
     FirebaseDatabase database;
     DatabaseReference myRef;

@@ -5,7 +5,7 @@ import no.ntnu.viruswar.services.backend.BackendService;
 import no.ntnu.viruswar.services.models.BaseEntity;
 import no.ntnu.viruswar.services.models.Loot;
 import no.ntnu.viruswar.services.backend.BackendModel;
-
+/*Methods not yet defined, but can be done in a similar manner to that found in the android folder*/
 class DesktopBackendService implements BackendService {
 
 

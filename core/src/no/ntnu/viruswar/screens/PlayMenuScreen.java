@@ -14,7 +14,7 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 import no.ntnu.viruswar.utils.Constants;
 
-public class PlayMenu extends MenuBaseScreen {
+public class PlayMenuScreen extends MenuBaseScreen {
 
     private final TextButton backBtn;
     private final TextButton createBtn;
@@ -27,7 +27,7 @@ public class PlayMenu extends MenuBaseScreen {
     private final LobbyController lobby;
 
 
-    public PlayMenu(final Context context) {
+    public PlayMenuScreen(final Context context) {
         super(context);
 
         this.lobby = new LobbyController(context);

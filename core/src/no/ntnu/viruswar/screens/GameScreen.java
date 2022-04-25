@@ -6,7 +6,7 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.OnlineEngine;
 import no.ntnu.viruswar.services.lobby.LobbyController;
 
-public class GameScreen extends ContextScreen {
+public class GameScreen extends ScreenContext {
 
     private final LobbyController lobby;
     private final OnlineEngine engine;

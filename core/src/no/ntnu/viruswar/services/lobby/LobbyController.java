@@ -1,5 +1,6 @@
 package no.ntnu.viruswar.services.lobby;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -10,10 +11,10 @@ import java.util.concurrent.TimeUnit;
 
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.factories.ActorFactory;
-import no.ntnu.viruswar.screens.GameLobby;
+import no.ntnu.viruswar.screens.GameLobbyScreen;
 import no.ntnu.viruswar.screens.GameScreen;
-import no.ntnu.viruswar.screens.PlayMenu;
 import no.ntnu.viruswar.services.backend.BackendModel;
+import no.ntnu.viruswar.services.models.BaseEntity;
 import no.ntnu.viruswar.services.models.Loot;
 import no.ntnu.viruswar.services.models.Player;
 
@@ -23,13 +24,11 @@ public class LobbyController {
     private final Context context;
     private final BackendModel backendModel;
 
-
     public LobbyController(Context context) {
         this.context = context;
         this.lobbyModel = new LobbyModel();
         this.backendModel = new BackendModel();
         context.getBackend().setGamePinEventListener(this.backendModel);
-
     }
 
     static void displayText(String message, final Label output, final long duration) {
@@ -42,7 +41,6 @@ public class LobbyController {
                     e.printStackTrace();
                 } finally {
                     output.setText("");
-
                 }
             }
         };
@@ -94,7 +92,7 @@ public class LobbyController {
         lobbyModel.set(false, pin, player.getId());
         context.getBackend().addEntityToGame(pin, player);
         subscribeToEntities(pin);
-        context.getScreens().push(new GameLobby(context, this));
+        context.getScreens().push(new GameLobbyScreen(context, this));
         context.getBackend().setLobbyStateListener(this.backendModel, getPin());
     }
 
@@ -118,7 +116,7 @@ public class LobbyController {
         context.getBackend().addEntityToGame(pin, host);
         lobbyModel.set(true, pin, host.getId());
         subscribeToEntities(pin);
-        context.getScreens().push(new GameLobby(context, this));
+        context.getScreens().push(new GameLobbyScreen(context, this));
     }
 
     void subscribeToEntities(String pin) {
@@ -126,17 +124,11 @@ public class LobbyController {
         context.getBackend().setLootEventListener(this.backendModel, pin);
     }
 
-    void toMenu() {
-        this.context.getBackend().setGamePinEventListener(this.backendModel);
-        context.getScreens().push(new PlayMenu(context));
-    }
-
     public void toGame(final Label output) {
         if (backendModel.getPlayers().values().size() < 2) {
             displayText("Cannot start game without opponents", output, 5);
             return;
         }
-
 
         Gdx.app.log("play", "clicked");
         context.getBackend().startGame(lobbyModel.getPin());
@@ -164,6 +156,10 @@ public class LobbyController {
                 getPlayers().containsKey(entityId) && getPlayers().get(entityId).consumed);
     }
 
+    public BaseEntity getEntity(String entityId) {
+        if (getLoots().containsKey(entityId)) return getLoots().get(entityId);
+        return getPlayers().get(entityId);
+    }
 
     public String getPin() {
         return lobbyModel.pin;

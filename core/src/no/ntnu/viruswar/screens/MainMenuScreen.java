@@ -14,7 +14,7 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.utils.Constants;
 
 
-public class MainMenu extends MenuBaseScreen {
+public class MainMenuScreen extends MenuBaseScreen {
 
     private final TextButton playBtn;
     private final TextButton tutorialBtn;
@@ -23,7 +23,7 @@ public class MainMenu extends MenuBaseScreen {
     private OrthographicCamera cam = new OrthographicCamera();
 
 
-    public MainMenu(final Context context) {
+    public MainMenuScreen(final Context context) {
         super(context);
         context.getAssets().setMusic(true, 1f);
         // Create the play-button
@@ -33,7 +33,7 @@ public class MainMenu extends MenuBaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("play", "clicked");
-                context.getScreens().push(new PlayMenu(context));
+                context.getScreens().push(new PlayMenuScreen(context));
             }
         });
 
@@ -43,7 +43,7 @@ public class MainMenu extends MenuBaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("tutorial", "clicked");
-                sm.push(new Tutorial(context));
+                sm.push(new TutorialScreen(context));
             }
         });
 
@@ -53,7 +53,7 @@ public class MainMenu extends MenuBaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("Settings", "clicked");
-                context.getScreens().push(new Settings(context));
+                context.getScreens().push(new SettingsScreen(context));
             }
         });
         background = new Sprite(new Texture(Gdx.files.internal("virusWar.png")));

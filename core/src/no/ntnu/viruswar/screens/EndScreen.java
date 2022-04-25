@@ -47,7 +47,7 @@ public class EndScreen extends MenuBaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("back to main menu", "clicked");
-                while (!(context.getScreens().peek() instanceof MainMenu)) {
+                while (!(context.getScreens().peek() instanceof MainMenuScreen)) {
                     context.getScreens().pop();
                 }
 

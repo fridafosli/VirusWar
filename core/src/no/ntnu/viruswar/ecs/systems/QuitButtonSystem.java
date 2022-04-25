@@ -16,7 +16,7 @@ import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.ecs.componenets.ButtonComponent;
 import no.ntnu.viruswar.ecs.utils.Camera;
 import no.ntnu.viruswar.ecs.utils.TouchController;
-import no.ntnu.viruswar.screens.MainMenu;
+import no.ntnu.viruswar.screens.MainMenuScreen;
 
 public class QuitButtonSystem extends IteratingSystem {
 
@@ -56,7 +56,7 @@ public class QuitButtonSystem extends IteratingSystem {
         quitBtn.setPosition(camera.position.x - 5 - quitBtn.getWidth() * 0.2f + camera.viewportWidth / 2, camera.position.y - 5 - quitBtn.getHeight() * 0.2f + camera.viewportHeight / 2);
         if (touchController.touchQuitButton(quitBtn.getX(bottomLeft), quitBtn.getY(bottomLeft))) {
             Gdx.app.log("quit", "clicked");
-            while (!(context.getScreens().peek() instanceof MainMenu)) {
+            while (!(context.getScreens().peek() instanceof MainMenuScreen)) {
                 context.getScreens().pop();
             }
         }

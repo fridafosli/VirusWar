@@ -20,13 +20,13 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.utils.Constants;
 
-public class Settings extends ContextScreen {
+public class SettingsScreen extends ScreenContext {
     private Stage stage;
     private Skin skin;
     private Label percentLabel;
 
 
-    public Settings(final Context context) {
+    public SettingsScreen(final Context context) {
         super(context);
 
         stage = new Stage(new ScreenViewport());

@@ -4,7 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 
 import no.ntnu.viruswar.context.BuildContext;
 import no.ntnu.viruswar.context.Context;
-import no.ntnu.viruswar.screens.MainMenu;
+import no.ntnu.viruswar.screens.MainMenuScreen;
 import no.ntnu.viruswar.services.backend.BackendService;
 
 
@@ -20,7 +20,7 @@ public class VirusWar extends ApplicationAdapter {
     public void create() {
         context = new BuildContext(backendService);
         context.getScreens().push(
-                new MainMenu(context));
+                new MainMenuScreen(context));
     }
 
     @Override

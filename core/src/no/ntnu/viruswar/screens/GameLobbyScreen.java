@@ -47,11 +47,11 @@ public class GameLobbyScreen extends MenuBaseScreen {
         table.row();
 
 
-        // Set up Back-button
-        TextButton backBtn = new TextButton("Leave", skin);
-        backBtn.setPosition(0, Gdx.graphics.getHeight() - 70);
+        // Set up Leave-button
+        TextButton leaveBtn = new TextButton("Leave", skin);
+        leaveBtn.setPosition(0, Gdx.graphics.getHeight() - leaveBtn.getHeight());
 
-        backBtn.addListener(new ClickListener() {
+        leaveBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.log("back", "clicked");
@@ -59,7 +59,7 @@ public class GameLobbyScreen extends MenuBaseScreen {
                 context.getScreens().pop();
             }
         });
-        stage.addActor(backBtn);
+        stage.addActor(leaveBtn);
 
         // Set up Customize-button
         TextButton customizeBtn = new TextButton("Customize", skin);

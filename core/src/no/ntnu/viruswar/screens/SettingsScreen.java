@@ -33,18 +33,27 @@ public class SettingsScreen extends ScreenContext {
         // Create the skin
         skin = new Skin(Gdx.files.internal("uiskin.json"));
         skin.getFont("default-font").getData().setScale(Constants.FONT_SCALE);
-
         // Setting up mute button
         final Drawable volOnTexture = new TextureRegionDrawable(new Texture(Gdx.files.internal("volOn.png")));
-        Drawable volOffTexture = new TextureRegionDrawable(new Texture(Gdx.files.internal("volOff.png")));
+        final Drawable volOffTexture = new TextureRegionDrawable(new Texture(Gdx.files.internal("volOff.png")));
+
         final ImageButton muteBtn = new ImageButton(volOnTexture, volOffTexture, volOffTexture);
+        final ImageButton.ImageButtonStyle style = muteBtn.getStyle();
         muteBtn.addListener(new ClickListener() {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 context.getAssets().setMusic(!context.getAssets().getPlaying(), context.getAssets().getVolume());
+                style.imageUp=!context.getAssets().getPlaying()?volOffTexture:volOnTexture;
+                style.imageDown=context.getAssets().getPlaying()?volOffTexture:volOnTexture;
+                style.imageChecked= !context.getAssets().getPlaying()?volOffTexture:volOnTexture;
+
             }
         });
+
+
+        style.imageUp=context.getAssets().getPlaying()?volOnTexture:volOffTexture;
+
         muteBtn.setSize(Constants.SCREEN_WIDTH_SCALE * 6, Constants.SCREEN_WIDTH_SCALE * 6);
         muteBtn.setPosition(Gdx.graphics.getWidth() / 2f - muteBtn.getWidth() / 2, Constants.SCREEN_HEIGHT_SCALE * 35);
         stage.addActor(muteBtn);
@@ -65,6 +74,10 @@ public class SettingsScreen extends ScreenContext {
                 Gdx.app.log("slider", "interacted");
                 context.getAssets().setMusic(true, slider.getPercent());
                 percentLabel.setText((int) (slider.getPercent() * 100) + "%");
+                style.imageUp=!context.getAssets().getPlaying()?volOffTexture:volOnTexture;
+                style.imageDown=context.getAssets().getPlaying()?volOffTexture:volOnTexture;
+                style.imageChecked= !context.getAssets().getPlaying()?volOffTexture:volOnTexture;
+
             }
         });
 

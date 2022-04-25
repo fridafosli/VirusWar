@@ -5,10 +5,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
 
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.services.assets.AssetManager;
@@ -91,6 +94,24 @@ public class CustomizeScreen extends MenuBaseScreen {
         //Sets username text field
         usernameInput = new TextField("username", skin);
         usernameInput.setText(lobby.getUserPlayer().getName());
+        usernameInput.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                table.align(Align.center | Align.top);
+                table.setPosition(0, Constants.SCREEN_HEIGHT_SCALE * 130);
+                stage.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        Gdx.app.log("Clicked",   "");
+                        table.align(Align.center | Align.top);
+                        table.setPosition(0, Gdx.graphics.getHeight());
+                        stage.removeListener(this);
+                        Gdx.input.setOnscreenKeyboardVisible(false);
+                        stage.unfocusAll();
+                    }
+                });
+            }
+        });
 
         // Put actors in to table
         table.setWidth(Constants.SCREEN_WIDTH_SCALE * 30);
@@ -98,7 +119,8 @@ public class CustomizeScreen extends MenuBaseScreen {
         table.padTop(Constants.SCREEN_HEIGHT_SCALE * 40);
         table.add(usernameLabel);
         table.row();
-        table.add(usernameInput).padBottom(Constants.SCREEN_HEIGHT_SCALE * 10);
+        table.add(usernameInput).width(Constants.SCREEN_WIDTH_SCALE * 15).fill();
+                //.padBottom(Constants.SCREEN_HEIGHT_SCALE * 10);
     }
 
     private void setPlayerVirus(int increment) {

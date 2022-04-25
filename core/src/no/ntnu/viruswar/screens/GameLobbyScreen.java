@@ -24,7 +24,9 @@ public class GameLobbyScreen extends MenuBaseScreen {
     public GameLobbyScreen(final Context context, final LobbyController lobby) {
         super(context);
         this.lobby = lobby;
+        // Initialize list that is updated with players that has joined gamepin
         this.playerList = new List(skin);
+        // Initialize scrollpane with list inside
         ScrollPane scrollpane = new ScrollPane(playerList, skin);
 
 
@@ -43,6 +45,7 @@ public class GameLobbyScreen extends MenuBaseScreen {
         playerLabel.setPosition(100, 50);
         table.add(playerLabel).padBottom(30);
         table.row();
+        // Add scrollpane to the table
         table.add(scrollpane).width(600).height(400);
         table.row();
 
@@ -95,7 +98,7 @@ public class GameLobbyScreen extends MenuBaseScreen {
 
     @Override
     public void render(float dt) {
-
+        // Send player to play-world if game is started
         if (lobby.isStarted()) {
             lobby.toGame(errorLabel);
         }

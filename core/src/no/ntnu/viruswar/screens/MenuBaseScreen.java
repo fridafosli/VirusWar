@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import no.ntnu.viruswar.context.Context;
 import no.ntnu.viruswar.utils.Constants;
 
+// Class with basic logic for the screens to extend
 abstract class MenuBaseScreen extends ScreenContext {
     protected Stage stage;
     protected Skin skin;

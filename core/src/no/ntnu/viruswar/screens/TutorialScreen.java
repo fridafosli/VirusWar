@@ -121,6 +121,7 @@ public class TutorialScreen extends ScreenContext {
 
     }
 
+    // Set buttons navigating through slides disabled when on top/bottom of stack
     private void updateButtonsDisabled() {
         prevBtn.setDisabled(page == 0);
         nextBtn.setDisabled(page == pages.size() - 1);

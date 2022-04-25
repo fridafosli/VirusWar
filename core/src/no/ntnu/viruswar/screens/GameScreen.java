@@ -15,6 +15,7 @@ public class GameScreen extends ScreenContext {
         super(context);
         this.lobby = controller;
         engine = new OnlineEngine(context, lobby);
+        // Because of ECS logic is in ecs folder
     }
 
 

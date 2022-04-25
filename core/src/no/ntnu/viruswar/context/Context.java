@@ -15,5 +15,4 @@ public interface Context {
 
     SpriteBatch getBatch();
 
-    //TODO: dispose
 }

@@ -59,6 +59,7 @@ public class SettingsScreen extends ScreenContext {
         stage.addActor(muteBtn);
 
 
+        // Set up informative label
         Label volumeLabel = new Label("Set music volume", skin);
         volumeLabel.setPosition(Gdx.graphics.getWidth() / 2f - volumeLabel.getWidth() / 2,
                 Constants.SCREEN_HEIGHT_SCALE * 70 - volumeLabel.getHeight() / 2);
@@ -82,7 +83,7 @@ public class SettingsScreen extends ScreenContext {
         });
 
 
-        // put slider in container for scaling
+        // Put slider in container for scaling
         Container<Slider> container = new Container<>(slider);
         container.setTransform(true);
         container.setPosition((Gdx.graphics.getWidth() - container.getWidth()) / 2,
@@ -119,7 +120,6 @@ public class SettingsScreen extends ScreenContext {
 
     @Override
     public void render(float dt) {
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         context.getBatch().begin();
         context.getBatch().end();
 

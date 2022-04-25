@@ -5,6 +5,7 @@ public class LobbyModel {
     protected String pin;
     protected String playerId;
 
+    // MVC model for gamelobby
     public void set(Boolean isHost, String pin, String playerId) {
         this.isHost = isHost;
         this.pin = pin;

@@ -23,6 +23,7 @@ public class EndScreen extends MenuBaseScreen {
     public EndScreen(final Context context, String gamePin, final Player player, boolean winner) {
         super(context);
 
+        // checks if the player is winner of game, and displays either winner og loser graphics
         if (winner) {
             background = new Sprite(new Texture(Gdx.files.internal("winScreen.png")));
             context.getBackend().removeGame(gamePin);

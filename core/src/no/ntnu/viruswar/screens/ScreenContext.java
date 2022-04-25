@@ -8,6 +8,8 @@ abstract public class ScreenContext extends Screen {
 
     final Context context;
 
+    // Gives context object to all screens that extend this.
+    // (This is extended by MenuBaseScreen and gives every screen that extends MBS this logic too)
     protected ScreenContext(Context context) {
         super(context.getScreens());
         this.context = context;

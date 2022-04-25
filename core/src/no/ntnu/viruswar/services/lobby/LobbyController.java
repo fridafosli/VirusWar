@@ -23,6 +23,7 @@ public class LobbyController {
     private final Context context;
     private final BackendModel backendModel;
 
+    // MVC controller for gamelobby, as gamelobby has Mode View Controller architecture pattern omplemented
     public LobbyController(Context context) {
         this.context = context;
         this.lobbyModel = new LobbyModel();
@@ -59,6 +60,8 @@ public class LobbyController {
     }
 
     public void joinLobby(String pin, String nick, Label label) {
+        // Some checks that requirements are valid to join game before sending the user to lobby.
+        // If criterias not valid, user is still in playmenu, and error label is updated with feedback.
         if (pin.length() < 1 || nick.length() < 1) {
             displayText("\n Please fill gamepin and nickname to join.", label, 5);
             return;
@@ -81,6 +84,7 @@ public class LobbyController {
             return;
         }
 
+        // Criterias valid, and user is sent to gamelobby
         Vector2 pos = ActorFactory.randomPos(100);
         Player player = new Player(pos.x, pos.y, 30, 0, nick);
         lobbyModel.set(false, pin, player.getId());
@@ -91,6 +95,7 @@ public class LobbyController {
     }
 
 
+    // Create new game if nickname inputfield is filled, and send host to lobby
     public void createLobby(String nick, Label label) {
         if (nick.length() < 1) {
             displayText("Please fill nickname to create game.", label, 5);

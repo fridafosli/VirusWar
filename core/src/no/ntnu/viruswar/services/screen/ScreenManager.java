@@ -5,6 +5,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.Stack;
 
+// Screen manager to keep track of the current state of the game the user has navigated to
+// Displayes the state of the screen on top of the stack
 public class ScreenManager {
 
     private final Stack<Screen> screens;
@@ -28,6 +30,7 @@ public class ScreenManager {
         }
     }
 
+    // Go to new state
     public void push(Screen screen) {
         if (isNotEmpty()) getScreen().hide();
         this.screens.push(screen);
@@ -36,6 +39,7 @@ public class ScreenManager {
         }
     }
 
+    // Go to previous state
     public void pop() {
         if (isNotEmpty()) {
             Screen old = screens.pop();
@@ -48,6 +52,7 @@ public class ScreenManager {
         }
     }
 
+    // Return current state
     public Screen peek() {
         return this.screens.peek();
     }

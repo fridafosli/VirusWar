@@ -11,9 +11,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import no.ntnu.viruswar.context.Context;
+import no.ntnu.viruswar.utils.Constants;
 
 public class TutorialScreen extends ScreenContext {
 
@@ -28,14 +31,14 @@ public class TutorialScreen extends ScreenContext {
 
     protected TutorialScreen(final Context context) {
         super(context);
-
         skin = new Skin(Gdx.files.internal("uiskin.json"));
+        skin.getFont("default-font").getData().setScale(Constants.FONT_SCALE);
         //skin.getFont("default-font").getData().setScale(scale);
         stage = new Stage(new ScreenViewport());
 
         // Creating the back button
         backBtn = new TextButton("Back", skin);
-        backBtn.setPosition(0, Gdx.graphics.getHeight() - 50);
+        backBtn.setPosition(0, Gdx.graphics.getHeight() -backBtn.getHeight());
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -44,17 +47,14 @@ public class TutorialScreen extends ScreenContext {
             }
         });
         stage.addActor(backBtn);
+        for(int i=0; i<5;i++){
+            Image img1 = new Image(new Texture(Gdx.files.internal("tutImg"+i+".png")));
+            img1.setSize(Gdx.graphics.getWidth() * 2 / 3f, Gdx.graphics.getHeight() * 2 / 3f);
+            img1.setPosition(Gdx.graphics.getWidth() / 2f - img1.getWidth() / 2, Gdx.graphics.getHeight() / 2f - img1.getHeight() / 2);
+            pages.add(img1);
 
+        }
         // creating the images in the tutorial
-        Image img1 = new Image(new Texture(Gdx.files.internal("badlogic.jpg")));
-        img1.setSize(Gdx.graphics.getWidth() * 2 / 3f, Gdx.graphics.getHeight() * 2 / 3f);
-        img1.setPosition(Gdx.graphics.getWidth() / 2f - img1.getWidth() / 2, Gdx.graphics.getHeight() / 2f - img1.getHeight() / 2);
-        pages.add(img1);
-
-        Image img2 = new Image(new Texture(Gdx.files.internal("settings.png")));
-        img2.setSize(Gdx.graphics.getWidth() * 2 / 3f, Gdx.graphics.getHeight() * 2 / 3f);
-        img2.setPosition(Gdx.graphics.getWidth() / 2f - img2.getWidth() / 2, Gdx.graphics.getHeight() / 2f - img2.getHeight() / 2);
-        pages.add(img2);
 
         // Setting pages to not visible
         for (Image page : pages) {
